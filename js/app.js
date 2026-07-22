@@ -201,7 +201,7 @@ function renderKpis() {
   document.getElementById('top-obstacle').textContent = `보안/규정 (${securityCount}건)`;
 }
 
-// Render Chart.js Visualizations with CI Brand Color RGB(0, 176, 240) -> #00b0f0
+// Render Chart.js Visualizations with Crimson Red Palette #e11d48
 function renderCharts() {
   const ctxLevel = document.getElementById('chart-level').getContext('2d');
   const ctxObstacle = document.getElementById('chart-obstacle').getContext('2d');
@@ -218,7 +218,7 @@ function renderCharts() {
       labels: ['개인활용 (Personal Use)', '조직도입 (Org Adoption)'],
       datasets: [{
         data: [levelCounts['개인활용'], levelCounts['조직도입']],
-        backgroundColor: ['#00b0f0', '#8b5cf6'],
+        backgroundColor: ['#e11d48', '#c084fc'],
         borderWidth: 0,
         hoverOffset: 6
       }]
@@ -258,7 +258,7 @@ function renderCharts() {
       datasets: [{
         label: '응답 기업 수',
         data: Object.values(obstacleMap),
-        backgroundColor: ['#f43f5e', '#00b0f0', '#8b5cf6', '#10b981'],
+        backgroundColor: ['#e11d48', '#f59e0b', '#c084fc', '#10b981'],
         borderRadius: 8
       }]
     },
@@ -275,7 +275,7 @@ function renderCharts() {
         },
         y: {
           ticks: { color: '#94a3b8', stepSize: 1 },
-          grid: { color: 'rgba(0, 176, 240, 0.1)' },
+          grid: { color: 'rgba(225, 29, 72, 0.1)' },
           beginAtZero: true
         }
       }
@@ -305,7 +305,7 @@ function renderCards(data) {
   if (data.length === 0) {
     grid.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #94a3b8;">
-        <i class="fa-solid fa-folder-open" style="font-size: 2.5rem; margin-bottom: 12px; display: block; color: #00b0f0;"></i>
+        <i class="fa-solid fa-folder-open" style="font-size: 2.5rem; margin-bottom: 12px; display: block; color: #e11d48;"></i>
         검색 결과가 없습니다.
       </div>
     `;
@@ -434,13 +434,13 @@ function openModal(id) {
 
     <div class="curriculum-box">
       <h4><i class="fa-solid fa-graduation-cap"></i> 추천 맞춤형 교육 커리큘럼</h4>
-      <div style="white-space: pre-line; line-height: 1.7; font-size: 0.95rem; color: #e0f2fe;">
+      <div style="white-space: pre-line; line-height: 1.7; font-size: 0.95rem; color: #ffe4e6;">
         ${item.recommendedCurriculum}
       </div>
     </div>
 
     <div style="font-size: 0.8rem; color: #64748b; text-align: right;">
-      담당자 문의: ${item.email} | 회사링크: <a href="${item.companyUrl}" target="_blank" style="color: #00b0f0;">${item.companyUrl}</a>
+      담당자 문의: ${item.email} | 회사링크: <a href="${item.companyUrl}" target="_blank" style="color: #fb7185;">${item.companyUrl}</a>
     </div>
   `;
 

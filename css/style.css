@@ -1,25 +1,26 @@
 :root {
-  --ci-brand: rgb(0, 176, 240);
-  --ci-brand-hex: #00b0f0;
-  --ci-brand-light: #33c0f3;
-  --ci-brand-dark: #008cc0;
-  --ci-brand-glow: rgba(0, 176, 240, 0.25);
+  --ci-brand: rgb(225, 29, 72);
+  --ci-brand-hex: #e11d48;
+  --ci-brand-light: #fb7185;
+  --ci-brand-dark: #be123c;
+  --ci-brand-glow: rgba(225, 29, 72, 0.25);
 
-  --bg-primary: #0b1329;
-  --bg-card: rgba(15, 27, 54, 0.75);
-  --bg-card-hover: rgba(22, 38, 74, 0.85);
-  --border-color: rgba(0, 176, 240, 0.18);
+  --bg-primary: #18090c;
+  --bg-card: rgba(38, 15, 20, 0.75);
+  --bg-card-hover: rgba(54, 20, 28, 0.85);
+  --border-color: rgba(225, 29, 72, 0.2);
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   
-  --accent-purple: #8b5cf6;
+  --accent-purple: #c084fc;
+  --accent-blue: #38bdf8;
   --accent-emerald: #10b981;
   --accent-amber: #f59e0b;
   --accent-rose: #f43f5e;
   
-  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 176, 240, 0.15);
-  --glass-bg: rgba(11, 19, 41, 0.88);
-  --glass-border: rgba(0, 176, 240, 0.25);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(225, 29, 72, 0.2);
+  --glass-bg: rgba(24, 9, 12, 0.88);
+  --glass-border: rgba(225, 29, 72, 0.25);
   --radius-lg: 16px;
   --radius-md: 10px;
   --font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -35,8 +36,8 @@ body {
   font-family: var(--font-family);
   background-color: var(--bg-primary);
   background-image: 
-    radial-gradient(at 0% 0%, rgba(0, 176, 240, 0.2) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(11, 19, 41, 0.9) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(225, 29, 72, 0.22) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(24, 9, 12, 0.95) 0px, transparent 50%);
   background-attachment: fixed;
   color: var(--text-main);
   line-height: 1.6;
@@ -74,14 +75,14 @@ header {
   border-radius: 9999px;
   font-size: 0.85rem;
   font-weight: 600;
-  background: rgba(0, 176, 240, 0.15);
-  color: var(--ci-brand-hex);
-  border: 1px solid rgba(0, 176, 240, 0.4);
+  background: rgba(225, 29, 72, 0.15);
+  color: var(--ci-brand-light);
+  border: 1px solid rgba(225, 29, 72, 0.4);
 }
 
 .badge-purple {
-  background: rgba(139, 92, 246, 0.15);
-  color: #c084fc;
+  background: rgba(192, 132, 252, 0.15);
+  color: #e9d5ff;
   border-color: rgba(192, 132, 252, 0.3);
 }
 
@@ -100,7 +101,7 @@ header {
 h1.main-title {
   font-size: 2.2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #ffffff 0%, var(--ci-brand-hex) 100%);
+  background: linear-gradient(135deg, #ffffff 0%, var(--ci-brand-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.02em;
@@ -240,7 +241,7 @@ h1.main-title {
 .search-box input {
   width: 100%;
   padding: 12px 16px 12px 42px;
-  background: rgba(11, 19, 41, 0.7);
+  background: rgba(24, 9, 12, 0.7);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   color: var(--text-main);
@@ -259,7 +260,7 @@ h1.main-title {
   left: 14px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--ci-brand-hex);
+  color: var(--ci-brand-light);
 }
 
 .filter-group {
@@ -270,7 +271,7 @@ h1.main-title {
 
 .filter-select {
   padding: 11px 16px;
-  background: rgba(11, 19, 41, 0.7);
+  background: rgba(24, 9, 12, 0.7);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   color: var(--text-main);
@@ -285,7 +286,7 @@ h1.main-title {
 }
 
 .filter-select option {
-  background: #0b1329;
+  background: #18090c;
   color: #fff;
 }
 
@@ -332,7 +333,7 @@ h1.main-title {
 .participant-card:hover {
   transform: translateY(-6px);
   border-color: var(--ci-brand-hex);
-  box-shadow: 0 12px 28px -5px rgba(0, 176, 240, 0.3);
+  box-shadow: 0 12px 28px -5px rgba(225, 29, 72, 0.35);
 }
 
 .card-header {
@@ -401,12 +402,12 @@ h1.main-title {
   justify-content: center;
   gap: 8px;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 12px rgba(0, 176, 240, 0.3);
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35);
 }
 
 .btn-detail:hover {
   background: linear-gradient(135deg, var(--ci-brand-light), var(--ci-brand-hex));
-  box-shadow: 0 6px 16px rgba(0, 176, 240, 0.5);
+  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.55);
 }
 
 /* Modal */
@@ -416,7 +417,7 @@ h1.main-title {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.82);
   backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
@@ -434,14 +435,14 @@ h1.main-title {
 }
 
 .modal-container {
-  background: #0f1b36;
+  background: #240c10;
   border: 1px solid var(--ci-brand-hex);
   border-radius: var(--radius-lg);
   max-width: 800px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 25px 50px -12px rgba(0, 176, 240, 0.4);
+  box-shadow: 0 25px 50px -12px rgba(225, 29, 72, 0.45);
   transform: scale(0.95);
   transition: transform 0.3s ease;
   color: var(--text-main);
@@ -459,7 +460,7 @@ h1.main-title {
   align-items: center;
   position: sticky;
   top: 0;
-  background: #0f1b36;
+  background: #240c10;
   z-index: 10;
 }
 
@@ -478,8 +479,8 @@ h1.main-title {
 }
 
 .modal-close:hover {
-  background: rgba(244, 63, 94, 0.2);
-  color: var(--accent-rose);
+  background: rgba(225, 29, 72, 0.25);
+  color: var(--ci-brand-light);
 }
 
 .modal-body {
@@ -490,7 +491,7 @@ h1.main-title {
 }
 
 .detail-section {
-  background: rgba(11, 19, 41, 0.6);
+  background: rgba(24, 9, 12, 0.6);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 18px 20px;
@@ -499,7 +500,7 @@ h1.main-title {
 .detail-section-title {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--ci-brand-hex);
+  color: var(--ci-brand-light);
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -513,14 +514,14 @@ h1.main-title {
 }
 
 .curriculum-box {
-  background: linear-gradient(135deg, rgba(0, 176, 240, 0.12), rgba(139, 92, 246, 0.12));
-  border: 1px solid rgba(0, 176, 240, 0.4);
+  background: linear-gradient(135deg, rgba(225, 29, 72, 0.15), rgba(192, 132, 252, 0.15));
+  border: 1px solid rgba(225, 29, 72, 0.4);
   border-radius: var(--radius-md);
   padding: 20px;
 }
 
 .curriculum-box h4 {
-  color: var(--ci-brand-hex);
+  color: var(--ci-brand-light);
   font-size: 1.05rem;
   margin-bottom: 8px;
   display: flex;
