@@ -355,6 +355,16 @@ h1.main-title {
   margin-top: 2px;
 }
 
+.email-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 0.825rem;
+  color: var(--ci-brand-light);
+  word-break: break-all;
+}
+
 .card-body {
   margin-bottom: 20px;
   display: flex;
@@ -383,37 +393,20 @@ h1.main-title {
   padding-top: 14px;
   border-top: 1px solid var(--border-color);
   display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-action-row {
+  display: flex;
   gap: 10px;
-  align-items: center;
 }
 
 .btn-detail {
   flex: 1;
-  padding: 11px 12px;
-  background: linear-gradient(135deg, var(--ci-brand-hex), var(--ci-brand-dark));
-  color: white;
-  border: none;
-  border-radius: var(--radius-md);
-  font-weight: 700;
-  font-size: 0.85rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35);
-}
-
-.btn-detail:hover {
-  background: linear-gradient(135deg, var(--ci-brand-light), var(--ci-brand-hex));
-  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.55);
-}
-
-.btn-email {
-  padding: 11px 14px;
+  padding: 10px 12px;
   background: rgba(255, 255, 255, 0.08);
-  color: var(--ci-brand-light);
+  color: var(--text-main);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   font-weight: 600;
@@ -424,13 +417,34 @@ h1.main-title {
   justify-content: center;
   gap: 6px;
   transition: all 0.25s ease;
-  white-space: nowrap;
 }
 
-.btn-email:hover {
-  background: rgba(225, 29, 72, 0.25);
-  border-color: var(--ci-brand-hex);
-  color: #ffffff;
+.btn-detail:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-email-primary {
+  width: 100%;
+  padding: 11px 16px;
+  background: linear-gradient(135deg, var(--ci-brand-hex), var(--ci-brand-dark));
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.35);
+}
+
+.btn-email-primary:hover {
+  background: linear-gradient(135deg, var(--ci-brand-light), var(--ci-brand-hex));
+  box-shadow: 0 6px 18px rgba(225, 29, 72, 0.55);
 }
 
 /* Modal */

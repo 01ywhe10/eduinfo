@@ -295,7 +295,7 @@ function populateFilters() {
   });
 }
 
-// Render Cards with Individual Email Buttons
+// Render Cards with Prominent Email Action
 function renderCards(data) {
   const grid = document.getElementById('cards-grid');
   const countEl = document.getElementById('results-count');
@@ -324,6 +324,9 @@ function renderCards(data) {
           <div>
             <div class="company-name">${item.company}</div>
             <div class="user-meta">${item.department} | ${item.name} ${item.position} (${item.experience})</div>
+            <div class="email-badge-row">
+              <i class="fa-regular fa-envelope"></i> ${item.email}
+            </div>
           </div>
           <span class="badge ${badgeClass}">${item.aiLevel}</span>
         </div>
@@ -345,12 +348,14 @@ function renderCards(data) {
         </div>
       </div>
       <div class="card-footer">
-        <button class="btn-detail" onclick="openModal(${item.id})">
-          <i class="fa-solid fa-chart-pie"></i> 심층 분석
+        <button class="btn-email-primary" onclick="sendEmail(${item.id})">
+          <i class="fa-solid fa-paper-plane"></i> ${item.name} 담당자 이메일 발송
         </button>
-        <button class="btn-email" onclick="sendEmail(${item.id})">
-          <i class="fa-regular fa-paper-plane"></i> 메일 발송
-        </button>
+        <div class="card-action-row">
+          <button class="btn-detail" style="width:100%" onclick="openModal(${item.id})">
+            <i class="fa-solid fa-chart-pie"></i> 심층 분석 및 맞춤 커리큘럼 보기
+          </button>
+        </div>
       </div>
     `;
     grid.appendChild(card);
@@ -370,6 +375,7 @@ function setupEvents() {
       const matchesSearch = 
         item.company.toLowerCase().includes(query) ||
         item.name.toLowerCase().includes(query) ||
+        item.email.toLowerCase().includes(query) ||
         item.obstacle.toLowerCase().includes(query) ||
         item.wishTopic.toLowerCase().includes(query) ||
         item.industry.toLowerCase().includes(query);
@@ -477,8 +483,8 @@ function openModal(id) {
       <div style="font-size: 0.85rem; color: #cbd5e1;">
         <i class="fa-regular fa-envelope" style="color: #fb7185; margin-right: 6px;"></i> ${item.name} ${item.position} (${item.email})
       </div>
-      <button class="btn-detail" style="width: auto; padding: 8px 16px;" onclick="sendEmail(${item.id})">
-        <i class="fa-regular fa-paper-plane"></i> 이메일 직접 발송하기
+      <button class="btn-email-primary" style="width: auto; padding: 10px 20px;" onclick="sendEmail(${item.id})">
+        <i class="fa-solid fa-paper-plane"></i> 이메일 직접 발송
       </button>
     </div>
   `;
