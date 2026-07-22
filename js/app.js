@@ -201,7 +201,7 @@ function renderKpis() {
   document.getElementById('top-obstacle').textContent = `보안/규정 (${securityCount}건)`;
 }
 
-// Render Chart.js Visualizations with Crimson Red Palette #e11d48
+// Render Chart.js Visualizations
 function renderCharts() {
   const ctxLevel = document.getElementById('chart-level').getContext('2d');
   const ctxObstacle = document.getElementById('chart-obstacle').getContext('2d');
@@ -295,7 +295,7 @@ function populateFilters() {
   });
 }
 
-// Render Cards
+// Render Cards with Individual Email Buttons
 function renderCards(data) {
   const grid = document.getElementById('cards-grid');
   const countEl = document.getElementById('results-count');
@@ -346,7 +346,10 @@ function renderCards(data) {
       </div>
       <div class="card-footer">
         <button class="btn-detail" onclick="openModal(${item.id})">
-          <i class="fa-solid fa-chart-pie"></i> 심층 분석 & 맞춤 솔루션 보기
+          <i class="fa-solid fa-chart-pie"></i> 심층 분석
+        </button>
+        <button class="btn-email" onclick="sendEmail(${item.id})">
+          <i class="fa-regular fa-paper-plane"></i> 메일 발송
         </button>
       </div>
     `;
@@ -381,6 +384,37 @@ function setupEvents() {
 
   searchInput.addEventListener('input', filterData);
   levelSelect.addEventListener('change', filterData);
+}
+
+// Send Individual Custom Mailto Email
+function sendEmail(id) {
+  const item = rawData.find(d => d.id === id);
+  if (!item || !item.email) {
+    alert('등록된 이메일 주소가 없습니다.');
+    return;
+  }
+
+  const subject = encodeURIComponent(`[HR AI 교육] ${item.company} ${item.name} ${item.position}님 맞춤 교육 커리큘럼 안내`);
+  const bodyText = `안녕하세요, ${item.company} ${item.name} ${item.position}님.
+
+HR AI 교육 참가를 위해 제출해주신 니즈 분석 데이터(주요 장애물: ${item.obstacle})를 바탕으로 수립된 맞춤형 교육 커리큘럼을 안내해 드립니다.
+
+■ 희망 학습 주제:
+${item.wishTopic}
+
+■ 맞춤 추천 커리큘럼:
+${item.recommendedCurriculum}
+
+■ 핵심 니즈 및 실행 방향:
+${item.coreNeed}
+
+사내 AI 교육 일정 연계 및 추가 문의사항이 있으실 경우 본 메일로 편하게 답신 부탁드립니다.
+
+감사합니다.
+HR AI 교육 운영팀 드림`;
+
+  const body = encodeURIComponent(bodyText);
+  window.location.href = `mailto:${item.email}?subject=${subject}&body=${body}`;
 }
 
 // Open Detail Modal
@@ -439,8 +473,13 @@ function openModal(id) {
       </div>
     </div>
 
-    <div style="font-size: 0.8rem; color: #64748b; text-align: right;">
-      담당자 문의: ${item.email} | 회사링크: <a href="${item.companyUrl}" target="_blank" style="color: #fb7185;">${item.companyUrl}</a>
+    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 14px 18px; border-radius: 8px;">
+      <div style="font-size: 0.85rem; color: #cbd5e1;">
+        <i class="fa-regular fa-envelope" style="color: #fb7185; margin-right: 6px;"></i> ${item.name} ${item.position} (${item.email})
+      </div>
+      <button class="btn-detail" style="width: auto; padding: 8px 16px;" onclick="sendEmail(${item.id})">
+        <i class="fa-regular fa-paper-plane"></i> 이메일 직접 발송하기
+      </button>
     </div>
   `;
 
