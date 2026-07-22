@@ -1,19 +1,25 @@
 :root {
-  --bg-primary: #0f172a;
-  --bg-card: rgba(30, 41, 59, 0.7);
-  --bg-card-hover: rgba(51, 65, 85, 0.8);
-  --border-color: rgba(255, 255, 255, 0.1);
+  --ci-brand: rgb(0, 176, 240);
+  --ci-brand-hex: #00b0f0;
+  --ci-brand-light: #33c0f3;
+  --ci-brand-dark: #008cc0;
+  --ci-brand-glow: rgba(0, 176, 240, 0.25);
+
+  --bg-primary: #0b1329;
+  --bg-card: rgba(15, 27, 54, 0.75);
+  --bg-card-hover: rgba(22, 38, 74, 0.85);
+  --border-color: rgba(0, 176, 240, 0.18);
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
-  --accent-blue: #3b82f6;
+  
   --accent-purple: #8b5cf6;
-  --accent-cyan: #06b6d4;
   --accent-emerald: #10b981;
   --accent-amber: #f59e0b;
   --accent-rose: #f43f5e;
-  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
-  --glass-bg: rgba(15, 23, 42, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.12);
+  
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 176, 240, 0.15);
+  --glass-bg: rgba(11, 19, 41, 0.88);
+  --glass-border: rgba(0, 176, 240, 0.25);
   --radius-lg: 16px;
   --radius-md: 10px;
   --font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -29,8 +35,8 @@ body {
   font-family: var(--font-family);
   background-color: var(--bg-primary);
   background-image: 
-    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(0, 176, 240, 0.2) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(11, 19, 41, 0.9) 0px, transparent 50%);
   background-attachment: fixed;
   color: var(--text-main);
   line-height: 1.6;
@@ -68,9 +74,9 @@ header {
   border-radius: 9999px;
   font-size: 0.85rem;
   font-weight: 600;
-  background: rgba(59, 130, 246, 0.15);
-  color: var(--accent-cyan);
-  border: 1px solid rgba(6, 182, 212, 0.3);
+  background: rgba(0, 176, 240, 0.15);
+  color: var(--ci-brand-hex);
+  border: 1px solid rgba(0, 176, 240, 0.4);
 }
 
 .badge-purple {
@@ -94,7 +100,7 @@ header {
 h1.main-title {
   font-size: 2.2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+  background: linear-gradient(135deg, #ffffff 0%, var(--ci-brand-hex) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.02em;
@@ -132,16 +138,16 @@ h1.main-title {
   left: 0;
   width: 4px;
   height: 100%;
-  background: var(--accent-blue);
+  background: var(--ci-brand-hex);
 }
 
 .kpi-card:nth-child(2)::before { background: var(--accent-purple); }
-.kpi-card:nth-child(3)::before { background: var(--accent-cyan); }
+.kpi-card:nth-child(3)::before { background: var(--ci-brand-hex); }
 .kpi-card:nth-child(4)::before { background: var(--accent-emerald); }
 
 .kpi-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: var(--ci-brand-hex);
   box-shadow: var(--shadow-lg);
 }
 
@@ -234,18 +240,18 @@ h1.main-title {
 .search-box input {
   width: 100%;
   padding: 12px 16px 12px 42px;
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(11, 19, 41, 0.7);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   color: var(--text-main);
   font-size: 0.95rem;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .search-box input:focus {
-  border-color: var(--accent-blue);
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+  border-color: var(--ci-brand-hex);
+  box-shadow: 0 0 0 3px var(--ci-brand-glow);
 }
 
 .search-box i {
@@ -253,7 +259,7 @@ h1.main-title {
   left: 14px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--text-muted);
+  color: var(--ci-brand-hex);
 }
 
 .filter-group {
@@ -264,7 +270,7 @@ h1.main-title {
 
 .filter-select {
   padding: 11px 16px;
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(11, 19, 41, 0.7);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   color: var(--text-main);
@@ -274,8 +280,12 @@ h1.main-title {
   min-width: 160px;
 }
 
+.filter-select:focus {
+  border-color: var(--ci-brand-hex);
+}
+
 .filter-select option {
-  background: #1e293b;
+  background: #0b1329;
   color: #fff;
 }
 
@@ -321,8 +331,8 @@ h1.main-title {
 
 .participant-card:hover {
   transform: translateY(-6px);
-  border-color: rgba(59, 130, 246, 0.4);
-  box-shadow: var(--shadow-lg);
+  border-color: var(--ci-brand-hex);
+  box-shadow: 0 12px 28px -5px rgba(0, 176, 240, 0.3);
 }
 
 .card-header {
@@ -330,7 +340,6 @@ h1.main-title {
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 14px;
-
 }
 
 .company-name {
@@ -369,22 +378,6 @@ h1.main-title {
   line-height: 1.5;
 }
 
-.tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 4px;
-}
-
-.tag {
-  font-size: 0.75rem;
-  padding: 4px 10px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #cbd5e1;
-}
-
 .card-footer {
   padding-top: 14px;
   border-top: 1px solid var(--border-color);
@@ -395,24 +388,25 @@ h1.main-title {
 
 .btn-detail {
   width: 100%;
-  padding: 10px 16px;
-  background: linear-gradient(135deg, var(--accent-blue), #2563eb);
+  padding: 11px 16px;
+  background: linear-gradient(135deg, var(--ci-brand-hex), var(--ci-brand-dark));
   color: white;
   border: none;
   border-radius: var(--radius-md);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.9rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: all 0.2s;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 176, 240, 0.3);
 }
 
 .btn-detail:hover {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  background: linear-gradient(135deg, var(--ci-brand-light), var(--ci-brand-hex));
+  box-shadow: 0 6px 16px rgba(0, 176, 240, 0.5);
 }
 
 /* Modal */
@@ -422,7 +416,7 @@ h1.main-title {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
@@ -440,14 +434,14 @@ h1.main-title {
 }
 
 .modal-container {
-  background: #1e293b;
-  border: 1px solid var(--glass-border);
+  background: #0f1b36;
+  border: 1px solid var(--ci-brand-hex);
   border-radius: var(--radius-lg);
   max-width: 800px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 25px 50px -12px rgba(0, 176, 240, 0.4);
   transform: scale(0.95);
   transition: transform 0.3s ease;
   color: var(--text-main);
@@ -465,7 +459,7 @@ h1.main-title {
   align-items: center;
   position: sticky;
   top: 0;
-  background: #1e293b;
+  background: #0f1b36;
   z-index: 10;
 }
 
@@ -496,7 +490,7 @@ h1.main-title {
 }
 
 .detail-section {
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(11, 19, 41, 0.6);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 18px 20px;
@@ -505,7 +499,7 @@ h1.main-title {
 .detail-section-title {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--accent-cyan);
+  color: var(--ci-brand-hex);
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -519,14 +513,14 @@ h1.main-title {
 }
 
 .curriculum-box {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
-  border: 1px solid rgba(139, 92, 246, 0.3);
+  background: linear-gradient(135deg, rgba(0, 176, 240, 0.12), rgba(139, 92, 246, 0.12));
+  border: 1px solid rgba(0, 176, 240, 0.4);
   border-radius: var(--radius-md);
   padding: 20px;
 }
 
 .curriculum-box h4 {
-  color: #c084fc;
+  color: var(--ci-brand-hex);
   font-size: 1.05rem;
   margin-bottom: 8px;
   display: flex;
