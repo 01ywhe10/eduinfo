@@ -188,6 +188,19 @@ document.addEventListener('DOMContentLoaded', () => {
   setupEvents();
 });
 
+// Theme Switcher Logic (Dark Red vs Pantone Pastel)
+function toggleTheme() {
+  document.body.classList.toggle('theme-pantone');
+  const btn = document.getElementById('theme-toggle-btn');
+  const isPantone = document.body.classList.contains('theme-pantone');
+
+  if (isPantone) {
+    btn.innerHTML = '<i class="fa-solid fa-moon"></i> 다크 크림슨 테마 전환';
+  } else {
+    btn.innerHTML = '<i class="fa-solid fa-palette"></i> Pantone 파스텔 테마 전환';
+  }
+}
+
 // Render KPI Cards
 function renderKpis() {
   document.getElementById('total-participants').textContent = `${rawData.length}개사`;
@@ -229,7 +242,7 @@ function renderCharts() {
       plugins: {
         legend: {
           position: 'bottom',
-          labels: { color: '#94a3b8', font: { family: 'Pretendard', size: 12 } }
+          labels: { font: { family: 'Pretendard', size: 12 } }
         }
       },
       cutout: '70%'
@@ -270,12 +283,12 @@ function renderCharts() {
       },
       scales: {
         x: {
-          ticks: { color: '#94a3b8', font: { size: 11 } },
+          ticks: { font: { size: 11 } },
           grid: { display: false }
         },
         y: {
-          ticks: { color: '#94a3b8', stepSize: 1 },
-          grid: { color: 'rgba(225, 29, 72, 0.1)' },
+          ticks: { stepSize: 1 },
+          grid: { color: 'rgba(0, 0, 0, 0.05)' },
           beginAtZero: true
         }
       }
@@ -295,7 +308,7 @@ function populateFilters() {
   });
 }
 
-// Render Cards with Prominent Email Action
+// Render Cards
 function renderCards(data) {
   const grid = document.getElementById('cards-grid');
   const countEl = document.getElementById('results-count');
@@ -333,7 +346,7 @@ function renderCards(data) {
         <div class="card-body">
           <div class="info-item">
             <div class="info-label">주요 장애물</div>
-            <div class="info-content" style="color: #fb7185; font-weight: 500;">
+            <div class="info-content" style="color: #e11d48; font-weight: 600;">
               <i class="fa-solid fa-triangle-exclamation" style="margin-right: 4px;"></i>${item.obstacle}
             </div>
           </div>
@@ -343,7 +356,7 @@ function renderCards(data) {
           </div>
           <div class="info-item">
             <div class="info-label">업종 / 주요사업</div>
-            <div class="info-content" style="font-size: 0.85rem; color: #94a3b8;">${item.industry}</div>
+            <div class="info-content" style="font-size: 0.85rem; opacity: 0.8;">${item.industry}</div>
           </div>
         </div>
       </div>
@@ -438,7 +451,7 @@ function openModal(id) {
         <div class="detail-section-title" style="color: #f59e0b;">
           <i class="fa-solid fa-circle-question"></i> 강사 직통 질문
         </div>
-        <div class="detail-text" style="font-weight: 600; color: #fde68a;">"${item.question}"</div>
+        <div class="detail-text" style="font-weight: 600;">"${item.question}"</div>
        </div>`
     : '';
 
@@ -474,14 +487,14 @@ function openModal(id) {
 
     <div class="curriculum-box">
       <h4><i class="fa-solid fa-graduation-cap"></i> 추천 맞춤형 교육 커리큘럼</h4>
-      <div style="white-space: pre-line; line-height: 1.7; font-size: 0.95rem; color: #ffe4e6;">
+      <div style="white-space: pre-line; line-height: 1.7; font-size: 0.95rem;">
         ${item.recommendedCurriculum}
       </div>
     </div>
 
-    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 14px 18px; border-radius: 8px;">
-      <div style="font-size: 0.85rem; color: #cbd5e1;">
-        <i class="fa-regular fa-envelope" style="color: #fb7185; margin-right: 6px;"></i> ${item.name} ${item.position} (${item.email})
+    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.06); padding: 14px 18px; border-radius: 8px;">
+      <div style="font-size: 0.85rem;">
+        <i class="fa-regular fa-envelope" style="color: #e11d48; margin-right: 6px;"></i> ${item.name} ${item.position} (${item.email})
       </div>
       <button class="btn-email-primary" style="width: auto; padding: 10px 20px;" onclick="sendEmail(${item.id})">
         <i class="fa-solid fa-paper-plane"></i> 이메일 직접 발송
