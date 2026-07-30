@@ -330,13 +330,20 @@ function openCourseModal(id) {
       </div>
     </div>
 
-    ${item.note ? `
-    <div class="detail-section" style="border-color: rgba(244, 63, 94, 0.4);">
-      <div class="detail-section-title" style="color: var(--accent-rose);">
-        <i class="fa-solid fa-note-sticky"></i> 특이사항 / 비고
+    <!-- Matched Trainees Section -->
+    <div class="detail-section" style="border-color: rgba(16, 185, 129, 0.4);">
+      <div class="detail-section-title" style="color: #10b981;">
+        <i class="fa-solid fa-users"></i> 해당 과목 수강 신청 대상자 명단 (${(courseTraineeMap[item.id] || []).length}명)
       </div>
-      <div class="detail-text">${item.note}</div>
-    </div>` : ''}
+      <div class="detail-text" style="font-size: 0.9rem; max-height: 160px; overflow-y: auto;">
+        ${(courseTraineeMap[item.id] && courseTraineeMap[item.id].length > 0)
+          ? `<div style="display: flex; flex-wrap: wrap; gap: 8px;">` +
+            courseTraineeMap[item.id].map(t => `<span class="badge badge-emerald" style="font-size: 0.8rem;"><i class="fa-solid fa-user" style="margin-right: 4px;"></i>${t.name} (${t.dept} / ${t.position})</span>`).join('') +
+            `</div>`
+          : '<span style="color: var(--text-muted);">신청 대상자가 없습니다.</span>'
+        }
+      </div>
+    </div>
   `;
 
   const modal = document.getElementById('modal-overlay');
