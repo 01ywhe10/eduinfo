@@ -180,12 +180,26 @@ function getFilteredData() {
   return curriculumData.filter(item => {
     const matchesLevel = currentLevel === 'all' || item.level === currentLevel;
     const matchesCategory = currentCategory === 'all' || item.category === currentCategory;
+
+    // Check if any matched trainee (name, dept, position, empId) matches search query
+    let matchesTrainee = false;
+    if (searchQuery && typeof courseTraineeMap !== 'undefined') {
+      const trainees = courseTraineeMap[item.id] || [];
+      matchesTrainee = trainees.some(t => 
+        t.name.toLowerCase().includes(searchQuery) ||
+        t.dept.toLowerCase().includes(searchQuery) ||
+        t.position.toLowerCase().includes(searchQuery) ||
+        t.empId.toLowerCase().includes(searchQuery)
+      );
+    }
+
     const matchesSearch = 
+      !searchQuery ||
       item.title.toLowerCase().includes(searchQuery) ||
       item.subCategory.toLowerCase().includes(searchQuery) ||
       item.mainInstructor.toLowerCase().includes(searchQuery) ||
       item.subInstructor.toLowerCase().includes(searchQuery) ||
-      item.note.toLowerCase().includes(searchQuery);
+      matchesTrainee;
 
     return matchesLevel && matchesCategory && matchesSearch;
   });
