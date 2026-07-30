@@ -13,50 +13,42 @@ let adminDepartmentData = [];
 
 // Load data from LocalStorage or initialize defaults
 function loadAdminData() {
-  const savedStatus = localStorage.getItem('sampyo_admin_course_status_v2');
+  const savedStatus = localStorage.getItem('sampyo_admin_course_status_v3');
   if (savedStatus) {
     adminCourseStatus = JSON.parse(savedStatus);
   } else {
-    // Initialize status using REAL matched trainee counts from courseTraineeMap
-    curriculumData.forEach((item, idx) => {
+    // Reset all progress, completed, and extra counts to 0 initially
+    curriculumData.forEach((item) => {
       const matchedList = (typeof courseTraineeMap !== 'undefined' && courseTraineeMap[item.id]) ? courseTraineeMap[item.id] : [];
-      const realTarget = matchedList.length > 0 ? matchedList.length : 20;
-
-      let status = '미진행';
-      let progress = 0;
-      let completedCount = 0;
-
-      if (idx < 25) {
-        status = '완료';
-        progress = 100;
-        completedCount = realTarget;
-      } else if (idx < 42) {
-        status = '진행중';
-        progress = 40 + ((idx * 7) % 50);
-        completedCount = Math.floor(realTarget * (progress / 100));
-      }
+      const realTarget = matchedList.length;
 
       adminCourseStatus[item.id] = {
-        status: status,
-        progress: progress,
+        status: '미진행',
+        progress: 0,
         targetCount: realTarget,
-        completedCount: completedCount
+        completedCount: 0,
+        extraCount: 0
       };
     });
     saveAdminData();
   }
 
-  const savedDepts = localStorage.getItem('sampyo_admin_dept_data');
+  const savedDepts = localStorage.getItem('sampyo_admin_dept_data_v3');
   if (savedDepts) {
     adminDepartmentData = JSON.parse(savedDepts);
   } else {
-    adminDepartmentData = [...defaultDepartmentData];
-    localStorage.setItem('sampyo_admin_dept_data', JSON.stringify(adminDepartmentData));
+    // Reset all department completed counts to 0
+    adminDepartmentData = defaultDepartmentData.map(d => ({
+      name: d.name,
+      target: d.target,
+      completed: 0
+    }));
+    localStorage.setItem('sampyo_admin_dept_data_v3', JSON.stringify(adminDepartmentData));
   }
 }
 
 function saveAdminData() {
-  localStorage.setItem('sampyo_admin_course_status_v2', JSON.stringify(adminCourseStatus));
+  localStorage.setItem('sampyo_admin_course_status_v3', JSON.stringify(adminCourseStatus));
 }
 
 let chartDeptInstance = null;
