@@ -1,0 +1,37 @@
+구분,,과목명,주강사,후보강사,비고
+Process&Production,소성,1. Clinker 제조공정의 이해,정신환,이순혁,
+Process&Production,소성,2. Kiln System의 이해,이순혁,정신환,
+Process&Production,소성,3. 휘발 물질의 제어,김동현,오양석,
+Process&Production,소성,4. 연료의 종류 및 특성의 이해,이유형,김동현,
+Process&Production,공정,5. Gas Fundamentals & Basics,조희석,박래훈,정신환
+Process&Production,공정,6. NOx 생성 및 제어의 이해,조희석,박정윤,이순혁
+Process&Production,내화물,7. 내화물의 이해,김동현,이유형,
+Process&Production,분쇄,8. 분쇄 이론의 이해,고시원,이유형,
+Process&Production,설비,9. 이송 및 집진설비의 이해,홍성훈,이진희,
+Maintenance,Maintenance,1. 설비유지보수 업무의 이해,이규선,,
+Maintenance,Maintenance,2. Equipment basis & trouble (1),이진희,,
+Maintenance,Maintenance,3. Equipment basis & trouble (2),이진희,,
+Maintenance,시멘트 설비,4. 시멘트 제조 설비의 이해,이규선,,
+Maintenance,Kiln 설비,5. Kiln 유지보수의 이해,심양섭,,
+Maintenance,Utility,6. Utility의 이해,고준호,,
+Maintenance,윤활유,7. 윤활 유지보수 관리의 이해,이진희,,
+Maintenance,진동관리,8. 진동 관리의 이해,이진희,,
+Maintenance,계량기,9. Weigh feeder 설비의 이해,이진희,,
+Maintenance,집진기,10. 집진 설비의 이해1,박관문,홍성훈,
+Maintenance,집진기,11. 집진 설비의 이해2,박관문,홍성훈,
+Maintenance,전기 일반,12. 전기기초일반,김태형,,
+Maintenance,전기 일반,13. DCS 이해 및 운영,김종태,,
+Maintenance,전기 일반,14. 전기기기의 종류 및 이해,송창근,,
+Environment,환경,1. 환경법규와 공장환경목표(기초),나영찬,이인욱,(신규)
+Environment,환경,2. 대기환경의 이해(기초),이인욱,,(신규)
+Environment,환경,3. 수질환경의 이해(기초),이인욱,,(신규)
+Quality,Raw Mix,1. RAW MIX CHEMISTRY 1 (기초),임두섭,김춘수,'24년 품질 1강 세분화
+Quality,Raw Mix,2. RAW MIX CHEMISTRY 2 (기초),임두섭,김춘수,
+Quality,Raw Mix,3. RAW MIX CHEMISTRY 3 (기초),김춘수,임두섭,
+Quality,Raw Mix,4. RAW MIX CHEMISTRY 4 (기초),김춘수,임두섭,
+Quality,생산공정품질,5. 채광공정 & 원부원료 와 시멘트 품질(기초),김춘수,임두섭,'24년 품질 3강 세분화
+Quality,생산공정품질,6. 원료분쇄공정과 시멘트 품질(기초),김춘수,임두섭,
+Quality,생산공정품질,7. 소성공정과 시멘트 품질(기초),김춘수,임두섭,
+Quality,생산공정품질,8. 시멘트 분쇄공정과 시멘트 품질(기초),임두섭,김춘수,'24년 품질 3강 세분화 & 4강
+Quality,시멘트 품질,9. 시멘트 품질과 콘크리트 품질 상관관계 (기초),임두섭,김춘수,'24년 품질 2강
+Quality,시멘트 품질,10. 고객요구품질과 대응방안 (기초),임두섭,김춘수,'24년 품질 5강
