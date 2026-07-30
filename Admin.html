@@ -270,15 +270,27 @@
           </p>
         </div>
 
-        <div style="display: flex; gap: 12px; margin-bottom: 16px;">
-          <div style="flex: 1;">
-            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">기본 정규 대상 인원 (명)</label>
-            <input type="number" id="edit-target" min="1" class="filter-select" style="width: 100%;">
+        <!-- Interactive Checkbox Trainee Attendance Component -->
+        <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-md); padding: 14px; margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <label style="font-size: 0.85rem; font-weight: 700; color: #10b981;">
+              <i class="fa-solid fa-square-check"></i> 정규 수강 대상자 수료 출석 체크 (체크박스 카운트)
+            </label>
+            <button type="button" class="header-level-btn btn-all" style="padding: 3px 8px; font-size: 0.75rem;" onclick="toggleSelectAllTrainees()">
+              전체 선택/해제
+            </button>
           </div>
-          <div style="flex: 1;">
-            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">정규 대상 수료 인원 (명)</label>
-            <input type="number" id="edit-completed" min="0" class="filter-select" style="width: 100%;">
+
+          <div id="trainee-checkbox-container" style="max-height: 180px; overflow-y: auto; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 6px;">
+            <!-- Dynamic Trainee Checkboxes -->
           </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 0.85rem;">
+            <span>기본 정규 대상: <strong id="edit-target-text">0</strong>명</span>
+            <span style="color: #10b981; font-weight: 700;">체크 수료 인원: <strong id="edit-completed-text">0</strong>명</span>
+          </div>
+          <input type="hidden" id="edit-target" value="0">
+          <input type="hidden" id="edit-completed" value="0">
         </div>
 
         <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: var(--radius-md); padding: 14px; margin-bottom: 24px;">

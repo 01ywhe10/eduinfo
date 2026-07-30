@@ -433,18 +433,47 @@ function openEditModal(id) {
   const item = curriculumData.find(d => d.id === id);
   if (!item) return;
 
-  const st = adminCourseStatus[id] || { status: '미진행', progress: 0, targetCount: 30, completedCount: 0, extraCount: 0, eduDate: '' };
+  const st = adminCourseStatus[id] || { status: '미진행', progress: 0, targetCount: 30, completedCount: 0, extraCount: 0, eduDate: '', checkedTrainees: [] };
 
   document.getElementById('edit-title').textContent = `${item.level} > ${item.title}`;
   document.getElementById('edit-status').value = st.status;
   document.getElementById('edit-progress').value = st.progress;
-  document.getElementById('edit-target').value = st.targetCount;
-  document.getElementById('edit-completed').value = st.completedCount;
   document.getElementById('edit-extra').value = st.extraCount || 0;
 
   // Set default today's date if date is empty
   const todayStr = new Date().toISOString().split('T')[0];
   document.getElementById('edit-edu-date').value = st.eduDate || todayStr;
+
+  // Render Interactive Trainee Checkboxes
+  const matchedList = (typeof courseTraineeMap !== 'undefined' && courseTraineeMap[id]) ? courseTraineeMap[id] : [];
+  const container = document.getElementById('trainee-checkbox-container');
+  container.innerHTML = '';
+
+  const checkedEmpIds = st.checkedTrainees || [];
+
+  if (matchedList.length === 0) {
+    container.innerHTML = '<span style="color:var(--text-muted); font-size:0.85rem; padding:6px;">해당 과목 수강 신청 대상자가 없습니다.</span>';
+  } else {
+    matchedList.forEach((t, idx) => {
+      const isChecked = checkedEmpIds.length > 0 ? checkedEmpIds.includes(t.empId) : (st.completedCount > idx);
+      const label = document.createElement('label');
+      label.style.cssText = 'display: flex; align-items: center; gap: 8px; font-size: 0.85rem; padding: 4px 6px; border-radius: 4px; cursor: pointer; transition: background 0.2s;';
+      label.onmouseover = () => label.style.background = 'rgba(255,255,255,0.06)';
+      label.onmouseout = () => label.style.background = 'transparent';
+
+      label.innerHTML = `
+        <input type="checkbox" class="trainee-chk" value="${t.empId}" ${isChecked ? 'checked' : ''} onchange="updateTraineeCheckCount()">
+        <span style="font-weight: 600; color: var(--ci-brand-light);">${t.name}</span>
+        <span style="font-size: 0.78rem; color: var(--text-muted);">(${t.dept} / ${t.position})</span>
+      `;
+      container.appendChild(label);
+    });
+  }
+
+  document.getElementById('edit-target').value = matchedList.length;
+  document.getElementById('edit-target-text').textContent = matchedList.length;
+
+  updateTraineeCheckCount();
 
   // Reset Photo Upload Controls
   document.getElementById('edit-photo-upload').value = '';
@@ -452,6 +481,34 @@ function openEditModal(id) {
 
   document.getElementById('admin-modal-overlay').classList.add('active');
   document.body.style.overflow = 'hidden';
+}
+
+function updateTraineeCheckCount() {
+  const checkboxes = document.querySelectorAll('.trainee-chk');
+  let checkedCount = 0;
+  checkboxes.forEach(chk => {
+    if (chk.checked) checkedCount++;
+  });
+
+  document.getElementById('edit-completed').value = checkedCount;
+  document.getElementById('edit-completed-text').textContent = checkedCount;
+
+  const targetVal = parseInt(document.getElementById('edit-target').value) || 0;
+  if (checkedCount >= targetVal && targetVal > 0) {
+    document.getElementById('edit-status').value = '완료';
+    document.getElementById('edit-progress').value = 100;
+  } else if (checkedCount > 0) {
+    document.getElementById('edit-status').value = '완료';
+    document.getElementById('edit-progress').value = Math.round((checkedCount / targetVal) * 100);
+  }
+}
+
+function toggleSelectAllTrainees() {
+  const checkboxes = document.querySelectorAll('.trainee-chk');
+  if (checkboxes.length === 0) return;
+  const allChecked = Array.from(checkboxes).every(chk => chk.checked);
+  checkboxes.forEach(chk => chk.checked = !allChecked);
+  updateTraineeCheckCount();
 }
 
 function handlePhotoUpload(event) {
@@ -467,9 +524,16 @@ function handlePhotoUpload(event) {
   const ext = file.name.split('.').pop() || 'jpg';
   const standardFileName = `${eduDate}_${courseTitle}_${instructor}.${ext}`;
 
-  // Intelligent Simulation: Recognize attendance count from photo file
-  const targetVal = parseInt(document.getElementById('edit-target').value) || 20;
+  // Check photo attendance simulation & auto-check checkboxes
+  const checkboxes = document.querySelectorAll('.trainee-chk');
+  const targetVal = checkboxes.length || parseInt(document.getElementById('edit-target').value) || 20;
   const recognizedCount = Math.min(targetVal, Math.floor(targetVal * 0.85) + (file.name.length % 5));
+
+  checkboxes.forEach((chk, idx) => {
+    chk.checked = (idx < recognizedCount);
+  });
+
+  updateTraineeCheckCount();
 
   document.getElementById('detected-count').textContent = recognizedCount;
   const previewEl = document.getElementById('standard-filename-preview');
@@ -477,16 +541,6 @@ function handlePhotoUpload(event) {
     previewEl.innerHTML = `<i class="fa-solid fa-file-export"></i> 표준 저장 파일명: <strong>${standardFileName}</strong>`;
   }
   document.getElementById('photo-count-msg').style.display = 'block';
-
-  // Automatically update the completed count field
-  document.getElementById('edit-completed').value = recognizedCount;
-  if (recognizedCount >= targetVal) {
-    document.getElementById('edit-status').value = '완료';
-    document.getElementById('edit-progress').value = 100;
-  } else if (recognizedCount > 0) {
-    document.getElementById('edit-status').value = '진행중';
-    document.getElementById('edit-progress').value = Math.round((recognizedCount / targetVal) * 100);
-  }
 }
 
 function closeAdminModal() {
@@ -502,14 +556,17 @@ function saveCourseStatus() {
   const targetCount = parseInt(document.getElementById('edit-target').value) || 1;
   const completedCount = parseInt(document.getElementById('edit-completed').value) || 0;
   const extraCount = parseInt(document.getElementById('edit-extra').value) || 0;
+  const eduDate = document.getElementById('edit-edu-date').value || '';
+
+  // Extract Checked Trainee Emp IDs
+  const checkedTrainees = Array.from(document.querySelectorAll('.trainee-chk:checked')).map(chk => chk.value);
 
   // Smart Auto Status Logic:
-  // If completedCount equals or exceeds targetCount (or completedCount > 0 and user left status as 미진행), automatically update status & progress
   if (completedCount >= targetCount && targetCount > 0) {
     status = '완료';
     progress = 100;
   } else if ((completedCount > 0 || extraCount > 0) && status === '미진행') {
-    status = '완료'; // 수기/사진으로 참여인원이 등록되면 즉시 완료로 반영
+    status = '완료';
     progress = Math.min(100, Math.round(((completedCount + extraCount) / targetCount) * 100));
   } else if (status === '완료') {
     progress = 100;
@@ -522,7 +579,9 @@ function saveCourseStatus() {
     progress: progress,
     targetCount: Math.max(1, targetCount),
     completedCount: Math.min(targetCount, Math.max(0, completedCount)),
-    extraCount: Math.max(0, extraCount)
+    extraCount: Math.max(0, extraCount),
+    eduDate: eduDate,
+    checkedTrainees: checkedTrainees
   };
 
   saveAdminData();
