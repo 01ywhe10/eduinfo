@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>교육대상자 현황 - 삼표시멘트 관리자 포털</title>
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="header-top">
+        <div>
+          <span class="badge badge-emerald"><i class="fa-solid fa-users"></i> 관리자 전용 리포트</span>
+          <h1 class="main-title" style="margin-top: 6px;">부서별 교육대상자 & 수료 현황</h1>
+          <p class="subtitle">삼표시멘트 사업장 부서별/팀별 직무교육 대상 인원 및 수료 모니터링</p>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 14px;">
+          <div style="display: flex; gap: 10px;">
+            <a href="Admin.html" class="header-level-btn btn-all" style="font-size: 0.85rem; padding: 8px 16px;">
+              <i class="fa-solid fa-arrow-left"></i> 관리자 포털로 돌아가기
+            </a>
+            <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()" style="padding: 8px 14px; font-size: 0.85rem;">
+              <i class="fa-solid fa-palette"></i> 삼표 CI 테마
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Summary KPI Cards -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-title">전체 대상자 총계</div>
+        <div class="kpi-value" id="kpi-total-target" style="color: var(--ci-brand-light);">0명</div>
+        <div class="kpi-subtext">전 부서 직무교육 대상자</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">전체 수료 완료 인원</div>
+        <div class="kpi-value" id="kpi-total-completed" style="color: #10b981;">0명</div>
+        <div class="kpi-subtext">교육 과정 수료 인원</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-title">평균 수료율</div>
+        <div class="kpi-value" id="kpi-avg-rate" style="color: #f59e0b;">0%</div>
+        <div class="kpi-subtext">전체 대상자 대비 달성률</div>
+      </div>
+    </section>
+
+    <!-- Search Bar -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 24px;">
+      <div class="search-box" style="width: 100%;">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="trainee-search" placeholder="부서명, 담당 분야 검색...">
+      </div>
+    </div>
+
+    <!-- Trainee Table Section -->
+    <section>
+      <div class="section-title-area">
+        <div class="section-title">
+          <i class="fa-solid fa-building-user" style="color: var(--ci-brand-hex);"></i> 부서별 교육대상자 수료 이행 현황표
+        </div>
+        <div class="results-count" id="trainee-count">조회 중...</div>
+      </div>
+
+      <div class="table-container">
+        <table class="curriculum-table">
+          <thead>
+            <tr>
+              <th style="width: 60px;">번호</th>
+              <th style="width: 160px;">부서 / 팀명</th>
+              <th style="width: 140px; text-align: center;">전체 대상 인원</th>
+              <th style="width: 140px; text-align: center;">수료 완료 인원</th>
+              <th style="width: 140px; text-align: center;">미수료 인원</th>
+              <th style="width: 200px;">수료 달성률 (%)</th>
+              <th>주요 수료 대상과목 분야</th>
+            </tr>
+          </thead>
+          <tbody id="trainee-table-body">
+            <!-- Dynamic Rows -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer style="margin-top: 40px;">
+      <p>© 2026 SAMPYO CEMENT Trainee Management Portal | All Rights Reserved.</p>
+    </footer>
+  </div>
+
+  <script src="js/curriculum_data.js"></script>
+  <script>
+    const deptList = [
+      { name: '소성팀', target: 35, completed: 31, focus: 'Process&Production (Clinker, Kiln, Gas)' },
+      { name: '공정기술팀', target: 28, completed: 25, focus: 'Process&Production (NOx, 분쇄, Flow)' },
+      { name: '설비보전팀', target: 45, completed: 38, focus: 'Maintenance (유지보수, Kiln, Utility)' },
+      { name: '품질관리팀', target: 30, completed: 27, focus: 'Quality (RAW MIX, 공정품질, 콘크리트)' },
+      { name: '환경안전팀', target: 20, completed: 19, focus: 'Environment (대기, 수질, 환경법규)' },
+      { name: '전기계장팀', target: 25, completed: 21, focus: 'Maintenance (전기일반, DCS, 집진기)' },
+      { name: '원료생산팀', target: 22, completed: 18, focus: 'Process&Production / Quality (원료, Mill)' },
+      { name: '출하안전팀', target: 18, completed: 16, focus: 'Maintenance / Quality (고객요구품질, 윤활)' }
+    ];
+
+    function renderTraineeTable() {
+      const q = document.getElementById('trainee-search').value.toLowerCase().trim();
+      const filtered = deptList.filter(d => 
+        d.name.toLowerCase().includes(q) ||
+        d.focus.toLowerCase().includes(q)
+      );
+
+      const totalTarget = deptList.reduce((acc, curr) => acc + curr.target, 0);
+      const totalCompleted = deptList.reduce((acc, curr) => acc + curr.completed, 0);
+      const avgRate = ((totalCompleted / totalTarget) * 100).toFixed(1);
+
+      document.getElementById('kpi-total-target').textContent = `${totalTarget}명`;
+      document.getElementById('kpi-total-completed').textContent = `${totalCompleted}명`;
+      document.getElementById('kpi-avg-rate').textContent = `${avgRate}%`;
+
+      const tbody = document.getElementById('trainee-table-body');
+      const countEl = document.getElementById('trainee-count');
+      countEl.textContent = `총 ${filtered.length}개 부서`;
+      tbody.innerHTML = '';
+
+      filtered.forEach((d, idx) => {
+        const uncompleted = d.target - d.completed;
+        const rate = ((d.completed / d.target) * 100).toFixed(1);
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="color: var(--text-muted);">${idx + 1}</td>
+          <td style="font-weight: 700; font-size: 1rem; color: var(--text-main);">
+            <i class="fa-solid fa-building" style="color: var(--ci-brand-light); margin-right: 6px;"></i> ${d.name}
+          </td>
+          <td style="text-align: center;"><strong>${d.target}명</strong></td>
+          <td style="text-align: center; color: #10b981; font-weight: 700;">${d.completed}명</td>
+          <td style="text-align: center; color: #f59e0b;">${uncompleted}명</td>
+          <td>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div style="flex: 1; height: 8px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden;">
+                <div style="width: ${rate}%; height: 100%; background: #10b981; border-radius: 99px;"></div>
+              </div>
+              <span style="font-weight: 700; font-size: 0.85rem; width: 45px; text-align: right;">${rate}%</span>
+            </div>
+          </td>
+          <td style="font-size: 0.85rem; color: var(--text-muted);">${d.focus}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    document.getElementById('trainee-search').addEventListener('input', renderTraineeTable);
+
+    function toggleTheme() {
+      document.body.classList.toggle('theme-pantone');
+    }
+
+    renderTraineeTable();
+  </script>
+</body>
+</html>
