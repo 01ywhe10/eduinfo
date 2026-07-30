@@ -87,21 +87,25 @@
           <p class="subtitle">시멘트/제조 60개 직무과정 진행 상황 및 부서별 대상자 수료/참여율 실시간 모니터링</p>
         </div>
         
-        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 14px;">
-          <!-- Top Right Action Controls -->
-            <button class="header-level-btn btn-all" style="font-size: 0.85rem; padding: 8px 16px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.4);" onclick="openChangePasswordModal()">
-              <i class="fa-solid fa-key"></i> 비밀번호 변경
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+          <!-- Top Right Action Controls (Ordered: 1. 메인포털 2. 사내강사현황 3. 교육대상자현황 + Small Password Change Button) -->
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; align-items: center;">
+            <a href="Curriculum.html" class="header-level-btn btn-all" style="font-size: 0.85rem; padding: 8px 16px;">
+              <i class="fa-solid fa-house"></i> 1) 메인 포털 바로가기
+            </a>
+            <a href="AdminInstructor.html" class="header-level-btn btn-beginner" style="font-size: 0.85rem; padding: 8px 16px;">
+              <i class="fa-solid fa-user-tie"></i> 2) 사내강사 현황
+            </a>
+            <a href="AdminTrainee.html" class="header-level-btn btn-intermediate" style="font-size: 0.85rem; padding: 8px 16px;">
+              <i class="fa-solid fa-users"></i> 3) 교육대상자 현황
+            </a>
+            
+            <!-- Small Compact Password Change Button -->
+            <button onclick="openChangePasswordModal()" title="비밀번호 변경"
+              style="padding: 6px 12px; font-size: 0.78rem; font-weight: 600; background: rgba(245, 158, 11, 0.12); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 9999px; cursor: pointer; transition: all 0.2s ease;">
+              <i class="fa-solid fa-key" style="font-size: 0.75rem;"></i> 비밀번호 변경
             </button>
-            <a href="AdminInstructor.html" class="header-level-btn btn-all" style="font-size: 0.85rem; padding: 8px 16px;">
-              <i class="fa-solid fa-user-tie"></i> 1) 사내강사 현황
-            </a>
-            <a href="AdminTrainee.html" class="header-level-btn btn-beginner" style="font-size: 0.85rem; padding: 8px 16px;">
-              <i class="fa-solid fa-users"></i> 2) 교육대상자 현황
-            </a>
-            <a href="Curriculum.html" class="header-level-btn btn-intermediate" style="font-size: 0.85rem; padding: 8px 16px;">
-              <i class="fa-solid fa-house"></i> 메인 포털 바로가기
-            </a>
-            <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()" style="padding: 8px 14px; font-size: 0.85rem;">
+            <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()" style="padding: 6px 12px; font-size: 0.78rem;">
               <i class="fa-solid fa-palette"></i> 삼표 CI 테마
             </button>
           </div>
