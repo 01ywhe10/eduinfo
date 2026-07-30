@@ -223,7 +223,22 @@ function renderAdminCharts() {
   });
 }
 
-function renderAdminTable(filterQuery = '', filterLevel = 'all', filterStatus = 'all') {
+function populateDepartmentFilter() {
+  const select = document.getElementById('admin-filter-dept');
+  if (!select || typeof traineeData === 'undefined') return;
+
+  const depts = [...new Set(traineeData.map(d => d.dept))].sort();
+  select.innerHTML = '<option value="all">전체 소속 부서 (16개 부서)</option>';
+  depts.forEach(dept => {
+    const count = traineeData.filter(t => t.dept === dept).length;
+    const opt = document.createElement('option');
+    opt.value = dept;
+    opt.textContent = `소속: ${dept} (${count}명)`;
+    select.appendChild(opt);
+  });
+}
+
+function renderAdminTable(filterQuery = '', filterLevel = 'all', filterStatus = 'all', filterDept = 'all') {
   const tbody = document.getElementById('admin-table-body');
   tbody.innerHTML = '';
 
@@ -231,12 +246,20 @@ function renderAdminTable(filterQuery = '', filterLevel = 'all', filterStatus = 
     const st = adminCourseStatus[item.id] || { status: '미진행' };
     const matchesLevel = filterLevel === 'all' || item.level === filterLevel;
     const matchesStatus = filterStatus === 'all' || st.status === filterStatus;
+    
+    // Department filtering matching courseTraineeMap
+    let matchesDept = true;
+    if (filterDept !== 'all' && typeof courseTraineeMap !== 'undefined') {
+      const list = courseTraineeMap[item.id] || [];
+      matchesDept = list.some(t => t.dept === filterDept);
+    }
+
     const matchesQuery = 
       item.title.toLowerCase().includes(filterQuery) ||
       item.mainInstructor.toLowerCase().includes(filterQuery) ||
       item.category.toLowerCase().includes(filterQuery);
 
-    return matchesLevel && matchesStatus && matchesQuery;
+    return matchesLevel && matchesStatus && matchesDept && matchesQuery;
   });
 
   document.getElementById('admin-count').textContent = `총 ${filtered.length}개 과목 관리 중`;
@@ -244,7 +267,7 @@ function renderAdminTable(filterQuery = '', filterLevel = 'all', filterStatus = 
   filtered.forEach(item => {
     const st = adminCourseStatus[item.id] || { status: '미진행', progress: 0, targetCount: 30, completedCount: 0, extraCount: 0 };
     const extraCount = st.extraCount || 0;
-    const partRate = ((st.completedCount / st.targetCount) * 100).toFixed(0);
+    const partRate = st.targetCount > 0 ? ((st.completedCount / st.targetCount) * 100).toFixed(0) : 0;
 
     let statusBadgeClass = 'badge';
     if (st.status === '완료') statusBadgeClass = 'badge badge-emerald';
@@ -285,7 +308,10 @@ function renderAdminTable(filterQuery = '', filterLevel = 'all', filterStatus = 
 }
 
 function setupAdminEvents() {
+  populateDepartmentFilter();
+
   const searchInput = document.getElementById('admin-search');
+  const deptSelect = document.getElementById('admin-filter-dept');
   const levelSelect = document.getElementById('admin-filter-level');
   const statusSelect = document.getElementById('admin-filter-status');
 
@@ -293,11 +319,13 @@ function setupAdminEvents() {
     renderAdminTable(
       searchInput.value.toLowerCase().trim(),
       levelSelect.value,
-      statusSelect.value
+      statusSelect.value,
+      deptSelect ? deptSelect.value : 'all'
     );
   }
 
   searchInput.addEventListener('input', filter);
+  if (deptSelect) deptSelect.addEventListener('change', filter);
   levelSelect.addEventListener('change', filter);
   statusSelect.addEventListener('change', filter);
 }
