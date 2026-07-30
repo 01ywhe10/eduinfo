@@ -177,9 +177,9 @@ header {
   border-radius: 9999px;
   font-size: 0.85rem;
   font-weight: 600;
-  background: rgba(225, 29, 72, 0.15);
+  background: rgba(0, 154, 222, 0.15);
   color: var(--ci-brand-light);
-  border: 1px solid rgba(225, 29, 72, 0.4);
+  border: 1px solid rgba(0, 154, 222, 0.35);
 }
 
 .badge-purple {
