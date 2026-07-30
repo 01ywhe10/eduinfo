@@ -1,27 +1,6 @@
 const courseTraineeMap = {
   "초급_1": [
     {
-      "name": "오양석",
-      "dept": "R&D팀",
-      "position": "책임",
-      "job": "R&D",
-      "empId": "1007338"
-    },
-    {
-      "name": "이순혁",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008255"
-    },
-    {
-      "name": "정신환",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008253"
-    },
-    {
       "name": "고영민",
       "dept": "광산생산팀",
       "position": "수석",
@@ -92,20 +71,6 @@ const courseTraineeMap = {
       "empId": "1007553"
     },
     {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
-    },
-    {
       "name": "남광현",
       "dept": "생산기획팀",
       "position": "책임",
@@ -167,13 +132,6 @@ const courseTraineeMap = {
       "position": "책임",
       "job": "설비/공사",
       "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "안상원",
@@ -227,27 +185,6 @@ const courseTraineeMap = {
   ],
   "초급_2": [
     {
-      "name": "오양석",
-      "dept": "R&D팀",
-      "position": "책임",
-      "job": "R&D",
-      "empId": "1007338"
-    },
-    {
-      "name": "이순혁",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008255"
-    },
-    {
-      "name": "정신환",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008253"
-    },
-    {
       "name": "고영민",
       "dept": "광산생산팀",
       "position": "수석",
@@ -318,20 +255,6 @@ const courseTraineeMap = {
       "empId": "1007553"
     },
     {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
-    },
-    {
       "name": "남광현",
       "dept": "생산기획팀",
       "position": "책임",
@@ -393,13 +316,6 @@ const courseTraineeMap = {
       "position": "책임",
       "job": "설비/공사",
       "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "안상원",
@@ -453,27 +369,6 @@ const courseTraineeMap = {
   ],
   "초급_3": [
     {
-      "name": "오양석",
-      "dept": "R&D팀",
-      "position": "책임",
-      "job": "R&D",
-      "empId": "1007338"
-    },
-    {
-      "name": "이순혁",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008255"
-    },
-    {
-      "name": "정신환",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008253"
-    },
-    {
       "name": "고영민",
       "dept": "광산생산팀",
       "position": "수석",
@@ -544,20 +439,6 @@ const courseTraineeMap = {
       "empId": "1007553"
     },
     {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
-    },
-    {
       "name": "남광현",
       "dept": "생산기획팀",
       "position": "책임",
@@ -619,13 +500,6 @@ const courseTraineeMap = {
       "position": "책임",
       "job": "설비/공사",
       "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "안상원",
@@ -679,27 +553,6 @@ const courseTraineeMap = {
   ],
   "초급_4": [
     {
-      "name": "오양석",
-      "dept": "R&D팀",
-      "position": "책임",
-      "job": "R&D",
-      "empId": "1007338"
-    },
-    {
-      "name": "이순혁",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008255"
-    },
-    {
-      "name": "정신환",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008253"
-    },
-    {
       "name": "고영민",
       "dept": "광산생산팀",
       "position": "수석",
@@ -770,20 +623,6 @@ const courseTraineeMap = {
       "empId": "1007553"
     },
     {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
-    },
-    {
       "name": "남광현",
       "dept": "생산기획팀",
       "position": "책임",
@@ -845,13 +684,6 @@ const courseTraineeMap = {
       "position": "책임",
       "job": "설비/공사",
       "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "안상원",
@@ -905,27 +737,6 @@ const courseTraineeMap = {
   ],
   "초급_5": [
     {
-      "name": "오양석",
-      "dept": "R&D팀",
-      "position": "책임",
-      "job": "R&D",
-      "empId": "1007338"
-    },
-    {
-      "name": "이순혁",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008255"
-    },
-    {
-      "name": "정신환",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008253"
-    },
-    {
       "name": "고영민",
       "dept": "광산생산팀",
       "position": "수석",
@@ -996,20 +807,6 @@ const courseTraineeMap = {
       "empId": "1007553"
     },
     {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
-    },
-    {
       "name": "남광현",
       "dept": "생산기획팀",
       "position": "책임",
@@ -1071,13 +868,6 @@ const courseTraineeMap = {
       "position": "책임",
       "job": "설비/공사",
       "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "안상원",
@@ -1131,27 +921,6 @@ const courseTraineeMap = {
   ],
   "초급_6": [
     {
-      "name": "오양석",
-      "dept": "R&D팀",
-      "position": "책임",
-      "job": "R&D",
-      "empId": "1007338"
-    },
-    {
-      "name": "이순혁",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008255"
-    },
-    {
-      "name": "정신환",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008253"
-    },
-    {
       "name": "고영민",
       "dept": "광산생산팀",
       "position": "수석",
@@ -1222,20 +991,6 @@ const courseTraineeMap = {
       "empId": "1007553"
     },
     {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
-    },
-    {
       "name": "남광현",
       "dept": "생산기획팀",
       "position": "책임",
@@ -1297,13 +1052,6 @@ const courseTraineeMap = {
       "position": "책임",
       "job": "설비/공사",
       "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "안상원",
@@ -1357,27 +1105,6 @@ const courseTraineeMap = {
   ],
   "초급_7": [
     {
-      "name": "오양석",
-      "dept": "R&D팀",
-      "position": "책임",
-      "job": "R&D",
-      "empId": "1007338"
-    },
-    {
-      "name": "이순혁",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008255"
-    },
-    {
-      "name": "정신환",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008253"
-    },
-    {
       "name": "고영민",
       "dept": "광산생산팀",
       "position": "수석",
@@ -1448,20 +1175,6 @@ const courseTraineeMap = {
       "empId": "1007553"
     },
     {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
-    },
-    {
       "name": "남광현",
       "dept": "생산기획팀",
       "position": "책임",
@@ -1523,13 +1236,6 @@ const courseTraineeMap = {
       "position": "책임",
       "job": "설비/공사",
       "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "안상원",
@@ -1583,27 +1289,6 @@ const courseTraineeMap = {
   ],
   "초급_8": [
     {
-      "name": "오양석",
-      "dept": "R&D팀",
-      "position": "책임",
-      "job": "R&D",
-      "empId": "1007338"
-    },
-    {
-      "name": "이순혁",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008255"
-    },
-    {
-      "name": "정신환",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008253"
-    },
-    {
       "name": "고영민",
       "dept": "광산생산팀",
       "position": "수석",
@@ -1674,20 +1359,6 @@ const courseTraineeMap = {
       "empId": "1007553"
     },
     {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
-    },
-    {
       "name": "남광현",
       "dept": "생산기획팀",
       "position": "책임",
@@ -1749,13 +1420,6 @@ const courseTraineeMap = {
       "position": "책임",
       "job": "설비/공사",
       "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "안상원",
@@ -1809,27 +1473,6 @@ const courseTraineeMap = {
   ],
   "초급_9": [
     {
-      "name": "오양석",
-      "dept": "R&D팀",
-      "position": "책임",
-      "job": "R&D",
-      "empId": "1007338"
-    },
-    {
-      "name": "이순혁",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008255"
-    },
-    {
-      "name": "정신환",
-      "dept": "공정개선팀",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1008253"
-    },
-    {
       "name": "고영민",
       "dept": "광산생산팀",
       "position": "수석",
@@ -1900,20 +1543,6 @@ const courseTraineeMap = {
       "empId": "1007553"
     },
     {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
-    },
-    {
       "name": "남광현",
       "dept": "생산기획팀",
       "position": "책임",
@@ -1975,13 +1604,6 @@ const courseTraineeMap = {
       "position": "책임",
       "job": "설비/공사",
       "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "안상원",
@@ -2077,13 +1699,6 @@ const courseTraineeMap = {
       "empId": "1008326"
     },
     {
-      "name": "신성웅",
-      "dept": "기계팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1008256"
-    },
-    {
       "name": "이기수",
       "dept": "기술팀",
       "position": "책임",
@@ -2091,32 +1706,11 @@ const courseTraineeMap = {
       "empId": "1008154"
     },
     {
-      "name": "이진희",
-      "dept": "보전관리팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1007553"
-    },
-    {
       "name": "박희범",
       "dept": "생산1팀",
       "position": "매니저",
       "job": "생산관리",
       "empId": "1008619"
-    },
-    {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
     },
     {
       "name": "박상진",
@@ -2159,34 +1753,6 @@ const courseTraineeMap = {
       "position": "매니저",
       "job": "환경안전",
       "empId": "1008683"
-    },
-    {
-      "name": "김세중",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008261"
-    },
-    {
-      "name": "김종태",
-      "dept": "전기팀",
-      "position": "수석",
-      "job": "설비/공사",
-      "empId": "1007074"
-    },
-    {
-      "name": "박건",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "오민석",
@@ -2296,13 +1862,6 @@ const courseTraineeMap = {
       "empId": "1008326"
     },
     {
-      "name": "신성웅",
-      "dept": "기계팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1008256"
-    },
-    {
       "name": "이기수",
       "dept": "기술팀",
       "position": "책임",
@@ -2310,32 +1869,11 @@ const courseTraineeMap = {
       "empId": "1008154"
     },
     {
-      "name": "이진희",
-      "dept": "보전관리팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1007553"
-    },
-    {
       "name": "박희범",
       "dept": "생산1팀",
       "position": "매니저",
       "job": "생산관리",
       "empId": "1008619"
-    },
-    {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
     },
     {
       "name": "박상진",
@@ -2378,34 +1916,6 @@ const courseTraineeMap = {
       "position": "매니저",
       "job": "환경안전",
       "empId": "1008683"
-    },
-    {
-      "name": "김세중",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008261"
-    },
-    {
-      "name": "김종태",
-      "dept": "전기팀",
-      "position": "수석",
-      "job": "설비/공사",
-      "empId": "1007074"
-    },
-    {
-      "name": "박건",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "오민석",
@@ -2515,13 +2025,6 @@ const courseTraineeMap = {
       "empId": "1008326"
     },
     {
-      "name": "신성웅",
-      "dept": "기계팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1008256"
-    },
-    {
       "name": "이기수",
       "dept": "기술팀",
       "position": "책임",
@@ -2529,32 +2032,11 @@ const courseTraineeMap = {
       "empId": "1008154"
     },
     {
-      "name": "이진희",
-      "dept": "보전관리팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1007553"
-    },
-    {
       "name": "박희범",
       "dept": "생산1팀",
       "position": "매니저",
       "job": "생산관리",
       "empId": "1008619"
-    },
-    {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
     },
     {
       "name": "박상진",
@@ -2597,34 +2079,6 @@ const courseTraineeMap = {
       "position": "매니저",
       "job": "환경안전",
       "empId": "1008683"
-    },
-    {
-      "name": "김세중",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008261"
-    },
-    {
-      "name": "김종태",
-      "dept": "전기팀",
-      "position": "수석",
-      "job": "설비/공사",
-      "empId": "1007074"
-    },
-    {
-      "name": "박건",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "오민석",
@@ -2734,13 +2188,6 @@ const courseTraineeMap = {
       "empId": "1008326"
     },
     {
-      "name": "신성웅",
-      "dept": "기계팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1008256"
-    },
-    {
       "name": "이기수",
       "dept": "기술팀",
       "position": "책임",
@@ -2748,32 +2195,11 @@ const courseTraineeMap = {
       "empId": "1008154"
     },
     {
-      "name": "이진희",
-      "dept": "보전관리팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1007553"
-    },
-    {
       "name": "박희범",
       "dept": "생산1팀",
       "position": "매니저",
       "job": "생산관리",
       "empId": "1008619"
-    },
-    {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
     },
     {
       "name": "박상진",
@@ -2816,34 +2242,6 @@ const courseTraineeMap = {
       "position": "매니저",
       "job": "환경안전",
       "empId": "1008683"
-    },
-    {
-      "name": "김세중",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008261"
-    },
-    {
-      "name": "김종태",
-      "dept": "전기팀",
-      "position": "수석",
-      "job": "설비/공사",
-      "empId": "1007074"
-    },
-    {
-      "name": "박건",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "오민석",
@@ -2953,13 +2351,6 @@ const courseTraineeMap = {
       "empId": "1008326"
     },
     {
-      "name": "신성웅",
-      "dept": "기계팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1008256"
-    },
-    {
       "name": "이기수",
       "dept": "기술팀",
       "position": "책임",
@@ -2967,32 +2358,11 @@ const courseTraineeMap = {
       "empId": "1008154"
     },
     {
-      "name": "이진희",
-      "dept": "보전관리팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1007553"
-    },
-    {
       "name": "박희범",
       "dept": "생산1팀",
       "position": "매니저",
       "job": "생산관리",
       "empId": "1008619"
-    },
-    {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
     },
     {
       "name": "박상진",
@@ -3035,34 +2405,6 @@ const courseTraineeMap = {
       "position": "매니저",
       "job": "환경안전",
       "empId": "1008683"
-    },
-    {
-      "name": "김세중",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008261"
-    },
-    {
-      "name": "김종태",
-      "dept": "전기팀",
-      "position": "수석",
-      "job": "설비/공사",
-      "empId": "1007074"
-    },
-    {
-      "name": "박건",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "오민석",
@@ -3172,13 +2514,6 @@ const courseTraineeMap = {
       "empId": "1008326"
     },
     {
-      "name": "신성웅",
-      "dept": "기계팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1008256"
-    },
-    {
       "name": "이기수",
       "dept": "기술팀",
       "position": "책임",
@@ -3186,32 +2521,11 @@ const courseTraineeMap = {
       "empId": "1008154"
     },
     {
-      "name": "이진희",
-      "dept": "보전관리팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1007553"
-    },
-    {
       "name": "박희범",
       "dept": "생산1팀",
       "position": "매니저",
       "job": "생산관리",
       "empId": "1008619"
-    },
-    {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
     },
     {
       "name": "박상진",
@@ -3254,34 +2568,6 @@ const courseTraineeMap = {
       "position": "매니저",
       "job": "환경안전",
       "empId": "1008683"
-    },
-    {
-      "name": "김세중",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008261"
-    },
-    {
-      "name": "김종태",
-      "dept": "전기팀",
-      "position": "수석",
-      "job": "설비/공사",
-      "empId": "1007074"
-    },
-    {
-      "name": "박건",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "오민석",
@@ -3391,13 +2677,6 @@ const courseTraineeMap = {
       "empId": "1008326"
     },
     {
-      "name": "신성웅",
-      "dept": "기계팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1008256"
-    },
-    {
       "name": "이기수",
       "dept": "기술팀",
       "position": "책임",
@@ -3405,32 +2684,11 @@ const courseTraineeMap = {
       "empId": "1008154"
     },
     {
-      "name": "이진희",
-      "dept": "보전관리팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1007553"
-    },
-    {
       "name": "박희범",
       "dept": "생산1팀",
       "position": "매니저",
       "job": "생산관리",
       "empId": "1008619"
-    },
-    {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
     },
     {
       "name": "박상진",
@@ -3473,34 +2731,6 @@ const courseTraineeMap = {
       "position": "매니저",
       "job": "환경안전",
       "empId": "1008683"
-    },
-    {
-      "name": "김세중",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008261"
-    },
-    {
-      "name": "김종태",
-      "dept": "전기팀",
-      "position": "수석",
-      "job": "설비/공사",
-      "empId": "1007074"
-    },
-    {
-      "name": "박건",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "오민석",
@@ -3610,13 +2840,6 @@ const courseTraineeMap = {
       "empId": "1008326"
     },
     {
-      "name": "신성웅",
-      "dept": "기계팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1008256"
-    },
-    {
       "name": "이기수",
       "dept": "기술팀",
       "position": "책임",
@@ -3624,32 +2847,11 @@ const courseTraineeMap = {
       "empId": "1008154"
     },
     {
-      "name": "이진희",
-      "dept": "보전관리팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1007553"
-    },
-    {
       "name": "박희범",
       "dept": "생산1팀",
       "position": "매니저",
       "job": "생산관리",
       "empId": "1008619"
-    },
-    {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
     },
     {
       "name": "박상진",
@@ -3692,34 +2894,6 @@ const courseTraineeMap = {
       "position": "매니저",
       "job": "환경안전",
       "empId": "1008683"
-    },
-    {
-      "name": "김세중",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008261"
-    },
-    {
-      "name": "김종태",
-      "dept": "전기팀",
-      "position": "수석",
-      "job": "설비/공사",
-      "empId": "1007074"
-    },
-    {
-      "name": "박건",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "오민석",
@@ -3829,13 +3003,6 @@ const courseTraineeMap = {
       "empId": "1008326"
     },
     {
-      "name": "신성웅",
-      "dept": "기계팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1008256"
-    },
-    {
       "name": "이기수",
       "dept": "기술팀",
       "position": "책임",
@@ -3843,32 +3010,11 @@ const courseTraineeMap = {
       "empId": "1008154"
     },
     {
-      "name": "이진희",
-      "dept": "보전관리팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1007553"
-    },
-    {
       "name": "박희범",
       "dept": "생산1팀",
       "position": "매니저",
       "job": "생산관리",
       "empId": "1008619"
-    },
-    {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
     },
     {
       "name": "박상진",
@@ -3911,34 +3057,6 @@ const courseTraineeMap = {
       "position": "매니저",
       "job": "환경안전",
       "empId": "1008683"
-    },
-    {
-      "name": "김세중",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008261"
-    },
-    {
-      "name": "김종태",
-      "dept": "전기팀",
-      "position": "수석",
-      "job": "설비/공사",
-      "empId": "1007074"
-    },
-    {
-      "name": "박건",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "오민석",
@@ -4048,13 +3166,6 @@ const courseTraineeMap = {
       "empId": "1008326"
     },
     {
-      "name": "신성웅",
-      "dept": "기계팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1008256"
-    },
-    {
       "name": "이기수",
       "dept": "기술팀",
       "position": "책임",
@@ -4062,32 +3173,11 @@ const courseTraineeMap = {
       "empId": "1008154"
     },
     {
-      "name": "이진희",
-      "dept": "보전관리팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1007553"
-    },
-    {
       "name": "박희범",
       "dept": "생산1팀",
       "position": "매니저",
       "job": "생산관리",
       "empId": "1008619"
-    },
-    {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
     },
     {
       "name": "박상진",
@@ -4130,34 +3220,6 @@ const courseTraineeMap = {
       "position": "매니저",
       "job": "환경안전",
       "empId": "1008683"
-    },
-    {
-      "name": "김세중",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008261"
-    },
-    {
-      "name": "김종태",
-      "dept": "전기팀",
-      "position": "수석",
-      "job": "설비/공사",
-      "empId": "1007074"
-    },
-    {
-      "name": "박건",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "오민석",
@@ -4267,13 +3329,6 @@ const courseTraineeMap = {
       "empId": "1008326"
     },
     {
-      "name": "신성웅",
-      "dept": "기계팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1008256"
-    },
-    {
       "name": "이기수",
       "dept": "기술팀",
       "position": "책임",
@@ -4281,32 +3336,11 @@ const courseTraineeMap = {
       "empId": "1008154"
     },
     {
-      "name": "이진희",
-      "dept": "보전관리팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1007553"
-    },
-    {
       "name": "박희범",
       "dept": "생산1팀",
       "position": "매니저",
       "job": "생산관리",
       "empId": "1008619"
-    },
-    {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
     },
     {
       "name": "박상진",
@@ -4349,34 +3383,6 @@ const courseTraineeMap = {
       "position": "매니저",
       "job": "환경안전",
       "empId": "1008683"
-    },
-    {
-      "name": "김세중",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008261"
-    },
-    {
-      "name": "김종태",
-      "dept": "전기팀",
-      "position": "수석",
-      "job": "설비/공사",
-      "empId": "1007074"
-    },
-    {
-      "name": "박건",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "오민석",
@@ -4486,13 +3492,6 @@ const courseTraineeMap = {
       "empId": "1008326"
     },
     {
-      "name": "신성웅",
-      "dept": "기계팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1008256"
-    },
-    {
       "name": "이기수",
       "dept": "기술팀",
       "position": "책임",
@@ -4500,32 +3499,11 @@ const courseTraineeMap = {
       "empId": "1008154"
     },
     {
-      "name": "이진희",
-      "dept": "보전관리팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1007553"
-    },
-    {
       "name": "박희범",
       "dept": "생산1팀",
       "position": "매니저",
       "job": "생산관리",
       "empId": "1008619"
-    },
-    {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
     },
     {
       "name": "박상진",
@@ -4568,34 +3546,6 @@ const courseTraineeMap = {
       "position": "매니저",
       "job": "환경안전",
       "empId": "1008683"
-    },
-    {
-      "name": "김세중",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008261"
-    },
-    {
-      "name": "김종태",
-      "dept": "전기팀",
-      "position": "수석",
-      "job": "설비/공사",
-      "empId": "1007074"
-    },
-    {
-      "name": "박건",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "오민석",
@@ -4705,13 +3655,6 @@ const courseTraineeMap = {
       "empId": "1008326"
     },
     {
-      "name": "신성웅",
-      "dept": "기계팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1008256"
-    },
-    {
       "name": "이기수",
       "dept": "기술팀",
       "position": "책임",
@@ -4719,32 +3662,11 @@ const courseTraineeMap = {
       "empId": "1008154"
     },
     {
-      "name": "이진희",
-      "dept": "보전관리팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1007553"
-    },
-    {
       "name": "박희범",
       "dept": "생산1팀",
       "position": "매니저",
       "job": "생산관리",
       "empId": "1008619"
-    },
-    {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
     },
     {
       "name": "박상진",
@@ -4787,34 +3709,6 @@ const courseTraineeMap = {
       "position": "매니저",
       "job": "환경안전",
       "empId": "1008683"
-    },
-    {
-      "name": "김세중",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008261"
-    },
-    {
-      "name": "김종태",
-      "dept": "전기팀",
-      "position": "수석",
-      "job": "설비/공사",
-      "empId": "1007074"
-    },
-    {
-      "name": "박건",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "오민석",
@@ -4924,13 +3818,6 @@ const courseTraineeMap = {
       "empId": "1008326"
     },
     {
-      "name": "신성웅",
-      "dept": "기계팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1008256"
-    },
-    {
       "name": "이기수",
       "dept": "기술팀",
       "position": "책임",
@@ -4938,32 +3825,11 @@ const courseTraineeMap = {
       "empId": "1008154"
     },
     {
-      "name": "이진희",
-      "dept": "보전관리팀",
-      "position": "책임",
-      "job": "기계설비",
-      "empId": "1007553"
-    },
-    {
       "name": "박희범",
       "dept": "생산1팀",
       "position": "매니저",
       "job": "생산관리",
       "empId": "1008619"
-    },
-    {
-      "name": "이유형",
-      "dept": "생산1팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007320"
-    },
-    {
-      "name": "김동현",
-      "dept": "생산2팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007327"
     },
     {
       "name": "박상진",
@@ -5006,34 +3872,6 @@ const courseTraineeMap = {
       "position": "매니저",
       "job": "환경안전",
       "empId": "1008683"
-    },
-    {
-      "name": "김세중",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008261"
-    },
-    {
-      "name": "김종태",
-      "dept": "전기팀",
-      "position": "수석",
-      "job": "설비/공사",
-      "empId": "1007074"
-    },
-    {
-      "name": "박건",
-      "dept": "전기팀",
-      "position": "책임",
-      "job": "설비/공사",
-      "empId": "1008324"
-    },
-    {
-      "name": "고시원",
-      "dept": "제품팀",
-      "position": "수석",
-      "job": "생산관리",
-      "empId": "1007169"
     },
     {
       "name": "오민석",
@@ -5279,27 +4117,6 @@ const courseTraineeMap = {
       "empId": "1007967"
     },
     {
-      "name": "안상원",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1005936"
-    },
-    {
-      "name": "임두섭",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1007329"
-    },
-    {
-      "name": "정의식",
-      "dept": "순환자원파트",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1007334"
-    },
-    {
       "name": "김지현",
       "dept": "환경팀",
       "position": "수석",
@@ -5517,27 +4334,6 @@ const courseTraineeMap = {
       "position": "책임",
       "job": "생산관리",
       "empId": "1007967"
-    },
-    {
-      "name": "안상원",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1005936"
-    },
-    {
-      "name": "임두섭",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1007329"
-    },
-    {
-      "name": "정의식",
-      "dept": "순환자원파트",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1007334"
     },
     {
       "name": "김지현",
@@ -5759,27 +4555,6 @@ const courseTraineeMap = {
       "empId": "1007967"
     },
     {
-      "name": "안상원",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1005936"
-    },
-    {
-      "name": "임두섭",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1007329"
-    },
-    {
-      "name": "정의식",
-      "dept": "순환자원파트",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1007334"
-    },
-    {
       "name": "김지현",
       "dept": "환경팀",
       "position": "수석",
@@ -5997,27 +4772,6 @@ const courseTraineeMap = {
       "position": "책임",
       "job": "생산관리",
       "empId": "1007967"
-    },
-    {
-      "name": "안상원",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1005936"
-    },
-    {
-      "name": "임두섭",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1007329"
-    },
-    {
-      "name": "정의식",
-      "dept": "순환자원파트",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1007334"
     },
     {
       "name": "김지현",
@@ -6239,27 +4993,6 @@ const courseTraineeMap = {
       "empId": "1007967"
     },
     {
-      "name": "안상원",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1005936"
-    },
-    {
-      "name": "임두섭",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1007329"
-    },
-    {
-      "name": "정의식",
-      "dept": "순환자원파트",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1007334"
-    },
-    {
       "name": "김지현",
       "dept": "환경팀",
       "position": "수석",
@@ -6477,27 +5210,6 @@ const courseTraineeMap = {
       "position": "책임",
       "job": "생산관리",
       "empId": "1007967"
-    },
-    {
-      "name": "안상원",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1005936"
-    },
-    {
-      "name": "임두섭",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1007329"
-    },
-    {
-      "name": "정의식",
-      "dept": "순환자원파트",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1007334"
     },
     {
       "name": "김지현",
@@ -6719,27 +5431,6 @@ const courseTraineeMap = {
       "empId": "1007967"
     },
     {
-      "name": "안상원",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1005936"
-    },
-    {
-      "name": "임두섭",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1007329"
-    },
-    {
-      "name": "정의식",
-      "dept": "순환자원파트",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1007334"
-    },
-    {
       "name": "김지현",
       "dept": "환경팀",
       "position": "수석",
@@ -6957,27 +5648,6 @@ const courseTraineeMap = {
       "position": "책임",
       "job": "생산관리",
       "empId": "1007967"
-    },
-    {
-      "name": "안상원",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1005936"
-    },
-    {
-      "name": "임두섭",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1007329"
-    },
-    {
-      "name": "정의식",
-      "dept": "순환자원파트",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1007334"
     },
     {
       "name": "김지현",
@@ -7199,27 +5869,6 @@ const courseTraineeMap = {
       "empId": "1007967"
     },
     {
-      "name": "안상원",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1005936"
-    },
-    {
-      "name": "임두섭",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1007329"
-    },
-    {
-      "name": "정의식",
-      "dept": "순환자원파트",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1007334"
-    },
-    {
       "name": "김지현",
       "dept": "환경팀",
       "position": "수석",
@@ -7437,27 +6086,6 @@ const courseTraineeMap = {
       "position": "책임",
       "job": "생산관리",
       "empId": "1007967"
-    },
-    {
-      "name": "안상원",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1005936"
-    },
-    {
-      "name": "임두섭",
-      "dept": "품질팀",
-      "position": "수석",
-      "job": "품질관리",
-      "empId": "1007329"
-    },
-    {
-      "name": "정의식",
-      "dept": "순환자원파트",
-      "position": "책임",
-      "job": "생산관리",
-      "empId": "1007334"
     },
     {
       "name": "김지현",
