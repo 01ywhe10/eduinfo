@@ -13,32 +13,33 @@ let adminDepartmentData = [];
 
 // Load data from LocalStorage or initialize defaults
 function loadAdminData() {
-  const savedStatus = localStorage.getItem('sampyo_admin_course_status');
+  const savedStatus = localStorage.getItem('sampyo_admin_course_status_v2');
   if (savedStatus) {
     adminCourseStatus = JSON.parse(savedStatus);
   } else {
-    // Initialize default status for 60 courses
+    // Initialize status using REAL matched trainee counts from courseTraineeMap
     curriculumData.forEach((item, idx) => {
-      // Simulate realistic initial progress
+      const matchedList = (typeof courseTraineeMap !== 'undefined' && courseTraineeMap[item.id]) ? courseTraineeMap[item.id] : [];
+      const realTarget = matchedList.length > 0 ? matchedList.length : 20;
+
       let status = '미진행';
       let progress = 0;
-      let targetCount = 30;
       let completedCount = 0;
 
       if (idx < 25) {
         status = '완료';
         progress = 100;
-        completedCount = 28 + (idx % 3);
+        completedCount = realTarget;
       } else if (idx < 42) {
         status = '진행중';
         progress = 40 + ((idx * 7) % 50);
-        completedCount = 15 + (idx % 8);
+        completedCount = Math.floor(realTarget * (progress / 100));
       }
 
       adminCourseStatus[item.id] = {
         status: status,
         progress: progress,
-        targetCount: targetCount,
+        targetCount: realTarget,
         completedCount: completedCount
       };
     });
@@ -55,7 +56,7 @@ function loadAdminData() {
 }
 
 function saveAdminData() {
-  localStorage.setItem('sampyo_admin_course_status', JSON.stringify(adminCourseStatus));
+  localStorage.setItem('sampyo_admin_course_status_v2', JSON.stringify(adminCourseStatus));
 }
 
 let chartDeptInstance = null;
