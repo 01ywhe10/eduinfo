@@ -208,12 +208,17 @@ function renderAdminTable(filterQuery = '', filterLevel = 'all', filterStatus = 
   document.getElementById('admin-count').textContent = `총 ${filtered.length}개 과목 관리 중`;
 
   filtered.forEach(item => {
-    const st = adminCourseStatus[item.id] || { status: '미진행', progress: 0, targetCount: 30, completedCount: 0 };
+    const st = adminCourseStatus[item.id] || { status: '미진행', progress: 0, targetCount: 30, completedCount: 0, extraCount: 0 };
+    const extraCount = st.extraCount || 0;
     const partRate = ((st.completedCount / st.targetCount) * 100).toFixed(0);
 
     let statusBadgeClass = 'badge';
     if (st.status === '완료') statusBadgeClass = 'badge badge-emerald';
     else if (st.status === '진행중') statusBadgeClass = 'badge badge-amber';
+
+    const extraBadgeHtml = extraCount > 0 
+      ? `<span class="badge badge-amber" style="font-size:0.75rem; margin-left:4px;" title="대상자 외 추가 신청/참석">+${extraCount}명 추가</span>`
+      : '';
 
     const tr = document.createElement('tr');
     tr.innerHTML = `
@@ -233,7 +238,7 @@ function renderAdminTable(filterQuery = '', filterLevel = 'all', filterStatus = 
         <span class="${statusBadgeClass}">${st.status}</span>
       </td>
       <td style="text-align: center;">
-        <strong>${st.completedCount}명</strong> / ${st.targetCount}명 (${partRate}%)
+        <strong>${st.completedCount}명</strong> / ${st.targetCount}명 (${partRate}%) ${extraBadgeHtml}
       </td>
       <td style="text-align: center;">
         <button class="header-level-btn btn-all" style="padding: 6px 12px; font-size: 0.8rem;" onclick="openEditModal('${item.id}')">
@@ -263,7 +268,7 @@ function setupAdminEvents() {
   statusSelect.addEventListener('change', filter);
 }
 
-// Edit Status Modal
+// Edit Status Modal & Photo OCR Recognition Simulation
 let activeEditId = null;
 
 function openEditModal(id) {
@@ -271,16 +276,44 @@ function openEditModal(id) {
   const item = curriculumData.find(d => d.id === id);
   if (!item) return;
 
-  const st = adminCourseStatus[id] || { status: '미진행', progress: 0, targetCount: 30, completedCount: 0 };
+  const st = adminCourseStatus[id] || { status: '미진행', progress: 0, targetCount: 30, completedCount: 0, extraCount: 0 };
 
   document.getElementById('edit-title').textContent = `${item.level} > ${item.title}`;
   document.getElementById('edit-status').value = st.status;
   document.getElementById('edit-progress').value = st.progress;
   document.getElementById('edit-target').value = st.targetCount;
   document.getElementById('edit-completed').value = st.completedCount;
+  document.getElementById('edit-extra').value = st.extraCount || 0;
+
+  // Reset Photo Upload Controls
+  document.getElementById('edit-photo-upload').value = '';
+  document.getElementById('photo-count-msg').style.display = 'none';
 
   document.getElementById('admin-modal-overlay').classList.add('active');
   document.body.style.overflow = 'hidden';
+}
+
+function handlePhotoUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  // Intelligent Simulation: Recognize attendance count from photo file
+  const targetVal = parseInt(document.getElementById('edit-target').value) || 20;
+  // Simulated recognized count based on target
+  const recognizedCount = Math.min(targetVal, Math.floor(targetVal * 0.85) + (file.name.length % 5));
+
+  document.getElementById('detected-count').textContent = recognizedCount;
+  document.getElementById('photo-count-msg').style.display = 'block';
+
+  // Automatically update the completed count field
+  document.getElementById('edit-completed').value = recognizedCount;
+  if (recognizedCount >= targetVal) {
+    document.getElementById('edit-status').value = '완료';
+    document.getElementById('edit-progress').value = 100;
+  } else if (recognizedCount > 0) {
+    document.getElementById('edit-status').value = '진행중';
+    document.getElementById('edit-progress').value = Math.round((recognizedCount / targetVal) * 100);
+  }
 }
 
 function closeAdminModal() {
@@ -295,12 +328,14 @@ function saveCourseStatus() {
   const progress = parseInt(document.getElementById('edit-progress').value) || 0;
   const targetCount = parseInt(document.getElementById('edit-target').value) || 1;
   const completedCount = parseInt(document.getElementById('edit-completed').value) || 0;
+  const extraCount = parseInt(document.getElementById('edit-extra').value) || 0;
 
   adminCourseStatus[activeEditId] = {
     status: status,
     progress: Math.min(100, Math.max(0, progress)),
     targetCount: Math.max(1, targetCount),
-    completedCount: Math.min(targetCount, Math.max(0, completedCount))
+    completedCount: Math.min(targetCount, Math.max(0, completedCount)),
+    extraCount: Math.max(0, extraCount)
   };
 
   saveAdminData();
