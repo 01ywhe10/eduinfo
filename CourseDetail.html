@@ -73,9 +73,8 @@
               <th style="width: 140px;">대분류</th>
               <th style="width: 140px;">세부분야</th>
               <th>과목명</th>
-              <th style="width: 120px;">주강사</th>
-              <th style="width: 120px;">후보강사</th>
-              <th style="width: 140px;">비고</th>
+              <th style="width: 130px;">주강사</th>
+              <th style="width: 130px;">후보강사</th>
             </tr>
           </thead>
           <tbody id="detail-table-body">
@@ -111,11 +110,6 @@
       titleText = '중급 교육과정 상세 목록';
       subtitleText = '중급 과정 (24개 과목) 과목명, 대분류, 주강사 및 후보강사 정보';
       badgeHtml = '<span class="badge badge-level-중급" style="padding: 6px 14px; font-size: 1rem;">🔥 중급 교육과정 (' + currentList.length + '개 과목)</span>';
-    } else if (type === 'new') {
-      currentList = curriculumData.filter(d => d.note.includes('신규'));
-      titleText = '신규 개설 과목 상세 목록';
-      subtitleText = '최신 신규 및 세분화 개설 과목과 강사 배정 정보';
-      badgeHtml = '<span class="badge badge-rose" style="padding: 6px 14px; font-size: 1rem;">✨ 신규 개설 과목 (' + currentList.length + '개 과목)</span>';
     } else {
       currentList = [...curriculumData];
       titleText = '전체 등록 교육과정 상세 목록';
@@ -135,7 +129,7 @@
       countEl.textContent = '총 ' + list.length + '개 과목';
 
       if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 40px; color: var(--text-muted);">검색 조건에 해당 과목이 없습니다.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 40px; color: var(--text-muted);">검색 조건에 해당 과목이 없습니다.</td></tr>';
         return;
       }
 
@@ -153,7 +147,6 @@
           <td style="color: var(--accent-blue);">
             ${item.subInstructor ? '<i class="fa-solid fa-user-group" style="margin-right: 4px;"></i>' + item.subInstructor : '-'}
           </td>
-          <td>${item.note ? '<span class="badge badge-rose" style="font-size: 0.75rem;">' + item.note + '</span>' : '-'}</td>
         `;
         tbody.appendChild(tr);
       });

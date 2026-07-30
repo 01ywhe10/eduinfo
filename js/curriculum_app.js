@@ -24,12 +24,10 @@ function updateKPIs() {
   const totalCount = curriculumData.length;
   const beginnerCount = curriculumData.filter(d => d.level === '초급').length;
   const intermediateCount = curriculumData.filter(d => d.level === '중급').length;
-  const newCount = curriculumData.filter(d => d.note.includes('신규')).length;
 
   document.getElementById('kpi-total-courses').textContent = `${totalCount}개`;
   document.getElementById('kpi-beginner-courses').textContent = `${beginnerCount}개`;
   document.getElementById('kpi-intermediate-courses').textContent = `${intermediateCount}개`;
-  document.getElementById('kpi-new-courses').textContent = `${newCount}개`;
 }
 
 function renderCharts() {
@@ -268,7 +266,6 @@ function renderTableView(data, container) {
       <td style="font-weight: 600; color: var(--text-main);">${item.title}</td>
       <td><i class="fa-solid fa-user-tie" style="color: var(--ci-brand-light); margin-right: 4px;"></i> ${item.mainInstructor || '-'}</td>
       <td>${item.subInstructor || '-'}</td>
-      <td>${item.note ? `<span class="badge badge-rose" style="font-size: 0.75rem;">${item.note}</span>` : '-'}</td>
     </tr>
   `).join('');
 
@@ -282,7 +279,6 @@ function renderTableView(data, container) {
           <th>과목명</th>
           <th>주강사</th>
           <th>후보강사</th>
-          <th>비고</th>
         </tr>
       </thead>
       <tbody>

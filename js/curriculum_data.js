@@ -47,7 +47,7 @@ const curriculumData = [
     "title": "5. Gas Fundamentals & Basics",
     "mainInstructor": "조희석",
     "subInstructor": "박래훈",
-    "note": "정신환"
+    "note": ""
   },
   {
     "id": "초급_6",
@@ -57,7 +57,7 @@ const curriculumData = [
     "title": "6. NOx 생성 및 제어의 이해",
     "mainInstructor": "조희석",
     "subInstructor": "박정윤",
-    "note": "이순혁"
+    "note": ""
   },
   {
     "id": "초급_7",
@@ -237,7 +237,7 @@ const curriculumData = [
     "title": "1. 환경법규와 공장환경목표(기초)",
     "mainInstructor": "나영찬",
     "subInstructor": "이인욱",
-    "note": "(신규)"
+    "note": ""
   },
   {
     "id": "초급_25",
@@ -247,7 +247,7 @@ const curriculumData = [
     "title": "2. 대기환경의 이해(기초)",
     "mainInstructor": "이인욱",
     "subInstructor": "",
-    "note": "(신규)"
+    "note": ""
   },
   {
     "id": "초급_26",
@@ -257,7 +257,7 @@ const curriculumData = [
     "title": "3. 수질환경의 이해(기초)",
     "mainInstructor": "이인욱",
     "subInstructor": "",
-    "note": "(신규)"
+    "note": ""
   },
   {
     "id": "초급_27",
@@ -267,7 +267,7 @@ const curriculumData = [
     "title": "1. RAW MIX CHEMISTRY 1 (기초)",
     "mainInstructor": "임두섭",
     "subInstructor": "김춘수",
-    "note": "'24년 품질 1강 세분화"
+    "note": ""
   },
   {
     "id": "초급_28",
@@ -307,7 +307,7 @@ const curriculumData = [
     "title": "5. 채광공정 & 원부원료 와 시멘트 품질(기초)",
     "mainInstructor": "김춘수",
     "subInstructor": "임두섭",
-    "note": "'24년 품질 3강 세분화"
+    "note": ""
   },
   {
     "id": "초급_32",
@@ -337,7 +337,7 @@ const curriculumData = [
     "title": "8. 시멘트 분쇄공정과 시멘트 품질(기초)",
     "mainInstructor": "임두섭",
     "subInstructor": "김춘수",
-    "note": "'24년 품질 3강 세분화 & 4강"
+    "note": ""
   },
   {
     "id": "초급_35",
@@ -347,7 +347,7 @@ const curriculumData = [
     "title": "9. 시멘트 품질과 콘크리트 품질 상관관계 (기초)",
     "mainInstructor": "임두섭",
     "subInstructor": "김춘수",
-    "note": "'24년 품질 2강"
+    "note": ""
   },
   {
     "id": "초급_36",
@@ -357,7 +357,7 @@ const curriculumData = [
     "title": "10. 고객요구품질과 대응방안 (기초)",
     "mainInstructor": "임두섭",
     "subInstructor": "김춘수",
-    "note": "'24년 품질 5강"
+    "note": ""
   },
   {
     "id": "중급_1",
