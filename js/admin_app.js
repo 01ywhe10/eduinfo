@@ -67,17 +67,22 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function handleAdminLogin(event) {
-  event.preventDefault();
-  const inputPw = document.getElementById('admin-password-input').value;
+  if (event) {
+    event.preventDefault();
+  }
+  const inputEl = document.getElementById('admin-password-input');
+  if (!inputEl) return;
+  const inputPw = inputEl.value.trim();
   const errorMsg = document.getElementById('password-error-msg');
 
   if (inputPw === ADMIN_PASSWORD_HASH) {
+    if (errorMsg) errorMsg.style.display = 'none';
     sessionStorage.setItem('sampyo_admin_authenticated', 'true');
     unlockAdminPortal();
   } else {
-    errorMsg.style.display = 'block';
-    document.getElementById('admin-password-input').value = '';
-    document.getElementById('admin-password-input').focus();
+    if (errorMsg) errorMsg.style.display = 'block';
+    inputEl.value = '';
+    inputEl.focus();
   }
 }
 
