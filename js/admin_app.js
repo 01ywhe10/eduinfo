@@ -490,16 +490,23 @@ function updateTraineeCheckCount() {
     if (chk.checked) checkedCount++;
   });
 
-  document.getElementById('edit-completed').value = checkedCount;
-  document.getElementById('edit-completed-text').textContent = checkedCount;
+  const completedInput = document.getElementById('edit-completed');
+  const completedText = document.getElementById('edit-completed-text');
+  if (completedInput) completedInput.value = checkedCount;
+  if (completedText) completedText.textContent = checkedCount;
 
   const targetVal = parseInt(document.getElementById('edit-target').value) || 0;
-  if (checkedCount >= targetVal && targetVal > 0) {
-    document.getElementById('edit-status').value = '완료';
-    document.getElementById('edit-progress').value = 100;
-  } else if (checkedCount > 0) {
-    document.getElementById('edit-status').value = '완료';
-    document.getElementById('edit-progress').value = Math.round((checkedCount / targetVal) * 100);
+  const currentStatusEl = document.getElementById('edit-status');
+  const currentProgressEl = document.getElementById('edit-progress');
+
+  if (currentStatusEl && currentProgressEl) {
+    if (checkedCount >= targetVal && targetVal > 0) {
+      currentStatusEl.value = '완료';
+      currentProgressEl.value = 100;
+    } else if (checkedCount > 0 && currentStatusEl.value === '미진행') {
+      currentStatusEl.value = '진행중';
+      currentProgressEl.value = Math.round((checkedCount / targetVal) * 100);
+    }
   }
 }
 
@@ -553,7 +560,7 @@ function saveCourseStatus() {
 
   let status = document.getElementById('edit-status').value;
   let progress = parseInt(document.getElementById('edit-progress').value) || 0;
-  const targetCount = parseInt(document.getElementById('edit-target').value) || 1;
+  const targetCount = parseInt(document.getElementById('edit-target').value) || 0;
   const completedCount = parseInt(document.getElementById('edit-completed').value) || 0;
   const extraCount = parseInt(document.getElementById('edit-extra').value) || 0;
   const eduDate = document.getElementById('edit-edu-date').value || '';
@@ -561,25 +568,25 @@ function saveCourseStatus() {
   // Extract Checked Trainee Emp IDs
   const checkedTrainees = Array.from(document.querySelectorAll('.trainee-chk:checked')).map(chk => chk.value);
 
-  // Smart Auto Status Logic:
-  if (completedCount >= targetCount && targetCount > 0) {
+  // Status and Progress Calculation
+  if (targetCount > 0 && completedCount >= targetCount) {
     status = '완료';
     progress = 100;
-  } else if ((completedCount > 0 || extraCount > 0) && status === '미진행') {
-    status = '완료';
-    progress = Math.min(100, Math.round(((completedCount + extraCount) / targetCount) * 100));
-  } else if (status === '완료') {
-    progress = 100;
-  } else if (status === '진행중' && progress === 0) {
-    progress = Math.min(100, Math.round(((completedCount + extraCount) / targetCount) * 100)) || 50;
+  } else if (completedCount > 0 || extraCount > 0) {
+    if (status === '미진행') {
+      status = '진행중';
+    }
+    if (progress === 0 && targetCount > 0) {
+      progress = Math.min(100, Math.round((completedCount / targetCount) * 100));
+    }
   }
 
   adminCourseStatus[activeEditId] = {
     status: status,
     progress: progress,
-    targetCount: Math.max(1, targetCount),
-    completedCount: Math.min(targetCount, Math.max(0, completedCount)),
-    extraCount: Math.max(0, extraCount),
+    targetCount: targetCount,
+    completedCount: completedCount,
+    extraCount: extraCount,
     eduDate: eduDate,
     checkedTrainees: checkedTrainees
   };
