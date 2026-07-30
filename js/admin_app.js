@@ -316,15 +316,29 @@ function closeAdminModal() {
 function saveCourseStatus() {
   if (!activeEditId) return;
 
-  const status = document.getElementById('edit-status').value;
-  const progress = parseInt(document.getElementById('edit-progress').value) || 0;
+  let status = document.getElementById('edit-status').value;
+  let progress = parseInt(document.getElementById('edit-progress').value) || 0;
   const targetCount = parseInt(document.getElementById('edit-target').value) || 1;
   const completedCount = parseInt(document.getElementById('edit-completed').value) || 0;
   const extraCount = parseInt(document.getElementById('edit-extra').value) || 0;
 
+  // Smart Auto Status Logic:
+  // If completedCount equals or exceeds targetCount (or completedCount > 0 and user left status as 미진행), automatically update status & progress
+  if (completedCount >= targetCount && targetCount > 0) {
+    status = '완료';
+    progress = 100;
+  } else if ((completedCount > 0 || extraCount > 0) && status === '미진행') {
+    status = '완료'; // 수기/사진으로 참여인원이 등록되면 즉시 완료로 반영
+    progress = Math.min(100, Math.round(((completedCount + extraCount) / targetCount) * 100));
+  } else if (status === '완료') {
+    progress = 100;
+  } else if (status === '진행중' && progress === 0) {
+    progress = Math.min(100, Math.round(((completedCount + extraCount) / targetCount) * 100)) || 50;
+  }
+
   adminCourseStatus[activeEditId] = {
     status: status,
-    progress: Math.min(100, Math.max(0, progress)),
+    progress: progress,
     targetCount: Math.max(1, targetCount),
     completedCount: Math.min(targetCount, Math.max(0, completedCount)),
     extraCount: Math.max(0, extraCount)
