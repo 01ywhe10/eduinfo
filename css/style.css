@@ -1282,3 +1282,25 @@ body.theme-pantone .kpi-link-card:hover {
   box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.12);
   border-color: var(--ci-brand-hex);
 }
+
+/* Natural Glassmorphic Header Tab Group */
+body.theme-pantone .header-tab-group {
+  background: rgba(255, 255, 255, 0.6) !important;
+  border-color: rgba(190, 18, 60, 0.15) !important;
+}
+
+.header-tab-group .tab-btn {
+  color: var(--text-muted);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-tab-group .tab-btn:hover {
+  background: rgba(225, 29, 72, 0.12);
+  color: var(--text-main);
+}
+
+.header-tab-group .tab-btn.active {
+  background: var(--ci-brand-hex);
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px var(--ci-brand-glow);
+}
