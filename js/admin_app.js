@@ -433,7 +433,7 @@ function openEditModal(id) {
   const item = curriculumData.find(d => d.id === id);
   if (!item) return;
 
-  const st = adminCourseStatus[id] || { status: '미진행', progress: 0, targetCount: 30, completedCount: 0, extraCount: 0 };
+  const st = adminCourseStatus[id] || { status: '미진행', progress: 0, targetCount: 30, completedCount: 0, extraCount: 0, eduDate: '' };
 
   document.getElementById('edit-title').textContent = `${item.level} > ${item.title}`;
   document.getElementById('edit-status').value = st.status;
@@ -441,6 +441,10 @@ function openEditModal(id) {
   document.getElementById('edit-target').value = st.targetCount;
   document.getElementById('edit-completed').value = st.completedCount;
   document.getElementById('edit-extra').value = st.extraCount || 0;
+
+  // Set default today's date if date is empty
+  const todayStr = new Date().toISOString().split('T')[0];
+  document.getElementById('edit-edu-date').value = st.eduDate || todayStr;
 
   // Reset Photo Upload Controls
   document.getElementById('edit-photo-upload').value = '';
@@ -452,14 +456,26 @@ function openEditModal(id) {
 
 function handlePhotoUpload(event) {
   const file = event.target.files[0];
-  if (!file) return;
+  if (!file || !activeEditId) return;
+
+  const item = curriculumData.find(d => d.id === activeEditId);
+  const eduDate = document.getElementById('edit-edu-date').value || new Date().toISOString().split('T')[0];
+  const courseTitle = item ? item.title.replace(/[\/\\:\*\?"<>\|]/g, '_') : '과목';
+  const instructor = item ? (item.mainInstructor || '강사미정').replace(/[\/\\:\*\?"<>\|]/g, '_') : '강사';
+
+  // Standardized Filename: "교육일자_교육과정명_교육강사"
+  const ext = file.name.split('.').pop() || 'jpg';
+  const standardFileName = `${eduDate}_${courseTitle}_${instructor}.${ext}`;
 
   // Intelligent Simulation: Recognize attendance count from photo file
   const targetVal = parseInt(document.getElementById('edit-target').value) || 20;
-  // Simulated recognized count based on target
   const recognizedCount = Math.min(targetVal, Math.floor(targetVal * 0.85) + (file.name.length % 5));
 
   document.getElementById('detected-count').textContent = recognizedCount;
+  const previewEl = document.getElementById('standard-filename-preview');
+  if (previewEl) {
+    previewEl.innerHTML = `<i class="fa-solid fa-file-export"></i> 표준 저장 파일명: <strong>${standardFileName}</strong>`;
+  }
   document.getElementById('photo-count-msg').style.display = 'block';
 
   // Automatically update the completed count field

@@ -252,13 +252,21 @@
           <input type="number" id="edit-progress" min="0" max="100" class="filter-select" style="width: 100%;" placeholder="0 ~ 100">
         </div>
 
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">
+            <i class="fa-solid fa-calendar-day"></i> 교육 실시 일자
+          </label>
+          <input type="date" id="edit-edu-date" class="filter-select" style="width: 100%;">
+        </div>
+
         <div style="background: rgba(0, 154, 222, 0.08); border: 1px dashed var(--border-color); border-radius: var(--radius-md); padding: 14px; margin-bottom: 16px;">
           <label style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--ci-brand-light); margin-bottom: 6px;">
-            <i class="fa-solid fa-camera"></i> 교육 현장/출석부 사진 업로드 (자동 참석 인원 카운트)
+            <i class="fa-solid fa-camera"></i> 교육 현장/출석부 사진 업로드 & 표준 저장 (자동 카운트 & 표준파일명 생성)
           </label>
           <input type="file" id="edit-photo-upload" accept="image/*" class="filter-select" style="width: 100%; padding: 8px;" onchange="handlePhotoUpload(event)">
           <p id="photo-count-msg" style="font-size: 0.8rem; color: #10b981; margin-top: 6px; display: none;">
-            <i class="fa-solid fa-circle-check"></i> 사진 인식 완료: <strong id="detected-count">0</strong>명의 수료 참석자가 카운트되었습니다.
+            <i class="fa-solid fa-circle-check"></i> 사진 인식 및 규격화 완료: <strong id="detected-count">0</strong>명 수료 카운트<br>
+            <span style="color: var(--ci-brand-light); font-size: 0.78rem;" id="standard-filename-preview"></span>
           </p>
         </div>
 
