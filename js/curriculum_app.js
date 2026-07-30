@@ -61,32 +61,7 @@ function renderCharts() {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          position: 'bottom',
-          labels: {
-            color: textColor,
-            font: { family: 'Pretendard', size: 12, weight: '700' },
-            padding: 14,
-            usePointStyle: true,
-            pointStyle: 'circle',
-            generateLabels: function(chart) {
-              const data = chart.data;
-              if (data.labels.length && data.datasets.length) {
-                const total = data.datasets[0].data.reduce((a, b) => a + b, 0);
-                return data.labels.map((label, i) => {
-                  const val = data.datasets[0].data[i];
-                  const pct = ((val / total) * 100).toFixed(1);
-                  return {
-                    text: `${label}: ${val}개 (${pct}%)`,
-                    fillStyle: data.datasets[0].backgroundColor[i],
-                    fontColor: textColor,
-                    hidden: isNaN(data.datasets[0].data[i]) || chart.getDatasetMeta(0).data[i].hidden,
-                    index: i
-                  };
-                });
-              }
-              return [];
-            }
-          }
+          display: false
         },
         tooltip: {
           titleColor: '#ffffff',
