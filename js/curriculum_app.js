@@ -33,6 +33,10 @@ function updateKPIs() {
 }
 
 function renderCharts() {
+  const isLight = document.body.classList.contains('theme-pantone');
+  const textColor = isLight ? '#0f172a' : '#ffffff';
+  const gridColor = isLight ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.12)';
+
   // Chart 1: Category Distribution
   const categoryCounts = {};
   curriculumData.forEach(d => {
@@ -59,8 +63,8 @@ function renderCharts() {
         legend: {
           position: 'bottom',
           labels: {
-            color: '#94a3b8',
-            font: { family: 'Pretendard', size: 12, weight: '600' },
+            color: textColor,
+            font: { family: 'Pretendard', size: 12, weight: '700' },
             padding: 14,
             usePointStyle: true,
             pointStyle: 'circle',
@@ -74,6 +78,7 @@ function renderCharts() {
                   return {
                     text: `${label}: ${val}개 (${pct}%)`,
                     fillStyle: data.datasets[0].backgroundColor[i],
+                    fontColor: textColor,
                     hidden: isNaN(data.datasets[0].data[i]) || chart.getDatasetMeta(0).data[i].hidden,
                     index: i
                   };
@@ -84,6 +89,11 @@ function renderCharts() {
           }
         },
         tooltip: {
+          titleColor: '#ffffff',
+          bodyColor: '#ffffff',
+          backgroundColor: 'rgba(15, 23, 42, 0.95)',
+          borderColor: '#009ade',
+          borderWidth: 1,
           callbacks: {
             label: function(context) {
               const label = context.label || '';
@@ -120,7 +130,7 @@ function renderCharts() {
       datasets: [{
         label: '주강사 담당 과목 수',
         data: sortedInstructors.map(item => item[1]),
-        backgroundColor: '#e11d48',
+        backgroundColor: '#009ade',
         borderRadius: 6
       }]
     },
@@ -128,11 +138,18 @@ function renderCharts() {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: { display: false }
+        legend: { display: false },
+        tooltip: {
+          titleColor: '#ffffff',
+          bodyColor: '#ffffff',
+          backgroundColor: 'rgba(15, 23, 42, 0.95)',
+          borderColor: '#009ade',
+          borderWidth: 1
+        }
       },
       scales: {
-        x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
-        y: { ticks: { color: '#94a3b8', stepSize: 1 }, grid: { color: 'rgba(255, 255, 255, 0.05)' }, beginAtZero: true }
+        x: { ticks: { color: textColor, font: { weight: '600' } }, grid: { display: false } },
+        y: { ticks: { color: textColor, stepSize: 1, font: { weight: '600' } }, grid: { color: gridColor }, beginAtZero: true }
       }
     }
   });
