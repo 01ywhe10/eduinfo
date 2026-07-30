@@ -1372,3 +1372,67 @@ body.theme-pantone .header-level-btn.btn-intermediate {
   color: #78350f;
   border-color: rgba(245, 158, 11, 0.4);
 }
+
+
+/* Fix Cross-browser Chrome High Contrast Text & Vibrant Solid Fallbacks */
+.header-level-btn {
+  -webkit-appearance: none;
+  appearance: none;
+  white-space: nowrap;
+}
+
+.header-level-btn.btn-all {
+  background: #7e22ce !important; /* Solid vibrant fallback for Chrome */
+  background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid #a855f7 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.header-level-btn.btn-all:hover {
+  background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%) !important;
+  box-shadow: 0 6px 16px rgba(168, 85, 247, 0.4) !important;
+}
+
+.header-level-btn.btn-beginner {
+  background: #059669 !important; /* Solid vibrant fallback for Chrome */
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid #34d399 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.header-level-btn.btn-beginner:hover {
+  background: linear-gradient(135deg, #34d399 0%, #059669 100%) !important;
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4) !important;
+}
+
+.header-level-btn.btn-intermediate {
+  background: #d97706 !important; /* Solid vibrant fallback for Chrome */
+  background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%) !important;
+  color: #ffffff !important;
+  border: 1px solid #fbbf24 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+.header-level-btn.btn-intermediate:hover {
+  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%) !important;
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4) !important;
+}
+
+/* Pantone Light Theme Button Style Overrides for High Contrast in Chrome */
+body.theme-pantone .header-level-btn.btn-all {
+  background: #e9d5ff !important;
+  color: #581c87 !important;
+  border-color: #c084fc !important;
+  text-shadow: none;
+}
+body.theme-pantone .header-level-btn.btn-beginner {
+  background: #a7f3d0 !important;
+  color: #064e3b !important;
+  border-color: #34d399 !important;
+  text-shadow: none;
+}
+body.theme-pantone .header-level-btn.btn-intermediate {
+  background: #fde68a !important;
+  color: #78350f !important;
+  border-color: #fbbf24 !important;
+  text-shadow: none;
+}
