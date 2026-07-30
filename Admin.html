@@ -20,11 +20,64 @@
       margin-bottom: 24px;
       box-shadow: var(--shadow-lg);
     }
+
+    /* Admin Password Overlay Styles */
+    .password-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+    }
+    .password-card {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 36px 32px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      color: #ffffff;
+    }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <!-- Admin Auth Modal Overlay -->
+  <div class="password-overlay" id="admin-auth-overlay">
+    <div class="password-card">
+      <div style="width: 64px; height: 64px; background: rgba(0, 154, 222, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto;">
+        <i class="fa-solid fa-lock" style="font-size: 1.8rem; color: #009ade;"></i>
+      </div>
+      <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 8px;">관리자 전용 인증</h2>
+      <p style="font-size: 0.88rem; color: #94a3b8; margin-bottom: 24px; line-height: 1.5;">
+        삼표시멘트 직무교육 관리자 포털입니다.<br>허가된 관리자 비밀번호를 입력해 주세요.
+      </p>
+
+      <form onsubmit="handleAdminLogin(event)">
+        <div style="margin-bottom: 16px; text-align: left;">
+          <label style="display: block; font-size: 0.8rem; color: #cbd5e1; margin-bottom: 6px; font-weight: 600;">비밀번호 (Default: sampyo1234)</label>
+          <input type="password" id="admin-password-input" class="filter-select" style="width: 100%; padding: 12px 16px; font-size: 1rem; background: #0f172a; border-color: rgba(255,255,255,0.2); color: #fff;" placeholder="비밀번호 입력..." required autofocus>
+        </div>
+        <p id="password-error-msg" style="color: #f43f5e; font-size: 0.82rem; margin-bottom: 16px; display: none;">
+          <i class="fa-solid fa-circle-exclamation"></i> 비밀번호가 올바르지 않습니다. 다시 확인해 주세요.
+        </p>
+
+        <div style="display: flex; gap: 10px;">
+          <a href="Curriculum.html" class="btn-detail" style="flex: 1; text-align: center; text-decoration: none; padding: 12px 0;">메인 포털로</a>
+          <button type="submit" class="btn-email-primary" style="flex: 1.5; padding: 12px 0;">
+            <i class="fa-solid fa-key"></i> 관리자 인증
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="container" id="admin-main-container" style="display: none;">
     <!-- Header -->
     <header>
       <div class="header-top">

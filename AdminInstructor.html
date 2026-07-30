@@ -99,6 +99,11 @@
   <script src="js/curriculum_data.js"></script>
   <script src="js/instructor_data.js"></script>
   <script>
+    if (sessionStorage.getItem('sampyo_admin_authenticated') !== 'true') {
+      alert('관리자 인증이 필요합니다. 관리자 로그인 페이지로 이동합니다.');
+      window.location.href = 'Admin.html';
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       renderInstructorTable();
       document.getElementById('instructor-search').addEventListener('input', renderInstructorTable);

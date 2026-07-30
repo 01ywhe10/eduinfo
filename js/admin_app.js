@@ -54,12 +54,42 @@ function saveAdminData() {
 let chartDeptInstance = null;
 let chartStatusInstance = null;
 
+const ADMIN_PASSWORD_HASH = 'sampyo1234';
+
 document.addEventListener('DOMContentLoaded', () => {
+  const isAuth = sessionStorage.getItem('sampyo_admin_authenticated');
+  if (isAuth === 'true') {
+    unlockAdminPortal();
+  } else {
+    document.getElementById('admin-auth-overlay').style.display = 'flex';
+    document.getElementById('admin-main-container').style.display = 'none';
+  }
+});
+
+function handleAdminLogin(event) {
+  event.preventDefault();
+  const inputPw = document.getElementById('admin-password-input').value;
+  const errorMsg = document.getElementById('password-error-msg');
+
+  if (inputPw === ADMIN_PASSWORD_HASH) {
+    sessionStorage.setItem('sampyo_admin_authenticated', 'true');
+    unlockAdminPortal();
+  } else {
+    errorMsg.style.display = 'block';
+    document.getElementById('admin-password-input').value = '';
+    document.getElementById('admin-password-input').focus();
+  }
+}
+
+function unlockAdminPortal() {
+  document.getElementById('admin-auth-overlay').style.display = 'none';
+  document.getElementById('admin-main-container').style.display = 'block';
+
   loadAdminData();
   initAdminDashboard();
   renderAdminTable();
   setupAdminEvents();
-});
+}
 
 function initAdminDashboard() {
   updateAdminKPIs();
