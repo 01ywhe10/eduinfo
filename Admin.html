@@ -100,11 +100,6 @@
               <i class="fa-solid fa-users"></i> 교육대상자 현황
             </a>
             
-            <!-- Small Compact Password Change Button -->
-            <button onclick="openChangePasswordModal()" title="비밀번호 변경"
-              style="padding: 6px 12px; font-size: 0.78rem; font-weight: 600; background: rgba(245, 158, 11, 0.12); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 9999px; cursor: pointer; transition: all 0.2s ease;">
-              <i class="fa-solid fa-key" style="font-size: 0.75rem;"></i> 비밀번호 변경
-            </button>
             <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()" style="padding: 6px 12px; font-size: 0.78rem;">
               <i class="fa-solid fa-palette"></i> 삼표 CI 테마
             </button>
@@ -309,43 +304,6 @@
             <i class="fa-solid fa-check"></i> 저장하기
           </button>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Change Password Modal -->
-  <div class="modal-overlay" id="change-password-modal-overlay">
-    <div class="modal-container" style="max-width: 440px;">
-      <div class="modal-header">
-        <h3 style="font-size: 1.2rem; font-weight: 700;"><i class="fa-solid fa-key" style="color: #f59e0b;"></i> 관리자 비밀번호 변경</h3>
-        <button class="modal-close" onclick="closeChangePasswordModal()">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form onsubmit="handleChangePassword(event); return false;">
-          <div style="margin-bottom: 14px;">
-            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">현재 비밀번호</label>
-            <input type="password" id="pw-current" class="filter-select" style="width: 100%;" placeholder="현재 비밀번호 입력" required>
-          </div>
-          <div style="margin-bottom: 14px;">
-            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">새 비밀번호</label>
-            <input type="password" id="pw-new" class="filter-select" style="width: 100%;" placeholder="새 비밀번호 입력" required>
-          </div>
-          <div style="margin-bottom: 20px;">
-            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">새 비밀번호 확인</label>
-            <input type="password" id="pw-confirm" class="filter-select" style="width: 100%;" placeholder="새 비밀번호 다시 입력" required>
-          </div>
-
-          <p id="pw-change-msg" style="font-size: 0.85rem; margin-bottom: 16px; display: none;"></p>
-
-          <div style="display: flex; justify-content: flex-end; gap: 10px;">
-            <button type="button" class="btn-detail" onclick="closeChangePasswordModal()">취소</button>
-            <button type="button" class="btn-email-primary" style="width: auto; padding: 10px 24px;" onclick="handleChangePassword(event)">
-              <i class="fa-solid fa-check"></i> 비밀번호 변경 저장
-            </button>
-          </div>
-        </form>
       </div>
     </div>
   </div>

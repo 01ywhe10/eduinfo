@@ -88,68 +88,6 @@ function handleAdminLogin(event) {
   }
 }
 
-// Dynamic Password Change Logic
-function openChangePasswordModal() {
-  document.getElementById('pw-current').value = '';
-  document.getElementById('pw-new').value = '';
-  document.getElementById('pw-confirm').value = '';
-  const msgEl = document.getElementById('pw-change-msg');
-  if (msgEl) msgEl.style.display = 'none';
-
-  document.getElementById('change-password-modal-overlay').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeChangePasswordModal() {
-  document.getElementById('change-password-modal-overlay').classList.remove('active');
-  document.body.style.overflow = 'auto';
-}
-
-function handleChangePassword(event) {
-  if (event) event.preventDefault();
-
-  const curPw = document.getElementById('pw-current').value.trim();
-  const newPw = document.getElementById('pw-new').value.trim();
-  const confirmPw = document.getElementById('pw-confirm').value.trim();
-  const msgEl = document.getElementById('pw-change-msg');
-
-  if (curPw !== getAdminPassword()) {
-    msgEl.style.display = 'block';
-    msgEl.style.color = '#f43f5e';
-    msgEl.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> 현재 비밀번호가 올바르지 않습니다.';
-    return;
-  }
-
-  if (!newPw || newPw.length < 4) {
-    msgEl.style.display = 'block';
-    msgEl.style.color = '#f43f5e';
-    msgEl.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> 새 비밀번호는 최소 4자 이상이어야 합니다.';
-    return;
-  }
-
-  if (newPw !== confirmPw) {
-    msgEl.style.display = 'block';
-    msgEl.style.color = '#f43f5e';
-    msgEl.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> 새 비밀번호 확인이 일치하지 않습니다.';
-    return;
-  }
-
-  // Save new password into LocalStorage
-  localStorage.setItem('sampyo_admin_password', newPw);
-
-  msgEl.style.display = 'block';
-  msgEl.style.color = '#10b981';
-  msgEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> 비밀번호가 성공적으로 변경되었습니다!';
-
-  setTimeout(() => {
-    document.getElementById('pw-current').value = '';
-    document.getElementById('pw-new').value = '';
-    document.getElementById('pw-confirm').value = '';
-    msgEl.style.display = 'none';
-    closeChangePasswordModal();
-  }, 1200);
-}
-
 function unlockAdminPortal() {
   document.getElementById('admin-auth-overlay').style.display = 'none';
   document.getElementById('admin-main-container').style.display = 'block';
