@@ -142,6 +142,10 @@ function handleChangePassword(event) {
   msgEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> 비밀번호가 성공적으로 변경되었습니다!';
 
   setTimeout(() => {
+    document.getElementById('pw-current').value = '';
+    document.getElementById('pw-new').value = '';
+    document.getElementById('pw-confirm').value = '';
+    msgEl.style.display = 'none';
     closeChangePasswordModal();
   }, 1200);
 }
