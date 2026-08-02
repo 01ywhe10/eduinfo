@@ -1432,6 +1432,14 @@ body.theme-pantone .header-level-btn.btn-intermediate {
 }
 
 
+.list-header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 /* ==========================================================================
    Comprehensive Mobile & Tablet Responsive Media Queries
    ========================================================================== */
@@ -1532,9 +1540,22 @@ body.theme-pantone .header-level-btn.btn-intermediate {
     min-width: 0 !important;
   }
 
+  .search-box {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
   .search-box input,
   .filter-select {
     width: 100%;
+  }
+
+  /* List Header Box Mobile Vertical Setup */
+  .list-header-box {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+    padding: 16px !important;
   }
 
   /* Cards Grid Mobile */
