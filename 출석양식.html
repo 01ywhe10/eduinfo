@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>출석부 - 삼표시멘트 직무교육</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: "Malgun Gothic", "맑은 고딕", Arial, sans-serif;
+        color: #000;
+        background: #fff;
+    }
+
+    .attendance-book {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    /* 제목 */
+    .title {
+        text-align: center;
+        font-size: 26px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    /* 강의 정보 */
+    .lecture-info {
+        display: grid;
+        grid-template-columns: 1fr 180px;
+        border: 1px solid #000;
+        margin-bottom: 10px;
+    }
+
+    .lecture-name {
+        padding: 10px 12px;
+        font-size: 15px;
+        font-weight: bold;
+        line-height: 1.5;
+    }
+
+    /* 강사 확인 */
+    .instructor-confirm {
+        border-left: 1px solid #000;
+        text-align: center;
+        min-height: 75px;
+    }
+
+    .confirm-title {
+        font-weight: bold;
+        padding: 6px;
+        border-bottom: 1px solid #000;
+        background: #d9d9d9;
+    }
+
+    .confirm-sign {
+        height: 48px;
+        padding-top: 5px;
+        line-height: 1.3;
+        font-size: 13px;
+    }
+
+    /* 출석부 테이블 */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    th, td {
+        border: 1px solid #000;
+        text-align: center;
+        vertical-align: middle;
+        padding: 8px 10px;
+    }
+
+    th {
+        background: #d9d9d9;
+        font-weight: bold;
+        font-size: 14.5px;
+        line-height: 1.4;
+    }
+
+    .no-col {
+        width: 8%;
+    }
+
+    .time-sub-header {
+        background: #d9d9d9;
+        font-weight: bold;
+        height: 32px;
+        font-size: 14.5px;
+    }
+
+    .time-header {
+        background: #d9d9d9;
+        font-weight: bold;
+        height: 32px;
+        font-size: 14.5px;
+    }
+
+    .remark-col {
+        width: 32%;
+    }
+
+    /* 예시 행 */
+    .example-row {
+        height: 56px;
+        font-size: 12.5px;
+        line-height: 1.4;
+        color: #777;
+    }
+
+    /* 데이터 행: 가독성 및 수기 서명 여백 확보를 위해 높이 42px 지정 */
+    .data-row {
+        height: 42px;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .name-cell {
+        color: #222;
+        font-weight: bold;
+        background-color: #fff;
+        font-size: 14px;
+    }
+
+    .signature-cell {
+        background-color: #fff;
+    }
+
+    .remark-cell {
+        font-size: 13px;
+        background-color: #fff;
+    }
+
+    .footer-note {
+        margin-top: 16px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #444;
+    }
+
+    .no-print {
+        margin-top: 24px;
+        text-align: center;
+    }
+
+    /* 인쇄 설정 */
+    @media print {
+        @page {
+            size: A4 portrait;
+            margin: 10mm;
+        }
+
+        body {
+            padding: 0;
+        }
+
+        .attendance-book {
+            max-width: none;
+        }
+
+        .title {
+            font-size: 24px;
+            margin-bottom: 14px;
+        }
+
+        .lecture-info {
+            margin-bottom: 8px;
+        }
+
+        .data-row {
+            height: 38px;
+        }
+
+        .footer-note {
+            display: none;
+        }
+
+        .no-print {
+            display: none !important;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="attendance-book">
+
+    <!-- 제목 -->
+    <div class="title" id="attendance-main-title">
+        출 석 부
+    </div>
+
+    <!-- 강의 정보 -->
+    <div class="lecture-info">
+        <div class="lecture-name" id="lecture-info-title">
+            ○ 강의명 : 유지보수 6. Utility의 이해<br>
+            ○ 담당강사 : 주강사 미정
+        </div>
+
+        <div class="instructor-confirm">
+            <div class="confirm-title">
+                강사확인
+            </div>
+            <div class="confirm-sign">
+                서명<br>
+                (이름을 정자로 작성)
+            </div>
+        </div>
+    </div>
+
+    <!-- 출석부 테이블 -->
+    <table>
+        <colgroup>
+            <col class="no-col">
+            <col style="width: 30%;">
+            <col style="width: 30%;">
+            <col class="remark-col">
+        </colgroup>
+
+        <thead>
+            <!-- 날짜 헤더 -->
+            <tr>
+                <th rowspan="3" class="no-col">
+                    No.
+                </th>
+
+                <th colspan="2" id="attendance-date-header">
+                    07월 22일
+                </th>
+
+                <th rowspan="3" class="remark-col">
+                    비고
+                </th>
+            </tr>
+
+            <!-- 시작 / 종료 헤더 -->
+            <tr>
+                <th class="time-sub-header">시작</th>
+                <th class="time-sub-header">종료</th>
+            </tr>
+
+            <!-- 시간 헤더 -->
+            <tr>
+                <th class="time-header" id="start-time-header">11:00</th>
+                <th class="time-header" id="end-time-header">12:00</th>
+            </tr>
+        </thead>
+
+        <tbody id="attendance-tbody">
+            <!-- 예시 행 -->
+            <tr class="example-row">
+                <td>(예시)</td>
+                <td>
+                    서명<br>
+                    (이름을 정자로 작성)
+                </td>
+                <td>
+                    서명<br>
+                    (이름을 정자로 작성)
+                </td>
+                <td>
+                    결석 / 지각 / 조퇴<br>
+                    (강사가 작성)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 하단 안내 -->
+    <div class="footer-note" id="footer-note-text">
+        ※ 출석 시 본인이 서명란(시작/종료)에 이름을 정자로 작성합니다.
+    </div>
+
+    <div class="no-print">
+        <button onclick="window.print()" style="padding: 10px 24px; background: #009ade; color: white; border: none; font-size: 15px; font-weight: bold; border-radius: 4px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,154,222,0.3);">
+            🖨️ 출석부 인쇄하기
+        </button>
+    </div>
+
+</div>
+
+<!-- Data Scripts for Dynamic Population -->
+<script src="js/curriculum_data.js"></script>
+<script src="js/trainee_data.js"></script>
+<script src="js/course_trainee_map.js"></script>
+
+<script>
+  const courseScheduleMap = {
+    "1. Clinker 제조공정의 이해": ["2026-03-24", "2026-03-26"],
+    "2. 시멘트 제조공정의 이해": ["2026-04-14", "2026-04-16"],
+    "3. 예열기 반응기작 이해": ["2026-05-12", "2026-05-14"],
+    "4. Kiln 반응기작 및 소성성 이해": ["2026-06-09", "2026-06-11"],
+    "5. 쿨러 열교환 및 용량산정": ["2026-07-07", "2026-07-09"],
+    "6. 분쇄이론 및 방앗간 운전 특성": ["2026-08-11", "2026-08-13"],
+    "7. 예열기 설비운전 종합": ["2026-09-08", "2026-09-10"],
+    "8. Kiln 설비운전 종합": ["2026-10-13", "2026-10-15"],
+    "9. 쿨러 설비운전 종합": ["2026-11-10", "2026-11-12"],
+    "10. 방앗간 설비운전 종합": ["2026-12-08", "2026-12-10"],
+    "1. 열역학 및 유체역학 기초": ["2026-03-24", "2026-03-26"],
+    "2. 연소공학 및 열전달 기초": ["2026-04-14", "2026-04-16"],
+    "3. Kiln 열수지 계산 및 효율 해석": ["2026-05-12", "2026-05-14"],
+    "4. 예열기/쿨러 열효율 분석 및 계산": ["2026-06-09", "2026-06-11"],
+    "5. 공정 이슈(Coating/Clogging) 원인분석": ["2026-07-07", "2026-07-09"],
+    "6. 폐기물 투입 시 열/물질수지 영향 분석": ["2026-08-11", "2026-08-13"],
+    "7. Kiln 링 형성 기작 및 방지 기술": ["2026-09-08", "2026-09-10"],
+    "8. 코팅 트러블 심화 원인분석": ["2026-10-13", "2026-10-15"],
+    "9. 예열기 Clogging 심화 원인분석": ["2026-11-10", "2026-11-12"],
+    "10. 열효율 극대화 및 공정 최적화 설계": ["2026-12-08", "2026-12-10"],
+    "1. 도면 읽기 및 기계요소의 이해": ["2026-03-24", "2026-03-26"],
+    "2. 윤활 관리 및 윤활유 선정 기초": ["2026-04-14", "2026-04-16"],
+    "3. 정비 안전 및 기초 정비 작업": ["2026-05-12", "2026-05-14"],
+    "4. 밸런싱 및 심시팅 기초": ["2026-06-09", "2026-06-11"],
+    "5. 베어링 실무 기초": ["2026-07-07", "2026-07-09"],
+    "6. Utility의 이해": ["2026-08-11", "2026-08-13"],
+    "7. 도면 분석 및 CAD 활용 기초": ["2026-09-08", "2026-09-10"],
+    "8. 정밀 윤활 관리 실무": ["2026-10-13", "2026-10-15"],
+    "9. 정 정비 및 동 정비 기본": ["2026-11-10", "2026-11-12"],
+    "10. Utility 유지보수 실무": ["2026-12-08", "2026-12-10"],
+    "1. 유압 및 공압 시스템 실무": ["2026-03-24", "2026-03-26"],
+    "2. 진동 측정 및 상태 진단 기초": ["2026-04-14", "2026-04-16"],
+    "3. 소성/분쇄 주요 설비 정비 실무": ["2026-05-12", "2026-05-14"],
+    "4. 설비 고장 원인 분석 및 예방정비": ["2026-06-09", "2026-06-11"],
+    "5. 진동 심화 분석 및 동적 밸런싱": ["2026-07-07", "2026-07-09"],
+    "6. 유압 진단 및 소성/분쇄 설비 정비": ["2026-08-11", "2026-08-13"],
+    "7. 설비 신뢰성 공학 적용": ["2026-09-08", "2026-09-10"],
+    "8. 진동 트러블슈팅 종합": ["2026-10-13", "2026-10-15"],
+    "9. 주요 설비 정밀 수명 진단": ["2026-11-10", "2026-11-12"],
+    "10. RCM 기반 예방보수 체계 구축": ["2026-12-08", "2026-12-10"],
+    "1. 품질시험 및 분석 기초": ["2026-03-24", "2026-03-26"],
+    "2. 시멘트 화학 및 광물 조성 기초": ["2026-04-14", "2026-04-16"],
+    "3. 원료 및 연료 품질 관리 실무": ["2026-05-12", "2026-05-14"],
+    "4. 클링커 품질 평가 및 관리": ["2026-06-09", "2026-06-11"],
+    "5. 제품(시멘트) 물성 시험 및 관리": ["2026-07-07", "2026-07-09"],
+    "6. XRF/XRD 기초 및 장비 운용": ["2026-08-11", "2026-08-13"],
+    "7. 품질 표준 및 공정 검사 기준": ["2026-09-08", "2026-09-10"],
+    "8. 광물 분석 실무": ["2026-10-13", "2026-10-15"],
+    "9. 클링커 수경율 관리 실무": ["2026-11-10", "2026-11-12"],
+    "10. 시멘트 응결 및 강도 발현 제어": ["2026-12-08", "2026-12-10"],
+    "1. XRF/XRD 정량 분석 및 데이터 해석": ["2026-03-24", "2026-03-26"],
+    "2. 광물 조성 제어 및 클링커 품질 최적화": ["2026-04-14", "2026-04-16"],
+    "3. 시멘트 수화 반응 및 내구성 심화": ["2026-05-12", "2026-05-14"],
+    "4. 고객 클레임 분석 및 트러블 슈팅": ["2026-06-09", "2026-06-11"],
+    "5. 친환경 혼합재 활용 및 품질 영향 분석": ["2026-07-07", "2026-07-09"],
+    "6. 혼합재 최적 배합 설계": ["2026-08-11", "2026-08-13"],
+    "7. 클로라이드/바이패스 품질 심화": ["2026-09-08", "2026-09-10"],
+    "8. 품질 클레임 심화 분석": ["2026-10-13", "2026-10-15"],
+    "9. 수화반응 제어 심화": ["2026-11-10", "2026-11-12"],
+    "10. 차세대 친환경 시멘트 품질 개발": ["2026-12-08", "2026-12-10"]
+  };
+
+  // Helper to read 1차 completed trainees from Admin localStorage
+  function getRound1CompletedSet(courseId) {
+    try {
+      const saved = localStorage.getItem('sampyo_admin_course_status_v3');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed[courseId] && Array.isArray(parsed[courseId].round1Trainees)) {
+          return new Set(parsed[courseId].round1Trainees);
+        }
+      }
+    } catch (e) {}
+    return new Set();
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const courseId = params.get('courseId');
+    const roundParam = params.get('round') || '1'; // '1' or '2'
+
+    if (!courseId || typeof curriculumData === 'undefined') return;
+
+    const item = curriculumData.find(d => d.id === courseId);
+    if (!item) return;
+
+    const dateList = courseScheduleMap[item.title] || [];
+    let selectedDateText = '';
+    if (roundParam === '2') {
+      selectedDateText = dateList[1] || dateList[0] || '2차 일정';
+    } else {
+      selectedDateText = dateList[0] || '1차 일정';
+    }
+
+    document.title = `출석부(${roundParam}차) - ${item.title}`;
+
+    const titleEl = document.getElementById('attendance-main-title');
+    if (titleEl) {
+      titleEl.textContent = `출 석 부 (${roundParam}차)`;
+    }
+
+    // 1. Lecture Info Header
+    const lectureTitleEl = document.getElementById('lecture-info-title');
+    if (lectureTitleEl) {
+      lectureTitleEl.innerHTML = `
+        ○ 강의명 : ${item.title} (${item.level} 과정 - ${roundParam}차)<br>
+        ○ 담당강사 : 주강사 ${item.mainInstructor || '미정'} ${item.subInstructor ? '/ 후보강사 ' + item.subInstructor : ''}
+      `;
+    }
+
+    // 2. Date Header (Specific to selected round)
+    const dateHeaderEl = document.getElementById('attendance-date-header');
+    if (dateHeaderEl) {
+      dateHeaderEl.textContent = `${selectedDateText} (${roundParam}차)`;
+    }
+
+    // 3. Trainees Table Body
+    const tbodyEl = document.getElementById('attendance-tbody');
+    if (tbodyEl) {
+      let rawTrainees = (typeof courseTraineeMap !== 'undefined' && courseTraineeMap[courseId]) ? courseTraineeMap[courseId] : [];
+      
+      // If round 2 is selected, EXCLUDE trainees who completed round 1 in Admin portal!
+      if (roundParam === '2') {
+        const completedR1Set = getRound1CompletedSet(courseId);
+        rawTrainees = rawTrainees.filter(t => !completedR1Set.has(t.empId));
+      }
+
+      const totalRows = Math.max(25, rawTrainees.length + 5);
+
+      let html = `
+        <tr class="example-row">
+          <td>(예시)</td>
+          <td>
+            서명<br>
+            (이름을 정자로 작성)
+          </td>
+          <td>
+            서명<br>
+            (이름을 정자로 작성)
+          </td>
+          <td>
+            결석 / 지각 / 조퇴<br>
+            (강사가 작성)
+          </td>
+        </tr>
+      `;
+
+      for (let i = 0; i < totalRows; i++) {
+        const t = rawTrainees[i];
+        const name = t ? t.name : '';
+        html += `
+          <tr class="data-row">
+            <td>${i + 1}</td>
+            <td class="name-cell">${name}</td>
+            <td class="signature-cell"></td>
+            <td class="remark-cell"></td>
+          </tr>
+        `;
+      }
+
+      tbodyEl.innerHTML = html;
+    }
+
+    const noteEl = document.getElementById('footer-note-text');
+    if (noteEl && roundParam === '2') {
+      noteEl.textContent = `※ 1차 교육 이수자는 명단에서 자동 제외되었으며, 출석 시 본인이 서명란(시작/종료)에 이름을 정자로 작성합니다.`;
+    }
+
+    // Auto print if requested
+    if (params.get('autoprint') === '1' || params.get('print') === 'true') {
+      setTimeout(() => {
+        window.print();
+      }, 300);
+    }
+  });
+</script>
+
+</body>
+</html>
