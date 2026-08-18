@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>개인별 수강 현황 및 출석률 모니터링 - 삼표시멘트 교육운영</title>
+  
+  <!-- FontAwesome & Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --bg-card: #1e293b;
+      --bg-header: rgba(15, 23, 42, 0.85);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #334155;
+      --ci-brand-hex: #009ade;
+      --ci-brand-light: #38bdf8;
+      --ci-brand-dark: #0284c7;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+    }
+
+    body.theme-pantone {
+      --bg-dark: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-header: rgba(255, 255, 255, 0.9);
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --ci-brand-hex: #009ade;
+      --ci-brand-light: #0284c7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+
+    header {
+      background: var(--bg-header);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 16px 0;
+      margin-bottom: 24px;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--ci-brand-light);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 8px 16px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-back:hover {
+      background: var(--ci-brand-hex);
+      color: white;
+    }
+
+    .profile-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    @media (max-width: 768px) {
+      .profile-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .profile-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .profile-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--ci-brand-hex), #0284c7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0, 154, 222, 0.3);
+    }
+
+    .profile-name-group h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-main);
+    }
+
+    .profile-meta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text-muted);
+    }
+
+    .badge-dept {
+      background: rgba(0, 154, 222, 0.15);
+      color: var(--ci-brand-light);
+      border: 1px solid rgba(0, 154, 222, 0.3);
+    }
+
+    .rate-box {
+      text-align: right;
+      background: rgba(15, 23, 42, 0.4);
+      padding: 16px 24px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+    }
+    @media (max-width: 768px) {
+      .rate-box { text-align: left; }
+    }
+
+    .rate-title {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .rate-value {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #10b981;
+      line-height: 1.1;
+    }
+
+    /* Monitoring Summary Grid */
+    .monitoring-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .monitor-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+
+    .monitor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--border-color);
+    }
+
+    .monitor-title {
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-main);
+    }
+
+    .stat-bar-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .stat-bar-bg {
+      height: 10px;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 5px;
+      overflow: hidden;
+      display: flex;
+      border: 1px solid var(--border-color);
+    }
+
+    .stat-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.4s ease;
+    }
+
+    /* Course Table */
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(15, 23, 42, 0.6);
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .status-completed {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .status-failed {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .status-pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-sheet {
+      background: var(--ci-brand-hex);
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-sheet:hover {
+      background: var(--ci-brand-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-content">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <a href="AdminTrainee.html" class="btn-back">
+          <i class="fa-solid fa-arrow-left"></i> 교육대상자 목록으로
+        </a>
+        <h2 style="font-size: 1.1rem; font-weight: 700;">개인별 수강 현황 및 출석률 모니터링</h2>
+      </div>
+      <div>
+        <span class="badge badge-dept"><i class="fa-solid fa-chart-pie"></i> 대화형 모니터링 시스템</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Profile Header Card -->
+    <div class="profile-card">
+      <div class="profile-info">
+        <div class="profile-avatar" id="prof-avatar">삼</div>
+        <div class="profile-name-group">
+          <h1>
+            <span id="prof-name">조회 중...</span>
+            <span class="badge badge-dept" id="prof-dept-badge">소속</span>
+          </h1>
+          <div class="profile-meta">
+            <span>사번: <strong id="prof-empid" style="color: var(--text-main); font-family: monospace;">-</strong></span>
+            <span>|</span>
+            <span>직위: <strong id="prof-position" style="color: var(--text-main);">-</strong></span>
+            <span>|</span>
+            <span>담당직무: <strong id="prof-job" style="color: var(--text-main);">-</strong></span>
+          </div>
+        </div>
+      </div>
+      <div class="rate-box">
+        <div class="rate-title">전체 종합 이수/출석률</div>
+        <div class="rate-value" id="overall-rate">0%</div>
+      </div>
+    </div>
+
+    <!-- Category & Level Summary Monitoring Dashboard -->
+    <div class="monitoring-grid">
+      <!-- Card 1: Level Summary (초급 / 중급) -->
+      <div class="monitor-card">
+        <div class="monitor-header">
+          <div class="monitor-title">
+            <i class="fa-solid fa-layer-group" style="color: #38bdf8;"></i> 과정 구분별 집계 (초급 / 중급)
+          </div>
+          <span class="badge" id="level-total-badge">총 0개 과목</span>
+        </div>
+        <div class="stat-bar-group" id="level-stat-group">
+          <!-- Dynamic rendering -->
+        </div>
+      </div>
+
+      <!-- Card 2: Main Category Summary (Process&Production, Maintenance, Quality) -->
+      <div class="monitor-card">
+        <div class="monitor-header">
+          <div class="monitor-title">
+            <i class="fa-solid fa-chart-column" style="color: #10b981;"></i> 주요 분야별 집계 (Process / Maintenance / Quality)
+          </div>
+          <span class="badge" id="cat-total-badge">총 0개 과목</span>
+        </div>
+        <div class="stat-bar-group" id="cat-stat-group">
+          <!-- Dynamic rendering -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Course List Section -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-title">
+          <i class="fa-solid fa-list-check" style="color: var(--ci-brand-hex);"></i> 과목별 출석 및 이수 상세 내역
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">
+          ※ 관리자 포털의 서명 및 이수 상태가 실시간 연동됩니다.
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 60px;">순번</th>
+              <th style="width: 90px;">구분</th>
+              <th style="width: 150px;">분류 (대분류 > 세부)</th>
+              <th>과목명</th>
+              <th style="width: 120px;">담당 강사</th>
+              <th style="width: 120px; text-align: center;">이수 상태</th>
+            </tr>
+          </thead>
+          <tbody id="course-table-body">
+            <!-- Dynamic Rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/curriculum_data.js"></script>
+  <script src="js/trainee_data.js"></script>
+  <script src="js/course_trainee_map.js"></script>
+  <script src="js/course_status_data.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const empId = params.get('empId');
+
+      if (!empId) {
+        alert('조회 대상자 사번이 지정되지 않았습니다.');
+        window.location.href = 'AdminTrainee.html';
+        return;
+      }
+
+      loadTraineeDetail(empId);
+    });
+
+    function getAdminCourseStatus() {
+      if (typeof getStoredCourseStatusData === 'function') {
+        return getStoredCourseStatusData();
+      }
+      try {
+        const saved = localStorage.getItem('sampyo_admin_course_status_v3');
+        if (saved) return JSON.parse(saved);
+      } catch(e) {}
+      return {};
+    }
+
+    function loadTraineeDetail(empId) {
+      // 1. Fetch Trainee Profile
+      let allTrainees = [];
+      if (typeof getStoredTraineeData === 'function') {
+        allTrainees = getStoredTraineeData();
+      } else if (typeof traineeData !== 'undefined') {
+        allTrainees = traineeData;
+      }
+
+      const trainee = allTrainees.find(t => String(t.empId) === String(empId));
+      if (!trainee) {
+        alert(`사번 ${empId} 임직원 정보를 찾을 수 없습니다.`);
+        window.location.href = 'AdminTrainee.html';
+        return;
+      }
+
+      // Update Profile UI
+      document.getElementById('prof-avatar').textContent = trainee.name ? trainee.name.charAt(0) : '삼';
+      document.getElementById('prof-name').textContent = trainee.name;
+      document.getElementById('prof-dept-badge').textContent = trainee.dept || '부서 미정';
+      document.getElementById('prof-empid').textContent = trainee.empId;
+      document.getElementById('prof-position').textContent = trainee.position || '매니저';
+      document.getElementById('prof-job').textContent = trainee.job || '생산관리';
+
+      // 2. Find all assigned courses using courseTraineeMap
+      const assignedCourses = [];
+      const adminStatus = getAdminCourseStatus();
+
+      curriculumData.forEach(course => {
+        const courseTrainees = courseTraineeMap[course.id] || [];
+        const isEnrolled = courseTrainees.some(t => String(t.empId) === String(empId));
+
+        if (isEnrolled) {
+          // Check admin status for course progress & completion
+          const statusObj = adminStatus[course.id] || {};
+          const isCourseFinished = statusObj.status === '완료'; // Admin status marked as Completed
+          
+          let isAttended = false;
+          if (Array.isArray(statusObj.round1Trainees)) {
+            isAttended = statusObj.round1Trainees.includes(String(empId));
+          }
+
+          // If course is marked Completed by admin:
+          // - if trainee attended: 'isCompleted' (이수 완료)
+          // - if trainee did NOT attend: 'isFailed' (미이수)
+          // If course is NOT finished yet (진행중 or 미진행): 'isPending' (진행 예정)
+          const isCompleted = isAttended;
+          const isFailed = isCourseFinished && !isAttended;
+          const isPending = !isCourseFinished && !isAttended;
+
+          assignedCourses.push({
+            ...course,
+            isCourseFinished: isCourseFinished,
+            isCompleted: isCompleted,
+            isFailed: isFailed,
+            isPending: isPending
+          });
+        }
+      });
+
+      // 3. Render Dashboard Aggregations (구분별 & 분류별)
+      renderMonitoringDashboard(assignedCourses);
+
+      // 4. Render Table
+      const tbody = document.getElementById('course-table-body');
+      tbody.innerHTML = '';
+
+      if (assignedCourses.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align: center; padding: 40px; color: var(--text-muted);">
+              현재 신청/배정된 교육과정이 없습니다.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      assignedCourses.forEach((c, idx) => {
+        const tr = document.createElement('tr');
+
+        let statusBadge = '';
+        if (c.isCompleted) {
+          statusBadge = `<span class="status-badge status-completed"><i class="fa-solid fa-circle-check"></i> 이수 완료</span>`;
+        } else if (c.isFailed) {
+          statusBadge = `<span class="status-badge status-failed"><i class="fa-solid fa-circle-xmark"></i> 미이수</span>`;
+        } else {
+          statusBadge = `<span class="status-badge status-pending"><i class="fa-solid fa-clock"></i> 진행 예정</span>`;
+        }
+
+        tr.innerHTML = `
+          <td style="color: var(--text-muted);">${idx + 1}</td>
+          <td><span class="badge" style="background: ${c.level === '중급' ? 'rgba(245, 158, 11, 0.2)' : 'rgba(56, 189, 248, 0.2)'}; color: ${c.level === '중급' ? '#f59e0b' : '#38bdf8'}; font-weight:700;">${c.level}</span></td>
+          <td><strong>${c.category}</strong> > ${c.subCategory}</td>
+          <td style="font-weight: 700; color: var(--text-main);">${c.title}</td>
+          <td>${c.mainInstructor || '미정'}</td>
+          <td style="text-align: center;">${statusBadge}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderMonitoringDashboard(assignedCourses) {
+      const totalCount = assignedCourses.length;
+      const finishedCourses = assignedCourses.filter(c => c.isCourseFinished);
+      const totalCompleted = assignedCourses.filter(c => c.isCompleted).length;
+      
+      // Overall rate: If there are finished courses, calculate completed / finished; otherwise completed / total
+      const rateBase = finishedCourses.length > 0 ? finishedCourses.length : totalCount;
+      const overallRate = rateBase > 0 ? Math.round((totalCompleted / rateBase) * 100) : 0;
+
+      document.getElementById('overall-rate').textContent = `${overallRate}%`;
+      document.getElementById('level-total-badge').textContent = `총 ${totalCount}개 배정 (${finishedCourses.length}개 완료됨)`;
+      document.getElementById('cat-total-badge').textContent = `총 ${totalCount}개 배정 (${finishedCourses.length}개 완료됨)`;
+
+      // 1. Level Aggregation (초급 vs 중급)
+      const levelStats = {
+        '초급': { total: 0, completed: 0, color: '#38bdf8' },
+        '중급': { total: 0, completed: 0, color: '#f59e0b' }
+      };
+
+      // 2. Category Aggregation (Process&Production, Maintenance, Quality 등)
+      const catStats = {
+        'Process&Production': { label: '생산 / 공정 (Process&Production)', total: 0, completed: 0, color: '#e11d48' },
+        'Maintenance': { label: '설비 / 보전 (Maintenance)', total: 0, completed: 0, color: '#38bdf8' },
+        'Quality': { label: '품질 관리 (Quality)', total: 0, completed: 0, color: '#10b981' }
+      };
+
+      assignedCourses.forEach(c => {
+        // Level
+        if (levelStats[c.level]) {
+          levelStats[c.level].total++;
+          if (c.isCompleted) levelStats[c.level].completed++;
+        }
+
+        // Category (normalize)
+        let catKey = c.category;
+        if (!catStats[catKey]) {
+          catStats[catKey] = { label: c.category, total: 0, completed: 0, color: '#c084fc' };
+        }
+        catStats[catKey].total++;
+        if (c.isCompleted) catStats[catKey].completed++;
+      });
+
+      // Render Level Progress Bars
+      const levelContainer = document.getElementById('level-stat-group');
+      levelContainer.innerHTML = '';
+
+      Object.keys(levelStats).forEach(lvl => {
+        const stat = levelStats[lvl];
+        const rate = stat.total > 0 ? Math.round((stat.completed / stat.total) * 100) : 0;
+
+        const item = document.createElement('div');
+        item.className = 'stat-item';
+        item.innerHTML = `
+          <div class="stat-label-row">
+            <span><i class="fa-solid fa-graduation-cap" style="color: ${stat.color};"></i> ${lvl} 과정</span>
+            <span style="color: ${stat.color};">${stat.completed} / ${stat.total} 과목 이수 (${rate}%)</span>
+          </div>
+          <div class="stat-bar-bg">
+            <div class="stat-bar-fill" style="width: ${rate}%; background: ${stat.color};"></div>
+          </div>
+        `;
+        levelContainer.appendChild(item);
+      });
+
+      // Render Category Progress Bars
+      const catContainer = document.getElementById('cat-stat-group');
+      catContainer.innerHTML = '';
+
+      Object.keys(catStats).forEach(key => {
+        const stat = catStats[key];
+        if (stat.total === 0) return; // Skip empty categories for cleaner view
+        const rate = stat.total > 0 ? Math.round((stat.completed / stat.total) * 100) : 0;
+
+        const item = document.createElement('div');
+        item.className = 'stat-item';
+        item.innerHTML = `
+          <div class="stat-label-row">
+            <span><i class="fa-solid fa-folder-open" style="color: ${stat.color};"></i> ${stat.label}</span>
+            <span style="color: ${stat.color};">${stat.completed} / ${stat.total} 과목 이수 (${rate}%)</span>
+          </div>
+          <div class="stat-bar-bg">
+            <div class="stat-bar-fill" style="width: ${rate}%; background: ${stat.color};"></div>
+          </div>
+        `;
+        catContainer.appendChild(item);
+      });
+    }
+  </script>
+</body>
+</html>

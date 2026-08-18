@@ -76,25 +76,30 @@ let adminDepartmentData = [];
 
 // Load data from LocalStorage or initialize defaults
 function loadAdminData() {
-  const savedStatus = localStorage.getItem('sampyo_admin_course_status_v3');
-  if (savedStatus) {
-    adminCourseStatus = JSON.parse(savedStatus);
+  if (typeof getStoredCourseStatusData === 'function') {
+    adminCourseStatus = getStoredCourseStatusData();
   } else {
-    // Reset all progress, completed, and extra counts to 0 initially
-    curriculumData.forEach((item) => {
-      const matchedList = (typeof courseTraineeMap !== 'undefined' && courseTraineeMap[item.id]) ? courseTraineeMap[item.id] : [];
-      const realTarget = matchedList.length;
+    const savedStatus = localStorage.getItem('sampyo_admin_course_status_v3');
+    if (savedStatus) {
+      adminCourseStatus = JSON.parse(savedStatus);
+    }
+  }
 
+  // Ensure all curriculum items have default status structure if missing
+  curriculumData.forEach((item) => {
+    if (!adminCourseStatus[item.id]) {
+      const matchedList = (typeof courseTraineeMap !== 'undefined' && courseTraineeMap[item.id]) ? courseTraineeMap[item.id] : [];
       adminCourseStatus[item.id] = {
         status: '미진행',
         progress: 0,
-        targetCount: realTarget,
+        targetCount: matchedList.length,
         completedCount: 0,
-        extraCount: 0
+        extraCount: 0,
+        round1Trainees: [],
+        round2Trainees: []
       };
-    });
-    saveAdminData();
-  }
+    }
+  });
 
   const savedDepts = localStorage.getItem('sampyo_admin_dept_data_v3');
   if (savedDepts) {
@@ -111,7 +116,11 @@ function loadAdminData() {
 }
 
 function saveAdminData() {
-  localStorage.setItem('sampyo_admin_course_status_v3', JSON.stringify(adminCourseStatus));
+  if (typeof saveStoredCourseStatusData === 'function') {
+    saveStoredCourseStatusData(adminCourseStatus);
+  } else {
+    localStorage.setItem('sampyo_admin_course_status_v3', JSON.stringify(adminCourseStatus));
+  }
 }
 
 let chartDeptInstance = null;
@@ -171,21 +180,27 @@ function updateAdminKPIs() {
   let totalProgressSum = 0;
   let completedCourses = 0;
   let inProgressCourses = 0;
-  let totalTarget = 0;
-  let totalCompleted = 0;
+  let completedCoursesTargetSum = 0; // Total target trainees ONLY for completed courses
+  let completedCoursesCompletedSum = 0; // Total completed trainees ONLY for completed courses
 
   curriculumData.forEach(item => {
     const st = adminCourseStatus[item.id] || { status: '미진행', progress: 0, targetCount: 30, completedCount: 0 };
     totalProgressSum += st.progress;
-    totalTarget += st.targetCount;
-    totalCompleted += st.completedCount;
 
-    if (st.status === '완료') completedCourses++;
-    else if (st.status === '진행중') inProgressCourses++;
+    if (st.status === '완료') {
+      completedCourses++;
+      completedCoursesTargetSum += st.targetCount;
+      completedCoursesCompletedSum += st.completedCount;
+    } else if (st.status === '진행중') {
+      inProgressCourses++;
+    }
   });
 
   const avgProgress = (totalProgressSum / totalCourses).toFixed(1);
-  const participationRate = ((totalCompleted / totalTarget) * 100).toFixed(1);
+  // Calculate participation rate ONLY for completed courses
+  const participationRate = completedCoursesTargetSum > 0 
+    ? ((completedCoursesCompletedSum / completedCoursesTargetSum) * 100).toFixed(1) 
+    : '0.0';
 
   document.getElementById('kpi-avg-progress').textContent = `${avgProgress}%`;
   document.getElementById('kpi-participation-rate').textContent = `${participationRate}%`;
@@ -214,23 +229,38 @@ function renderAdminCharts() {
     });
   }
 
-  // Calculate actual attendance counts from adminCourseStatus
-  let globalTotalCompleted = 0;
-  curriculumData.forEach(c => {
-    const st = adminCourseStatus[c.id] || { completedCount: 0, extraCount: 0 };
-    globalTotalCompleted += (st.completedCount + (st.extraCount || 0));
-  });
+  // Calculate total assigned course enrollments vs actual completions ONLY for COMPLETED courses (status === '완료'), excluding '인사팀'
+  const deptDetails = Object.keys(deptMap).filter(d => d !== '인사팀').map(deptName => {
+    let totalAssignedEnrollments = 0; // Total course enrollments in completed courses for this dept
+    let totalCompletedEnrollments = 0; // Total completed trainees in completed courses for this dept
 
-  const deptNames = Object.keys(deptMap);
-  const deptDetails = deptNames.map(d => {
-    const target = deptMap[d].totalTrainees;
-    // Calculate realistic completed attendance proportion per department
-    const completed = Math.min(target, Math.round(globalTotalCompleted * (target / 46)));
-    const rate = target > 0 ? ((completed / target) * 100).toFixed(1) : '0.0';
+    curriculumData.forEach(course => {
+      const st = adminCourseStatus[course.id];
+      // Only count for courses marked as Completed ('완료')
+      if (st && st.status === '완료') {
+        const courseTrainees = (typeof courseTraineeMap !== 'undefined' && courseTraineeMap[course.id]) ? courseTraineeMap[course.id] : [];
+        const deptTraineesInCourse = courseTrainees.filter(t => t.dept === deptName);
+
+        if (deptTraineesInCourse.length > 0) {
+          totalAssignedEnrollments += deptTraineesInCourse.length;
+
+          if (Array.isArray(st.round1Trainees)) {
+            const completedSet = new Set(st.round1Trainees);
+            const completedInDept = deptTraineesInCourse.filter(t => completedSet.has(String(t.empId))).length;
+            totalCompletedEnrollments += completedInDept;
+          }
+        }
+      }
+    });
+
+    const rate = totalAssignedEnrollments > 0 
+      ? ((totalCompletedEnrollments / totalAssignedEnrollments) * 100).toFixed(1) 
+      : '0.0';
+
     return {
-      name: d,
-      target: target,
-      completed: completed,
+      name: deptName,
+      target: totalAssignedEnrollments, // 교육 완료 건의 총 대상 수강 건수
+      completed: totalCompletedEnrollments, // 교육 완료 건의 실제 참석 수강 건수
       rate: parseFloat(rate)
     };
   });
@@ -267,8 +297,8 @@ function renderAdminCharts() {
               const idx = ctx.dataIndex;
               const info = deptDetails[idx];
               return [
-                ` • 참여대상자 (참석횟수): ${info.completed}명 / ${info.target}명`,
-                ` • 부서 참여율: ${info.rate}%`
+                ` • 이수 건수 / 총 배정 건수: ${info.completed}건 / ${info.target}건`,
+                ` • 부서별 수료/참여율: ${info.rate}%`
               ];
             }
           }

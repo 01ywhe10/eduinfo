@@ -207,6 +207,7 @@
     <div class="lecture-info">
         <div class="lecture-name" id="lecture-info-title">
             ○ 강의명 : 유지보수 6. Utility의 이해<br>
+            ○ 교육일자 : 2026년 8월 11일<br>
             ○ 담당강사 : 주강사 미정
         </div>
 
@@ -298,68 +299,114 @@
 <script src="js/course_trainee_map.js"></script>
 
 <script>
-  const courseScheduleMap = {
+  const defaultCourseScheduleMap = {
     "1. Clinker 제조공정의 이해": ["2026-03-24", "2026-03-26"],
-    "2. 시멘트 제조공정의 이해": ["2026-04-14", "2026-04-16"],
-    "3. 예열기 반응기작 이해": ["2026-05-12", "2026-05-14"],
-    "4. Kiln 반응기작 및 소성성 이해": ["2026-06-09", "2026-06-11"],
-    "5. 쿨러 열교환 및 용량산정": ["2026-07-07", "2026-07-09"],
-    "6. 분쇄이론 및 방앗간 운전 특성": ["2026-08-11", "2026-08-13"],
-    "7. 예열기 설비운전 종합": ["2026-09-08", "2026-09-10"],
-    "8. Kiln 설비운전 종합": ["2026-10-13", "2026-10-15"],
-    "9. 쿨러 설비운전 종합": ["2026-11-10", "2026-11-12"],
-    "10. 방앗간 설비운전 종합": ["2026-12-08", "2026-12-10"],
-    "1. 열역학 및 유체역학 기초": ["2026-03-24", "2026-03-26"],
-    "2. 연소공학 및 열전달 기초": ["2026-04-14", "2026-04-16"],
-    "3. Kiln 열수지 계산 및 효율 해석": ["2026-05-12", "2026-05-14"],
-    "4. 예열기/쿨러 열효율 분석 및 계산": ["2026-06-09", "2026-06-11"],
-    "5. 공정 이슈(Coating/Clogging) 원인분석": ["2026-07-07", "2026-07-09"],
-    "6. 폐기물 투입 시 열/물질수지 영향 분석": ["2026-08-11", "2026-08-13"],
-    "7. Kiln 링 형성 기작 및 방지 기술": ["2026-09-08", "2026-09-10"],
-    "8. 코팅 트러블 심화 원인분석": ["2026-10-13", "2026-10-15"],
-    "9. 예열기 Clogging 심화 원인분석": ["2026-11-10", "2026-11-12"],
-    "10. 열효율 극대화 및 공정 최적화 설계": ["2026-12-08", "2026-12-10"],
-    "1. 도면 읽기 및 기계요소의 이해": ["2026-03-24", "2026-03-26"],
-    "2. 윤활 관리 및 윤활유 선정 기초": ["2026-04-14", "2026-04-16"],
-    "3. 정비 안전 및 기초 정비 작업": ["2026-05-12", "2026-05-14"],
-    "4. 밸런싱 및 심시팅 기초": ["2026-06-09", "2026-06-11"],
-    "5. 베어링 실무 기초": ["2026-07-07", "2026-07-09"],
-    "6. Utility의 이해": ["2026-08-11", "2026-08-13"],
-    "7. 도면 분석 및 CAD 활용 기초": ["2026-09-08", "2026-09-10"],
-    "8. 정밀 윤활 관리 실무": ["2026-10-13", "2026-10-15"],
-    "9. 정 정비 및 동 정비 기본": ["2026-11-10", "2026-11-12"],
-    "10. Utility 유지보수 실무": ["2026-12-08", "2026-12-10"],
-    "1. 유압 및 공압 시스템 실무": ["2026-03-24", "2026-03-26"],
-    "2. 진동 측정 및 상태 진단 기초": ["2026-04-14", "2026-04-16"],
-    "3. 소성/분쇄 주요 설비 정비 실무": ["2026-05-12", "2026-05-14"],
-    "4. 설비 고장 원인 분석 및 예방정비": ["2026-06-09", "2026-06-11"],
-    "5. 진동 심화 분석 및 동적 밸런싱": ["2026-07-07", "2026-07-09"],
-    "6. 유압 진단 및 소성/분쇄 설비 정비": ["2026-08-11", "2026-08-13"],
-    "7. 설비 신뢰성 공학 적용": ["2026-09-08", "2026-09-10"],
-    "8. 진동 트러블슈팅 종합": ["2026-10-13", "2026-10-15"],
-    "9. 주요 설비 정밀 수명 진단": ["2026-11-10", "2026-11-12"],
-    "10. RCM 기반 예방보수 체계 구축": ["2026-12-08", "2026-12-10"],
-    "1. 품질시험 및 분석 기초": ["2026-03-24", "2026-03-26"],
-    "2. 시멘트 화학 및 광물 조성 기초": ["2026-04-14", "2026-04-16"],
-    "3. 원료 및 연료 품질 관리 실무": ["2026-05-12", "2026-05-14"],
-    "4. 클링커 품질 평가 및 관리": ["2026-06-09", "2026-06-11"],
-    "5. 제품(시멘트) 물성 시험 및 관리": ["2026-07-07", "2026-07-09"],
-    "6. XRF/XRD 기초 및 장비 운용": ["2026-08-11", "2026-08-13"],
-    "7. 품질 표준 및 공정 검사 기준": ["2026-09-08", "2026-09-10"],
-    "8. 광물 분석 실무": ["2026-10-13", "2026-10-15"],
-    "9. 클링커 수경율 관리 실무": ["2026-11-10", "2026-11-12"],
-    "10. 시멘트 응결 및 강도 발현 제어": ["2026-12-08", "2026-12-10"],
-    "1. XRF/XRD 정량 분석 및 데이터 해석": ["2026-03-24", "2026-03-26"],
-    "2. 광물 조성 제어 및 클링커 품질 최적화": ["2026-04-14", "2026-04-16"],
-    "3. 시멘트 수화 반응 및 내구성 심화": ["2026-05-12", "2026-05-14"],
-    "4. 고객 클레임 분석 및 트러블 슈팅": ["2026-06-09", "2026-06-11"],
-    "5. 친환경 혼합재 활용 및 품질 영향 분석": ["2026-07-07", "2026-07-09"],
-    "6. 혼합재 최적 배합 설계": ["2026-08-11", "2026-08-13"],
-    "7. 클로라이드/바이패스 품질 심화": ["2026-09-08", "2026-09-10"],
-    "8. 품질 클레임 심화 분석": ["2026-10-13", "2026-10-15"],
-    "9. 수화반응 제어 심화": ["2026-11-10", "2026-11-12"],
-    "10. 차세대 친환경 시멘트 품질 개발": ["2026-12-08", "2026-12-10"]
+    "2. Equipment basis & trouble (1)": ["2026-03-31", "2026-04-02"],
+    "1. RAW MIX CHEMISTRY 1 (기초)": ["2026-04-07", "2026-04-09"],
+    "1. Flow Measurement Basic": ["2026-04-08"],
+    "1. 설비유지보수 업무의 이해": ["2026-04-14", "2026-04-16"],
+    "1. RAW MIX CHEMISTRY 1 (심화)": ["2026-04-15"],
+    "2. Kiln System의 이해": ["2026-04-21", "2026-04-23"],
+    "1. Oil 오염원 및 오염도 관리": ["2026-04-22"],
+    "2. RAW MIX CHEMISTRY 2 (기초)": ["2026-04-28", "2026-04-30"],
+    "2. Compressor 설비 교육 및 적용": ["2026-04-29"],
+    "2. RAW MIX CHEMISTRY 2 (심화)": ["2026-05-06"],
+    "3. 휘발 물질의 제어": ["2026-05-07", "2026-05-12"],
+    "2. Thermodynamics & Heat Capacities": ["2026-05-13"],
+    "3. RAW MIX CHEMISTRY 3 (기초)": ["2026-05-14", "2026-05-19"],
+    "4. 연료의 종류 및 특성의 이해": ["2026-05-21", "2026-05-26"],
+    "4. 시멘트 제조 설비의 이해": ["2026-06-02", "2026-06-04"],
+    "3. Equipment basis & trouble (2)": ["2026-06-09", "2026-06-11"],
+    "3. Kiln maintenance & 윤활 유지 보수": ["2026-06-10"],
+    "4. RAW MIX CHEMISTRY 4 (기초)": ["2026-06-18"],
+    "5. 채광공정 & 원부원료 와 시멘트 품질(기초)": ["2026-06-23", "2026-06-25"],
+    "3. Fan System": ["2026-06-24"],
+    "6. 원료분쇄공정과 시멘트 품질(기초)": ["2026-06-30", "2026-07-02"],
+    "3. RAW MIX CHEMISTRY 3 (심화)": ["2026-07-08"],
+    "5. Kiln 유지보수의 이해": ["2026-07-07", "2026-07-09"],
+    "4. 휘발물질의 순환 및 CBS System 설계": ["2026-07-29"],
+    "5. Gas Fundamentals & Basics": ["2026-07-14", "2026-07-16"],
+    "4. 회전체 동력전달 장치 종류 및 특성": ["2026-07-22"],
+    "6. NOx 생성 및 제어의 이해": ["2026-07-21", "2026-07-23"],
+    "4. RAW MIX CHEMISTRY 4 (심화)": ["2026-07-15"],
+    "6. Utility의 이해": ["2026-07-28", "2026-07-30"],
+    "5. 채광공정 & 원부원료 와 시멘트 품질(심화)": ["2026-08-05"],
+    "7. 내화물의 이해": ["2026-08-04", "2026-08-06"],
+    "5. 유공압의 이해": ["2026-08-12"],
+    "7. 소성공정과 시멘트 품질(기초)": ["2026-08-11", "2026-08-13"],
+    "5. Heat & Gas Balance": ["2026-08-19"],
+    "7. 윤활 유지보수 관리의 이해": ["2026-08-18", "2026-08-20"],
+    "6. 원료분쇄공정과 시멘트 품질(심화)": ["2026-08-26"],
+    "8. 분쇄 이론의 이해": ["2026-08-25", "2026-08-27"],
+    "6. 열처리기술": ["2026-09-02"],
+    "8. 시멘트 분쇄공정과 시멘트 품질(기초)": ["2026-09-01", "2026-09-03"],
+    "6. Kiln Operation 및 Shooting Trouble": ["2026-09-09"],
+    "8. 진동 관리의 이해": ["2026-09-08", "2026-09-10"],
+    "7. 소성공정과 시멘트 품질(심화)": ["2026-09-16"],
+    "9. 시멘트 품질과 콘크리트 품질 상관관계 (기초)": ["2026-09-15", "2026-09-17"],
+    "7. Cooler 4th upgrade 설비 이해 및 유지 보수": ["2026-09-30"],
+    "9. Weigh feeder 설비의 이해": ["2026-09-22", "2026-09-24"],
+    "10. 고객요구품질과 대응방안 (기초)": ["2026-09-29", "2026-10-01"],
+    "7. Mill Operation": ["2026-10-07"],
+    "1. 환경법규와 공장환경목표(기초)": ["2026-10-06", "2026-10-08"],
+    "8. 시멘트 분쇄공정과 시멘트 품질(심화)": ["2026-10-14"],
+    "10. 집진 설비의 이해1": ["2026-10-13", "2026-10-15"],
+    "9. 시멘트 품질과 콘크리트 품질 상관관계 (심화)": ["2026-10-21"],
+    "12. 전기기초일반": ["2026-10-20", "2026-10-22"],
+    "10. 고객요구품질과 대응방안 (심화)": ["2026-10-28"],
+    "2. 대기환경의 이해(기초)": ["2026-10-27", "2026-10-29"],
+    "3. 수질환경의 이해(기초)": ["2026-11-03", "2026-11-05"],
+    "11. 집진 설비의 이해2": ["2026-11-10", "2026-11-12"],
+    "13. DCS 이해 및 운영": ["2026-11-17", "2026-11-19"],
+    "14. 전기기기의 종류 및 이해": ["2026-11-24", "2026-11-26"]
   };
+  let courseScheduleMap = { ...defaultCourseScheduleMap };
+
+  async function loadScheduleFromCSV() {
+    try {
+      const response = await fetch('교육일자.csv');
+      if (!response.ok) return;
+      const text = await response.text();
+      const lines = text.split('\n').filter(l => l.trim());
+      if (lines.length <= 1) return;
+
+      const scheduleMap = {};
+      // Skip header line
+      for (let i = 1; i < lines.length; i++) {
+        const parts = lines[i].split(',').map(p => p.trim());
+        if (parts.length >= 4) {
+          const dateStr = parts[0]; // e.g. "7/28"
+          const title = parts[3];   // e.g. "6. Utility의 이해"
+          
+          if (!dateStr || !title) continue;
+
+          let formattedDate = dateStr;
+          if (dateStr.includes('/')) {
+            const [m, d] = dateStr.split('/');
+            const month = m.padStart(2, '0');
+            const day = d.padStart(2, '0');
+            formattedDate = `2026-${month}-${day}`;
+          } else if (dateStr.includes('-')) {
+            const [m, d] = dateStr.split('-');
+            const month = m.padStart(2, '0');
+            const day = d.padStart(2, '0');
+            formattedDate = `2026-${month}-${day}`;
+          }
+
+          if (!scheduleMap[title]) {
+            scheduleMap[title] = [];
+          }
+          scheduleMap[title].push(formattedDate);
+        }
+      }
+
+      if (Object.keys(scheduleMap).length > 0) {
+        courseScheduleMap = scheduleMap;
+      }
+    } catch (e) {
+      console.warn('Failed to load 교육일자.csv, using default schedule map.', e);
+    }
+  }
 
   // Helper to read 1차 completed trainees from Admin localStorage
   function getRound1CompletedSet(courseId) {
@@ -375,7 +422,9 @@
     return new Set();
   }
 
-  window.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener('DOMContentLoaded', async () => {
+    await loadScheduleFromCSV();
+
     const params = new URLSearchParams(window.location.search);
     const courseId = params.get('courseId');
     const roundParam = params.get('round') || '1'; // '1' or '2'
@@ -386,12 +435,22 @@
     if (!item) return;
 
     const dateList = courseScheduleMap[item.title] || [];
-    let selectedDateText = '';
-    if (roundParam === '2') {
-      selectedDateText = dateList[1] || dateList[0] || '2차 일정';
-    } else {
-      selectedDateText = dateList[0] || '1차 일정';
+    const rawDate = (roundParam === '2') ? (dateList[1] || dateList[0] || '') : (dateList[0] || '');
+
+    function formatFullDate(dStr) {
+      if (!dStr || !dStr.includes('-')) return dStr || '일정 미정';
+      const parts = dStr.split('-');
+      return `${parts[0]}년 ${parseInt(parts[1], 10)}월 ${parseInt(parts[2], 10)}일`;
     }
+
+    function formatShortDate(dStr) {
+      if (!dStr || !dStr.includes('-')) return dStr || '일정 미정';
+      const parts = dStr.split('-');
+      return `${parts[1]}월 ${parts[2]}일`;
+    }
+
+    const fullDateText = formatFullDate(rawDate);
+    const shortDateText = formatShortDate(rawDate);
 
     document.title = `출석부(${roundParam}차) - ${item.title}`;
 
@@ -405,6 +464,7 @@
     if (lectureTitleEl) {
       lectureTitleEl.innerHTML = `
         ○ 강의명 : ${item.title} (${item.level} 과정 - ${roundParam}차)<br>
+        ○ 교육일자 : ${fullDateText}<br>
         ○ 담당강사 : 주강사 ${item.mainInstructor || '미정'} ${item.subInstructor ? '/ 후보강사 ' + item.subInstructor : ''}
       `;
     }
@@ -412,7 +472,7 @@
     // 2. Date Header (Specific to selected round)
     const dateHeaderEl = document.getElementById('attendance-date-header');
     if (dateHeaderEl) {
-      dateHeaderEl.textContent = `${selectedDateText} (${roundParam}차)`;
+      dateHeaderEl.textContent = `${shortDateText} (${roundParam}차)`;
     }
 
     // 3. Trainees Table Body

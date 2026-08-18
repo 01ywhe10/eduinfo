@@ -1,4 +1,4 @@
-const traineeData = [
+const initialTraineeData = [
   {
     "seq": "1",
     "dept": "R&D팀",
@@ -611,3 +611,34 @@ const traineeData = [
     "phone": "010-8527-8084"
   }
 ];
+
+function getStoredTraineeData() {
+  try {
+    const stored = localStorage.getItem('sampyo_trainee_data');
+    if (stored) {
+      return JSON.parse(stored);
+    }
+  } catch (e) {
+    console.error('Error loading trainee data from localStorage:', e);
+  }
+  return [...initialTraineeData];
+}
+
+function saveStoredTraineeData(data) {
+  try {
+    if (data) traineeData = data;
+    localStorage.setItem('sampyo_trainee_data', JSON.stringify(traineeData));
+  } catch (e) {
+    console.error('Error saving trainee data to localStorage:', e);
+  }
+}
+
+function resetTraineeData() {
+  localStorage.removeItem('sampyo_trainee_data');
+  traineeData = [...initialTraineeData];
+  saveStoredTraineeData(traineeData);
+  return traineeData;
+}
+
+let traineeData = getStoredTraineeData();
+

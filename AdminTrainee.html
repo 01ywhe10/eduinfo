@@ -7,6 +7,8 @@
   <!-- Google Fonts & FontAwesome -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css">
   <style>
@@ -19,6 +21,267 @@
       font-size: 0.8rem;
       font-weight: 600;
     }
+
+    /* Trainee Level Select Combobox */
+    .lvl-select {
+      background: var(--bg-card, #1e293b);
+      color: var(--text-main, #f8fafc);
+      border: 1px solid var(--border-color, #334155);
+      border-radius: 6px;
+      padding: 5px 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s ease;
+      text-align: center;
+      width: 100%;
+      max-width: 110px;
+    }
+    .lvl-select:hover, .lvl-select:focus {
+      border-color: var(--ci-brand-light, #009ADE);
+      box-shadow: 0 0 0 2px rgba(0, 154, 222, 0.25);
+    }
+    .lvl-select.lvl-intermediate {
+      background: rgba(245, 158, 11, 0.18);
+      color: #f59e0b;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+    .lvl-select.lvl-basic {
+      background: rgba(16, 185, 129, 0.18);
+      color: #10b981;
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    .lvl-select.lvl-optional {
+      background: rgba(148, 163, 184, 0.15);
+      color: #94a3b8;
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+    .lvl-select.lvl-excluded {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    /* Action Buttons */
+    .btn-add-trainee-lg {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      border: none;
+      font-size: 0.9rem;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    }
+    .btn-add-trainee-lg:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.45);
+      filter: brightness(1.05);
+    }
+
+    .btn-add-inline-toggle {
+      background: rgba(0, 154, 222, 0.15);
+      color: var(--ci-brand-light, #009ADE);
+      border: 1px solid rgba(0, 154, 222, 0.4);
+      font-size: 0.85rem;
+      padding: 9px 15px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-add-inline-toggle:hover {
+      background: var(--ci-brand-light, #009ADE);
+      color: #ffffff;
+    }
+
+    .btn-delete {
+      background: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .btn-delete:hover {
+      background: #ef4444;
+      color: #ffffff;
+      border-color: #ef4444;
+    }
+
+    /* Quick Add Row in Table */
+    .quick-add-tr {
+      background: rgba(0, 154, 222, 0.08) !important;
+      border-bottom: 2px solid var(--ci-brand-light, #009ADE) !important;
+    }
+    .quick-input, .quick-select {
+      background: var(--bg-card, #1e293b);
+      border: 1px solid var(--border-color, #334155);
+      color: var(--text-main, #f8fafc);
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      width: 100%;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .quick-input:focus, .quick-select:focus {
+      border-color: var(--ci-brand-light, #009ADE);
+      box-shadow: 0 0 0 2px rgba(0, 154, 222, 0.2);
+    }
+    .btn-save-inline {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+    .btn-save-inline:hover {
+      background: #059669;
+    }
+
+    /* Modal Overlay & Card */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-container {
+      background: var(--bg-card, #1e293b);
+      border: 1px solid var(--border-color, #334155);
+      border-radius: 14px;
+      width: 92%;
+      max-width: 640px;
+      padding: 26px;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+      transform: translateY(-20px);
+      transition: transform 0.25s ease;
+    }
+    .modal-overlay.active .modal-container {
+      transform: translateY(0);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color, #334155);
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main, #f8fafc);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted, #94a3b8);
+      font-size: 1.3rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: color 0.2s;
+    }
+    .modal-close-btn:hover { color: #ef4444; }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 580px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted, #94a3b8);
+    }
+    .form-input, .form-select {
+      background: var(--bg-input, rgba(15, 23, 42, 0.6));
+      border: 1px solid var(--border-color, #334155);
+      color: var(--text-main, #f8fafc);
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus {
+      border-color: var(--ci-brand-light, #009ADE);
+    }
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color, #334155);
+    }
+    .btn-secondary {
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text-main, #f8fafc);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      padding: 9px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn-primary {
+      background: var(--ci-brand-light, #009ADE);
+      color: #ffffff;
+      border: none;
+      padding: 9px 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 154, 222, 0.3);
+    }
+    .btn-primary:hover {
+      filter: brightness(1.1);
+    }
   </style>
 </head>
 <body>
@@ -29,11 +292,11 @@
         <div>
           <span class="badge badge-emerald"><i class="fa-solid fa-users"></i> 관리자 전용 데이터</span>
           <h1 class="main-title" style="margin-top: 6px;">삼표시멘트 교육대상자 명부 및 수강 과정 현황</h1>
-          <p class="subtitle">사내 46명 교육 대상 임직원 소속, 직위, 직무 및 생산/공정·유지보수·품질 과정 수강 현황</p>
+          <p class="subtitle">사내 교육 대상 임직원 소속, 직위, 직무 및 생산/공정·유지보수·품질 과정 수강 현황 (실시간 연동)</p>
         </div>
         
         <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 14px;">
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
             <a href="AdminInstructor.html" class="header-level-btn btn-all" style="font-size: 0.85rem; padding: 8px 16px;">
               <i class="fa-solid fa-user-tie"></i> 사내강사 현황
             </a>
@@ -61,14 +324,34 @@
         <div class="kpi-subtext">교육 참여 소속 부서 수</div>
       </div>
       <div class="kpi-card">
+        <div class="kpi-title">초급 과정 신청자</div>
+        <div class="kpi-value" id="kpi-basic-count" style="color: #38bdf8;">0명</div>
+        <div class="kpi-subtext">기초 초급 과정 수강자 수</div>
+      </div>
+      <div class="kpi-card">
         <div class="kpi-title">중급 과정 신청자</div>
         <div class="kpi-value" id="kpi-intermediate-count" style="color: #f59e0b;">0명</div>
         <div class="kpi-subtext">심화 중급 과정 수강자 수</div>
       </div>
     </section>
 
-    <!-- Search & Filter Bar -->
-    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
+    <!-- Department Participation Rate Chart Card Section -->
+    <section style="margin-bottom: 24px;">
+      <div class="chart-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+        <div class="chart-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div class="chart-title" style="font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-chart-column" style="color: var(--ci-brand-light);"></i> 부서별 교육 수료/참여율 현황 (%)
+          </div>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">※ 완료된 교육 과목의 이수 건수 / 배정 대상 건수 기준</span>
+        </div>
+        <div class="chart-container" style="height: 240px; position: relative;">
+          <canvas id="chart-dept-trainee"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prominent Search & Action Control Bar -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 24px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
       <div class="search-box" style="flex: 1; min-width: 240px;">
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" id="trainee-search" placeholder="성명, 사번, 부서명, 직급, 직무 검색...">
@@ -77,30 +360,46 @@
       <select id="filter-dept" class="filter-select">
         <option value="all">전체 소속 부서</option>
       </select>
+
+      <!-- Prominent Primary Buttons for Adding Trainees -->
+      <button type="button" class="btn-add-trainee-lg" onclick="openAddTraineeModal()">
+        <i class="fa-solid fa-user-plus"></i> 신규 대상자 등록 (모달)
+      </button>
+
+      <button type="button" class="btn-add-inline-toggle" onclick="toggleQuickAddRow()">
+        <i class="fa-solid fa-table-cells-row-unlock"></i> <span id="quick-add-toggle-label">테이블 직접 추가 열기</span>
+      </button>
+
+      <button type="button" class="filter-select" onclick="handleResetData()" title="초기 데이터로 되돌리기" style="cursor: pointer; background: rgba(148, 163, 184, 0.1); border-color: var(--border-color);">
+        <i class="fa-solid fa-rotate-left"></i> 데이터 초기화
+      </button>
     </div>
 
     <!-- Trainee Table Section -->
     <section>
-      <div class="section-title-area">
-        <div class="section-title">
-          <i class="fa-solid fa-address-card" style="color: var(--ci-brand-hex);"></i> 임직원 교육대상자 상세 명부표 (46명)
+      <div class="section-title-area" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <div class="section-title" id="section-title-text" style="font-size: 1.15rem; font-weight: 700;">
+          <i class="fa-solid fa-address-card" style="color: var(--ci-brand-hex);"></i> 임직원 교육대상자 상세 명부표
         </div>
-        <div class="results-count" id="trainee-count">조회 중...</div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <div class="results-count" id="trainee-count">조회 중...</div>
+        </div>
       </div>
 
       <div class="table-container">
         <table class="curriculum-table">
           <thead>
             <tr>
-              <th style="width: 50px;">순번</th>
-              <th style="width: 140px;">소속 부서</th>
-              <th style="width: 80px;">직위</th>
-              <th style="width: 110px;">담당 직무</th>
-              <th style="width: 90px;">사번</th>
-              <th style="width: 100px;">성명</th>
-              <th style="width: 120px; text-align: center;">생산/공정 수강</th>
-              <th style="width: 120px; text-align: center;">유지보수 수강</th>
-              <th style="width: 120px; text-align: center;">품질 수강</th>
+              <th style="width: 45px;">순번</th>
+              <th style="width: 125px;">소속 부서</th>
+              <th style="width: 70px;">직위</th>
+              <th style="width: 95px;">담당 직무</th>
+              <th style="width: 85px;">사번</th>
+              <th style="width: 110px; white-space: nowrap;">성명</th>
+              <th style="width: 140px; text-align: center; white-space: nowrap;">생산/공정 수강</th>
+              <th style="width: 140px; text-align: center; white-space: nowrap;">유지보수 수강</th>
+              <th style="width: 140px; text-align: center; white-space: nowrap;">품질 수강</th>
+              <th style="width: 75px; text-align: center;">작업</th>
             </tr>
           </thead>
           <tbody id="trainee-table-body">
@@ -115,8 +414,100 @@
     </footer>
   </div>
 
+  <!-- Add Trainee Modal -->
+  <div class="modal-overlay" id="add-trainee-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-user-plus" style="color: var(--ci-brand-light);"></i> 신규 교육대상자 등록
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeAddTraineeModal()">&times;</button>
+      </div>
+      
+      <form id="add-trainee-form" onsubmit="handleAddTraineeSubmit(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">성명 *</label>
+            <input type="text" id="add-name" class="form-input" placeholder="예: 홍길동" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">사번 *</label>
+            <input type="text" id="add-empId" class="form-input" placeholder="예: 1009999" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">소속 부서 *</label>
+            <select id="add-dept" class="form-select" onchange="if(this.value) document.getElementById('add-dept-custom').value=''">
+              <option value="">-- 부서 선택 --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">직접 입력 (신규 부서인 경우)</label>
+            <input type="text" id="add-dept-custom" class="form-input" placeholder="예: 스마트팩토리팀">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">직위</label>
+            <select id="add-position" class="form-select">
+              <option value="매니저">매니저</option>
+              <option value="책임" selected>책임</option>
+              <option value="수석">수석</option>
+              <option value="교육담당자">교육담당자</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">담당 직무</label>
+            <input type="text" id="add-job" class="form-input" placeholder="예: 생산관리, 기계설비 등" value="생산관리">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">생산/공정 수당대상</label>
+            <select id="add-processLvl" class="form-select">
+              <option value="초급">🌿 초급</option>
+              <option value="중급">🔥 중급</option>
+              <option value="(선택)" selected>⚙️ (선택)</option>
+              <option value="제외">🚫 제외</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">유지보수 수당대상</label>
+            <select id="add-maintLvl" class="form-select">
+              <option value="초급">🌿 초급</option>
+              <option value="중급">🔥 중급</option>
+              <option value="(선택)" selected>⚙️ (선택)</option>
+              <option value="제외">🚫 제외</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">품질 수당대상</label>
+            <select id="add-qualityLvl" class="form-select">
+              <option value="초급">🌿 초급</option>
+              <option value="중급">🔥 중급</option>
+              <option value="(선택)" selected>⚙️ (선택)</option>
+              <option value="제외">🚫 제외</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">이메일</label>
+            <input type="email" id="add-email" class="form-input" placeholder="email@sampyo.co.kr">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeAddTraineeModal()">취소</button>
+          <button type="submit" class="btn-primary"><i class="fa-solid fa-check"></i> 저장 및 추가</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/curriculum_data.js"></script>
   <script src="js/trainee_data.js"></script>
+  <script src="js/course_trainee_map.js"></script>
   <script>
+    let showQuickAdd = true; // Show quick add row at top by default for immediate visibility
+    let chartDeptTraineeInstance = null;
+
     if (sessionStorage.getItem('sampyo_admin_authenticated') !== 'true') {
       alert('관리자 인증이 필요합니다. 관리자 로그인 페이지로 이동합니다.');
       window.location.href = 'Admin.html';
@@ -130,21 +521,234 @@
 
     function populateDeptFilter() {
       const select = document.getElementById('filter-dept');
-      const depts = [...new Set(traineeData.map(d => d.dept))];
+      const curVal = select.value || 'all';
+      select.innerHTML = '<option value="all">전체 소속 부서</option>';
+      
+      const depts = [...new Set(traineeData.map(d => d.dept))].filter(Boolean).sort();
       depts.forEach(dept => {
         const opt = document.createElement('option');
         opt.value = dept;
         opt.textContent = `소속: ${dept}`;
         select.appendChild(opt);
       });
+      select.value = depts.includes(curVal) ? curVal : 'all';
 
+      updateKpiCards(depts);
+    }
+
+    function getAdminCourseStatus() {
+      try {
+        const saved = localStorage.getItem('sampyo_admin_course_status_v3');
+        if (saved) return JSON.parse(saved);
+      } catch(e) {}
+      return {};
+    }
+
+    function renderDepartmentParticipationChart(depts) {
+      const canvas = document.getElementById('chart-dept-trainee');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (chartDeptTraineeInstance) chartDeptTraineeInstance.destroy();
+
+      const adminStatus = getAdminCourseStatus();
+      const curriculums = (typeof curriculumData !== 'undefined') ? curriculumData : [];
+
+      // Exclude '인사팀' from participation chart statistics
+      const filteredDepts = depts.filter(d => d !== '인사팀');
+
+      const deptDetails = filteredDepts.map(deptName => {
+        let totalAssigned = 0;
+        let totalCompleted = 0;
+
+        curriculums.forEach(course => {
+          const st = adminStatus[course.id];
+          if (st && st.status === '완료') {
+            const trainees = (typeof courseTraineeMap !== 'undefined' && courseTraineeMap[course.id]) ? courseTraineeMap[course.id] : [];
+            const deptTrainees = trainees.filter(t => t.dept === deptName);
+
+            if (deptTrainees.length > 0) {
+              totalAssigned += deptTrainees.length;
+              if (Array.isArray(st.round1Trainees)) {
+                const setCompleted = new Set(st.round1Trainees);
+                const countCompleted = deptTrainees.filter(t => setCompleted.has(String(t.empId))).length;
+                totalCompleted += countCompleted;
+              }
+            }
+          }
+        });
+
+        const rate = totalAssigned > 0 ? ((totalCompleted / totalAssigned) * 100).toFixed(1) : '0.0';
+        return {
+          dept: deptName,
+          total: totalAssigned,
+          completed: totalCompleted,
+          rate: parseFloat(rate)
+        };
+      });
+
+      const isLight = document.body.classList.contains('theme-pantone');
+      const textColor = isLight ? '#0f172a' : '#ffffff';
+      const gridColor = isLight ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.12)';
+
+      chartDeptTraineeInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: deptDetails.map(d => d.dept),
+          datasets: [{
+            label: '부서별 수료/참여율 (%)',
+            data: deptDetails.map(d => d.rate),
+            backgroundColor: '#009ade',
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              titleColor: '#ffffff',
+              bodyColor: '#ffffff',
+              backgroundColor: 'rgba(15, 23, 42, 0.95)',
+              borderColor: '#009ade',
+              borderWidth: 1,
+              padding: 12,
+              callbacks: {
+                title: (items) => `🏢 ${items[0].label}`,
+                label: (ctxItem) => {
+                  const info = deptDetails[ctxItem.dataIndex];
+                  return [
+                    ` • 이수 건수 / 완료 과목 배정 건수: ${info.completed}건 / ${info.total}건`,
+                    ` • 부서 참여율: ${info.rate}%`
+                  ];
+                }
+              }
+            }
+          },
+          scales: {
+            x: { ticks: { color: textColor, font: { weight: '600', size: 11 } }, grid: { display: false } },
+            y: { ticks: { color: textColor, font: { weight: '600' } }, grid: { color: gridColor }, beginAtZero: true, max: 100 }
+          }
+        }
+      });
+    }
+
+    function updateKpiCards(depts) {
+      if (!depts) {
+        depts = [...new Set(traineeData.map(d => d.dept))].filter(Boolean);
+      }
       document.getElementById('kpi-total-trainees').textContent = `${traineeData.length}명`;
       document.getElementById('kpi-total-depts').textContent = `${depts.length}개 부서`;
 
+      const basicCount = traineeData.filter(d => 
+        (d.processLvl && d.processLvl.includes('초급')) || 
+        (d.maintLvl && d.maintLvl.includes('초급')) || 
+        (d.qualityLvl && d.qualityLvl.includes('초급'))
+      ).length;
+      document.getElementById('kpi-basic-count').textContent = `${basicCount}명`;
+
       const interCount = traineeData.filter(d => 
-        d.processLvl.includes('중급') || d.maintLvl.includes('중급') || d.qualityLvl.includes('중급')
+        (d.processLvl && d.processLvl.includes('중급')) || 
+        (d.maintLvl && d.maintLvl.includes('중급')) || 
+        (d.qualityLvl && d.qualityLvl.includes('중급'))
       ).length;
       document.getElementById('kpi-intermediate-count').textContent = `${interCount}명`;
+
+      const titleEl = document.getElementById('section-title-text');
+      if (titleEl) {
+        titleEl.innerHTML = `<i class="fa-solid fa-address-card" style="color: var(--ci-brand-hex);"></i> 임직원 교육대상자 상세 명부표 (${traineeData.length}명)`;
+      }
+
+      renderDepartmentParticipationChart(depts);
+    }
+
+    function getLevelClass(lvl) {
+      if (!lvl) return 'lvl-optional';
+      if (lvl.includes('중급')) return 'lvl-intermediate';
+      if (lvl.includes('초급')) return 'lvl-basic';
+      if (lvl.includes('제외')) return 'lvl-excluded';
+      return 'lvl-optional';
+    }
+
+    function getCategoryCompletionRate(empId, field) {
+      if (typeof curriculumData === 'undefined' || typeof courseTraineeMap === 'undefined') return null;
+      
+      let targetCat = '';
+      if (field === 'processLvl') targetCat = 'Process&Production';
+      else if (field === 'maintLvl') targetCat = 'Maintenance';
+      else if (field === 'qualityLvl') targetCat = 'Quality';
+      if (!targetCat) return null;
+
+      const adminStatus = getAdminCourseStatus();
+      let finishedAssignedCount = 0;
+      let completedCount = 0;
+
+      curriculumData.forEach(course => {
+        if (course.category === targetCat) {
+          const courseTrainees = courseTraineeMap[course.id] || [];
+          const isEnrolled = courseTrainees.some(t => String(t.empId) === String(empId));
+
+          if (isEnrolled) {
+            const st = adminStatus[course.id];
+            if (st && st.status === '완료') {
+              finishedAssignedCount++;
+              if (Array.isArray(st.round1Trainees) && st.round1Trainees.includes(String(empId))) {
+                completedCount++;
+              }
+            }
+          }
+        }
+      });
+
+      if (finishedAssignedCount === 0) return { text: '수료율 -', color: 'var(--text-muted)' };
+      const rate = Math.round((completedCount / finishedAssignedCount) * 100);
+      const color = rate >= 80 ? '#10b981' : (rate >= 50 ? '#f59e0b' : '#ef4444');
+      return { text: `수료율: ${rate}% (${completedCount}/${finishedAssignedCount})`, color: color };
+    }
+
+    function renderLevelSelectHtml(empId, field, currentValue) {
+      const options = [
+        { val: '초급', label: '🌿 초급' },
+        { val: '중급', label: '🔥 중급' },
+        { val: '(선택)', label: '⚙️ (선택)' },
+        { val: '제외', label: '🚫 제외' }
+      ];
+
+      const currentCls = getLevelClass(currentValue);
+      let html = `<div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">`;
+      html += `<select class="lvl-select ${currentCls}" onchange="onLevelChange('${empId}', '${field}', this)">`;
+      
+      options.forEach(opt => {
+        const isSelected = (currentValue === opt.val || (currentValue && currentValue.includes(opt.val.replace(/[()]/g, '')))) ? 'selected' : '';
+        html += `<option value="${opt.val}" ${isSelected}>${opt.label}</option>`;
+      });
+      html += `</select>`;
+
+      const rateInfo = getCategoryCompletionRate(empId, field);
+      if (rateInfo) {
+        html += `<span style="font-size: 0.72rem; font-weight: 700; color: ${rateInfo.color}; white-space: nowrap;" title="완료된 과목 기준 개인 수료율">${rateInfo.text}</span>`;
+      }
+      html += `</div>`;
+      return html;
+    }
+
+    function onLevelChange(empId, field, selectEl) {
+      const newValue = selectEl.value;
+      const item = traineeData.find(d => String(d.empId) === String(empId));
+      if (item) {
+        item[field] = newValue;
+        saveStoredTraineeData(traineeData);
+        renderTraineeTable();
+      }
+    }
+
+    function toggleQuickAddRow() {
+      showQuickAdd = !showQuickAdd;
+      const labelEl = document.getElementById('quick-add-toggle-label');
+      if (labelEl) {
+        labelEl.textContent = showQuickAdd ? '테이블 직접 추가 닫기' : '테이블 직접 추가 열기';
+      }
+      renderTraineeTable();
     }
 
     function renderTraineeTable() {
@@ -168,20 +772,65 @@
       countEl.textContent = `총 ${filtered.length}명 검색됨`;
       tbody.innerHTML = '';
 
+      // 1. Render Quick Add Row at the top if enabled
+      if (showQuickAdd) {
+        const quickTr = document.createElement('tr');
+        quickTr.className = 'quick-add-tr';
+        quickTr.innerHTML = `
+          <td style="text-align: center; font-weight: 700; color: var(--ci-brand-light);"><i class="fa-solid fa-plus"></i></td>
+          <td><input type="text" id="quick-dept" placeholder="부서 (예: R&D팀)" class="quick-input"></td>
+          <td>
+            <select id="quick-position" class="quick-select">
+              <option value="매니저">매니저</option>
+              <option value="책임" selected>책임</option>
+              <option value="수석">수석</option>
+            </select>
+          </td>
+          <td><input type="text" id="quick-job" placeholder="직무 (예: 생산관리)" class="quick-input" value="생산관리"></td>
+          <td><input type="text" id="quick-empId" placeholder="사번 (예: 1009999)" class="quick-input"></td>
+          <td><input type="text" id="quick-name" placeholder="성명 (예: 홍길동)" class="quick-input"></td>
+          <td style="text-align: center;">
+            <select id="quick-processLvl" class="lvl-select lvl-optional">
+              <option value="초급">🌿 초급</option>
+              <option value="중급">🔥 중급</option>
+              <option value="(선택)" selected>⚙️ (선택)</option>
+              <option value="제외">🚫 제외</option>
+            </select>
+          </td>
+          <td style="text-align: center;">
+            <select id="quick-maintLvl" class="lvl-select lvl-optional">
+              <option value="초급">🌿 초급</option>
+              <option value="중급">🔥 중급</option>
+              <option value="(선택)" selected>⚙️ (선택)</option>
+              <option value="제외">🚫 제외</option>
+            </select>
+          </td>
+          <td style="text-align: center;">
+            <select id="quick-qualityLvl" class="lvl-select lvl-optional">
+              <option value="초급">🌿 초급</option>
+              <option value="중급">🔥 중급</option>
+              <option value="(선택)" selected>⚙️ (선택)</option>
+              <option value="제외">🚫 제외</option>
+            </select>
+          </td>
+          <td style="text-align: center;">
+            <button type="button" class="btn-save-inline" onclick="handleQuickAddSubmit()" title="입력 정보 등록">
+              <i class="fa-solid fa-check"></i> 추가
+            </button>
+          </td>
+        `;
+        tbody.appendChild(quickTr);
+      }
+
       if (filtered.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:40px; color:var(--text-muted);">조건에 맞는 교육대상자가 없습니다.</td></tr>';
+        const tr = document.createElement('tr');
+        tr.innerHTML = '<td colspan="10" style="text-align:center; padding:40px; color:var(--text-muted);">조건에 맞는 교육대상자가 없습니다. 상단 추가 행 또는 모달을 통해 추가할 수 있습니다.</td>';
+        tbody.appendChild(tr);
         return;
       }
 
       filtered.forEach((item, idx) => {
         const tr = document.createElement('tr');
-
-        const getLvlBadge = (lvl) => {
-          if (!lvl) return '-';
-          if (lvl.includes('중급')) return '<span class="badge badge-amber" style="font-size:0.75rem;">🔥 중급</span>';
-          if (lvl.includes('초급')) return '<span class="badge badge-emerald" style="font-size:0.75rem;">🌿 초급</span>';
-          return `<span class="badge" style="font-size:0.75rem;">${lvl}</span>`;
-        };
 
         tr.innerHTML = `
           <td style="color: var(--text-muted);">${item.seq || idx + 1}</td>
@@ -189,15 +838,151 @@
           <td>${item.position}</td>
           <td>${item.job}</td>
           <td style="font-family: monospace; color: var(--text-muted);">${item.empId}</td>
-          <td style="font-weight: 700; font-size: 1rem; color: var(--ci-brand-light);">
-            <i class="fa-solid fa-user" style="margin-right:4px;"></i>${item.name}
+          <td style="font-weight: 700; font-size: 1rem; color: var(--ci-brand-light); white-space: nowrap;">
+            <a href="AdminTraineeDetail.html?empId=${item.empId}" title="${item.name}님 개인별 참석/출석률 상세페이지 보기" style="color: var(--ci-brand-light); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+              <i class="fa-solid fa-user"></i>${item.name} <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem; margin-left: 2px;"></i>
+            </a>
           </td>
-          <td style="text-align: center;">${getLvlBadge(item.processLvl)}</td>
-          <td style="text-align: center;">${getLvlBadge(item.maintLvl)}</td>
-          <td style="text-align: center;">${getLvlBadge(item.qualityLvl)}</td>
+          <td style="text-align: center;">${renderLevelSelectHtml(item.empId, 'processLvl', item.processLvl)}</td>
+          <td style="text-align: center;">${renderLevelSelectHtml(item.empId, 'maintLvl', item.maintLvl)}</td>
+          <td style="text-align: center;">${renderLevelSelectHtml(item.empId, 'qualityLvl', item.qualityLvl)}</td>
+          <td style="text-align: center;">
+            <button class="btn-delete" onclick="deleteTrainee('${item.empId}')" title="삭제">
+              <i class="fa-solid fa-trash-can"></i> 삭제
+            </button>
+          </td>
         `;
         tbody.appendChild(tr);
       });
+    }
+
+    function handleQuickAddSubmit() {
+      const dept = document.getElementById('quick-dept').value.trim();
+      const position = document.getElementById('quick-position').value;
+      const job = document.getElementById('quick-job').value.trim() || '생산관리';
+      const empId = document.getElementById('quick-empId').value.trim();
+      const name = document.getElementById('quick-name').value.trim();
+      const processLvl = document.getElementById('quick-processLvl').value;
+      const maintLvl = document.getElementById('quick-maintLvl').value;
+      const qualityLvl = document.getElementById('quick-qualityLvl').value;
+
+      if (!name || !empId || !dept) {
+        alert('테이블 직접 추가: 성명, 사번, 부서명은 필수 입력 항목입니다.');
+        return;
+      }
+
+      if (traineeData.some(d => String(d.empId) === String(empId))) {
+        alert(`사번 '${empId}'는 이미 등록된 대상자입니다.`);
+        return;
+      }
+
+      const newTrainee = {
+        seq: String(traineeData.length + 1),
+        dept: dept,
+        position: position,
+        job: job,
+        empId: empId,
+        name: name,
+        processLvl: processLvl,
+        maintLvl: maintLvl,
+        qualityLvl: qualityLvl,
+        email: `${empId}@sampyo.co.kr`,
+        phone: '010-0000-0000'
+      };
+
+      traineeData.push(newTrainee);
+      saveStoredTraineeData(traineeData);
+
+      populateDeptFilter();
+      renderTraineeTable();
+      alert(`'${name}' 님이 교육대상자로 성공적으로 등록되었습니다.`);
+    }
+
+    function deleteTrainee(empId) {
+      const item = traineeData.find(d => String(d.empId) === String(empId));
+      if (!item) return;
+
+      if (confirm(`'${item.name}' (${item.empId}) 님을 교육대상자 명단에서 삭제하시겠습니까?`)) {
+        const idx = traineeData.findIndex(d => String(d.empId) === String(empId));
+        if (idx !== -1) {
+          traineeData.splice(idx, 1);
+          saveStoredTraineeData(traineeData);
+          populateDeptFilter();
+          renderTraineeTable();
+        }
+      }
+    }
+
+    function openAddTraineeModal() {
+      const deptSelect = document.getElementById('add-dept');
+      const depts = [...new Set(traineeData.map(d => d.dept))].filter(Boolean).sort();
+      deptSelect.innerHTML = '<option value="">-- 기존 부서 선택 --</option>';
+      depts.forEach(dept => {
+        deptSelect.innerHTML += `<option value="${dept}">${dept}</option>`;
+      });
+
+      document.getElementById('add-trainee-form').reset();
+      document.getElementById('add-trainee-modal').classList.add('active');
+    }
+
+    function closeAddTraineeModal() {
+      document.getElementById('add-trainee-modal').classList.remove('active');
+    }
+
+    function handleAddTraineeSubmit(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('add-name').value.trim();
+      const empId = document.getElementById('add-empId').value.trim();
+      let dept = document.getElementById('add-dept-custom').value.trim() || document.getElementById('add-dept').value;
+      const position = document.getElementById('add-position').value.trim() || '책임';
+      const job = document.getElementById('add-job').value.trim() || '생산관리';
+      const processLvl = document.getElementById('add-processLvl').value;
+      const maintLvl = document.getElementById('add-maintLvl').value;
+      const qualityLvl = document.getElementById('add-qualityLvl').value;
+      const email = document.getElementById('add-email').value.trim() || `${empId}@sampyo.co.kr`;
+
+      if (!name || !empId || !dept) {
+        alert('성명, 사번, 소속 부서는 필수 입력 항목입니다.');
+        return;
+      }
+
+      if (traineeData.some(d => String(d.empId) === String(empId))) {
+        alert(`사번 '${empId}'는 이미 등록되어 있습니다.`);
+        return;
+      }
+
+      const nextSeq = String(traineeData.length + 1);
+      const newTrainee = {
+        seq: nextSeq,
+        dept: dept,
+        position: position,
+        job: job,
+        empId: empId,
+        name: name,
+        processLvl: processLvl,
+        maintLvl: maintLvl,
+        qualityLvl: qualityLvl,
+        email: email,
+        phone: '010-0000-0000'
+      };
+
+      traineeData.push(newTrainee);
+      saveStoredTraineeData(traineeData);
+
+      closeAddTraineeModal();
+      populateDeptFilter();
+      renderTraineeTable();
+      alert(`'${name}' 님이 교육대상자로 성공적으로 등록되었습니다.`);
+    }
+
+    function handleResetData() {
+      if (confirm('모든 수정을 초기화하고 기본 교육대상자 목록으로 되돌리시겠습니까?')) {
+        resetTraineeData();
+        populateDeptFilter();
+        renderTraineeTable();
+        alert('초기 명단으로 리셋되었습니다.');
+      }
     }
 
     function setupEvents() {
