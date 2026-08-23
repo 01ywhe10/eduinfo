@@ -144,7 +144,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (isAuth) {
     sessionStorage.setItem('sampyo_admin_authenticated', 'true');
     if (remoteAuth) {
-      try { await window.completionSync.pullPrivate(); } catch (error) { console.error(error); }
+      try {
+        const remoteStatus = await window.completionSync.pullPrivate();
+        if (!remoteStatus) {
+          const localStatus = typeof getStoredCourseStatusData === 'function'
+            ? getStoredCourseStatusData()
+            : {};
+          await window.completionSync.push(localStatus);
+        }
+      } catch (error) {
+        console.error('Supabase 최초 이수현황 동기화 실패:', error);
+      }
     }
     unlockAdminPortal();
   } else {
