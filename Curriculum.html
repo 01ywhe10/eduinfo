@@ -54,6 +54,26 @@
         </div>
       </div>
     </header>
+    <section class="notice-board" aria-labelledby="notice-title">
+      <div class="notice-board-header">
+        <div><span class="notice-eyebrow"><i class="fa-solid fa-bullhorn"></i> NOTICE</span><h2 class="notice-title" id="notice-title">공지사항</h2></div>
+        <p class="notice-summary">교육 신청 전 일정과 운영 안내를 확인해 주세요.</p>
+      </div>
+      <div class="notice-list">
+        <details class="notice-item" open>
+          <summary><span class="notice-label">중요</span><span class="notice-item-title">2026년 직무교육 과정별 교육 일정 안내</span><time datetime="2026-02-20">2026.02.20</time><i class="fa-solid fa-chevron-down notice-toggle-icon" aria-hidden="true"></i></summary>
+          <div class="notice-content">과정별 1차·2차 교육 일정을 상세 페이지에서 확인할 수 있습니다. 일정은 운영 상황에 따라 변경될 수 있으니 교육 전 다시 확인해 주세요.</div>
+        </details>
+        <details class="notice-item">
+          <summary><span class="notice-label notice-label-info">안내</span><span class="notice-item-title">교육과정 검색 및 상세정보 이용 안내</span><time datetime="2026-02-16">2026.02.16</time><i class="fa-solid fa-chevron-down notice-toggle-icon" aria-hidden="true"></i></summary>
+          <div class="notice-content">과목명, 강사명, 세부분야 또는 교육대상자 이름으로 검색할 수 있으며, 과정 카드를 선택하면 교육 일정과 수강 대상자를 확인할 수 있습니다.</div>
+        </details>
+        <details class="notice-item">
+          <summary><span class="notice-label notice-label-update">업데이트</span><span class="notice-item-title">교육 참여 현황 및 출석 관리 기능 업데이트</span><time datetime="2026-02-10">2026.02.10</time><i class="fa-solid fa-chevron-down notice-toggle-icon" aria-hidden="true"></i></summary>
+          <div class="notice-content">관리자 화면에서 과정별 진행 상태와 차수별 출석 인원을 관리하고, 개인별 수강 및 출석 현황을 확인할 수 있습니다.</div>
+        </details>
+      </div>
+    </section>
 
     <!-- KPI Summary Section (Interactive Hyperlink Cards) -->
     <section class="kpi-grid">
@@ -192,6 +212,9 @@
   <script src="js/curriculum_data.js"></script>
   <script src="js/trainee_data.js"></script>
   <script src="js/course_trainee_map.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase_config.js"></script>
+  <script src="js/completion_sync.js"></script>
   <script src="js/course_status_data.js"></script>
   <script src="js/curriculum_app.js"></script>
 </body>

@@ -2324,6 +2324,11 @@ function getStoredCourseStatusData() {
 function saveStoredCourseStatusData(data) {
   try {
     localStorage.setItem('sampyo_admin_course_status_v3', JSON.stringify(data));
+    if (window.completionSync && window.completionSync.configured) {
+      window.completionSync.push(data).catch(error => {
+        console.error('Supabase 이수현황 저장 실패:', error.message || error);
+      });
+    }
   } catch (e) {
     console.error('Error saving sampyo_admin_course_status_v3:', e);
   }

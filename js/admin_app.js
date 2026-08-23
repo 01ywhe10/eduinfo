@@ -130,9 +130,22 @@ function getAdminPassword() {
   return localStorage.getItem('sampyo_admin_password') || 'sampyo1234';
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const isAuth = sessionStorage.getItem('sampyo_admin_authenticated');
-  if (isAuth === 'true') {
+document.addEventListener('DOMContentLoaded', async () => {
+  const remoteAuth = window.completionSync && window.completionSync.configured;
+  const emailField = document.getElementById('supabase-email-field');
+  const passwordLabel = document.querySelector('label[for="admin-password-input"]');
+  if (emailField) emailField.style.display = remoteAuth ? 'block' : 'none';
+  if (passwordLabel) passwordLabel.textContent = remoteAuth ? '비밀번호' : '비밀번호 (Default: sampyo1234)';
+
+  const isAuth = remoteAuth
+    ? await window.completionSync.hasSession()
+    : sessionStorage.getItem('sampyo_admin_authenticated') === 'true';
+
+  if (isAuth) {
+    sessionStorage.setItem('sampyo_admin_authenticated', 'true');
+    if (remoteAuth) {
+      try { await window.completionSync.pullPrivate(); } catch (error) { console.error(error); }
+    }
     unlockAdminPortal();
   } else {
     document.getElementById('admin-auth-overlay').style.display = 'flex';
@@ -140,21 +153,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-function handleAdminLogin(event) {
-  if (event) {
-    event.preventDefault();
-  }
+async function handleAdminLogin(event) {
+  if (event) event.preventDefault();
   const inputEl = document.getElementById('admin-password-input');
-  if (!inputEl) return;
-  const inputPw = inputEl.value.trim();
   const errorMsg = document.getElementById('password-error-msg');
+  if (!inputEl) return;
 
-  if (inputPw === getAdminPassword()) {
+  try {
+    if (window.completionSync && window.completionSync.configured) {
+      const emailEl = document.getElementById('admin-email-input');
+      const email = emailEl ? emailEl.value.trim() : '';
+      if (!email) throw new Error('관리자 이메일을 입력해 주세요.');
+      await window.completionSync.signIn(email, inputEl.value);
+    } else if (inputEl.value.trim() !== getAdminPassword()) {
+      throw new Error('비밀번호가 올바르지 않습니다.');
+    }
+
     if (errorMsg) errorMsg.style.display = 'none';
     sessionStorage.setItem('sampyo_admin_authenticated', 'true');
     unlockAdminPortal();
-  } else {
-    if (errorMsg) errorMsg.style.display = 'block';
+  } catch (error) {
+    if (errorMsg) {
+      errorMsg.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${error.message || '로그인에 실패했습니다.'}`;
+      errorMsg.style.display = 'block';
+    }
     inputEl.value = '';
     inputEl.focus();
   }
