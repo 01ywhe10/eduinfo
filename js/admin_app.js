@@ -244,11 +244,13 @@ function renderAdminCharts() {
         if (deptTraineesInCourse.length > 0) {
           totalAssignedEnrollments += deptTraineesInCourse.length;
 
-          if (Array.isArray(st.round1Trainees)) {
-            const completedSet = new Set(st.round1Trainees);
-            const completedInDept = deptTraineesInCourse.filter(t => completedSet.has(String(t.empId))).length;
-            totalCompletedEnrollments += completedInDept;
-          }
+          const completedSet = new Set([
+            ...(st.round1Trainees || []),
+            ...(st.round2Trainees || []),
+            ...(st.checkedTrainees || [])
+          ]);
+          const completedInDept = deptTraineesInCourse.filter(t => completedSet.has(String(t.empId))).length;
+          totalCompletedEnrollments += completedInDept;
         }
       }
     });

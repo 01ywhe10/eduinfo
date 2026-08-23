@@ -68,14 +68,15 @@
         <table class="curriculum-table">
           <thead>
             <tr>
-              <th style="width: 60px;">번호</th>
-              <th style="width: 80px;">레벨</th>
+              <th style="width: 50px;">번호</th>
+              <th style="width: 70px;">레벨</th>
               <th style="width: 140px;">대분류</th>
-              <th style="width: 140px;">세부분야</th>
+              <th style="width: 120px;">세부분야</th>
               <th>과목명</th>
-              <th style="width: 120px;">주강사</th>
-              <th style="width: 120px;">후보강사</th>
-              <th style="width: 180px;">교육일자 (1차 / 2차)</th>
+              <th style="width: 100px;">주강사</th>
+              <th style="width: 100px;">후보강사</th>
+              <th style="width: 160px;">교육일자 (1차/2차)</th>
+              <th style="width: 140px; text-align: center;">수료 현황 (이수/대상)</th>
             </tr>
           </thead>
           <tbody id="detail-table-body">
@@ -91,6 +92,9 @@
   </div>
 
   <script src="js/curriculum_data.js"></script>
+  <script src="js/trainee_data.js"></script>
+  <script src="js/course_trainee_map.js"></script>
+  <script src="js/course_status_data.js"></script>
   <script>
     const courseScheduleMap = {
       "1. Clinker 제조공정의 이해": ["2026-03-24", "2026-03-26"],
@@ -198,7 +202,25 @@
 
       list.forEach((item, index) => {
         const dates = courseScheduleMap[item.title] || [];
-        const dateStr = dates.length > 0 ? dates.map((d, i) => `${i + 1}차(${d.substring(5)})`).join(' | ') : '-';
+        let dateHtml = '-';
+        if (dates.length > 0) {
+          dateHtml = dates.map((d, i) => 
+            `<div style="white-space: nowrap; line-height: 1.4;"><i class="fa-solid fa-calendar-day" style="margin-right: 4px; font-size: 0.78rem;"></i> ${i + 1}차: ${d}</div>`
+          ).join('');
+        }
+        
+        let statusBadge = '<span class="badge" style="background:#64748b; color:#fff;">미진행</span>';
+        let completionText = '0명 / 0명';
+        if (typeof getStoredCourseStatusData === 'function') {
+          const statusMap = getStoredCourseStatusData();
+          const st = statusMap[item.id];
+          if (st) {
+            if (st.status === '완료') statusBadge = '<span class="badge badge-emerald">완료</span>';
+            else if (st.status === '진행중') statusBadge = '<span class="badge badge-amber">진행중</span>';
+            completionText = `<strong>${st.completedCount}명</strong> / ${st.targetCount}명`;
+          }
+        }
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td style="color: var(--text-muted);">${index + 1}</td>
@@ -213,7 +235,13 @@
             ${item.subInstructor ? '<i class="fa-solid fa-user-group" style="margin-right: 4px;"></i>' + item.subInstructor : '-'}
           </td>
           <td style="color: var(--ci-brand-light); font-weight: 600;">
-            <i class="fa-solid fa-calendar-day" style="margin-right: 4px;"></i> ${dateStr}
+            ${dateHtml}
+          </td>
+          <td style="text-align: center;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+              ${statusBadge}
+              <span style="font-size: 0.78rem; color: var(--text-muted);">${completionText}</span>
+            </div>
           </td>
         `;
         tbody.appendChild(tr);

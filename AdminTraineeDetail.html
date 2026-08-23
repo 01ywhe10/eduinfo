@@ -533,9 +533,12 @@
           const isCourseFinished = statusObj.status === '완료'; // Admin status marked as Completed
           
           let isAttended = false;
-          if (Array.isArray(statusObj.round1Trainees)) {
-            isAttended = statusObj.round1Trainees.includes(String(empId));
-          }
+          const completedSet = new Set([
+            ...(statusObj.round1Trainees || []),
+            ...(statusObj.round2Trainees || []),
+            ...(statusObj.checkedTrainees || [])
+          ]);
+          isAttended = completedSet.has(String(empId));
 
           // If course is marked Completed by admin:
           // - if trainee attended: 'isCompleted' (이수 완료)
