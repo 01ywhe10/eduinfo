@@ -423,6 +423,9 @@
         }
       }
     } catch (e) {}
+    if (typeof defaultCourseStatusData !== 'undefined' && defaultCourseStatusData[courseId] && Array.isArray(defaultCourseStatusData[courseId].round1Trainees)) {
+      return new Set(defaultCourseStatusData[courseId].round1Trainees);
+    }
     return new Set();
   }
 

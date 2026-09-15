@@ -7,29 +7,43 @@
   const client = configured && window.supabase ? window.supabase.createClient(config.url, config.publishableKey) : null;
   let channel = null;
 
+  function readLocal() {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        return JSON.parse(stored);
+      }
+      if (typeof getStoredCourseStatusData === 'function') {
+        return getStoredCourseStatusData();
+      }
+      if (typeof defaultCourseStatusData !== 'undefined') {
+        return defaultCourseStatusData;
+      }
+    } catch (error) {
+      console.error('이수현황 로컬 데이터 읽기 실패:', error);
+    }
+    return (typeof defaultCourseStatusData !== 'undefined') ? defaultCourseStatusData : {};
+  }
+
   function rowsToStatus(rows, base) {
-    const result = { ...(base || {}) };
+    const defaultData = (typeof defaultCourseStatusData !== 'undefined') ? defaultCourseStatusData : {};
+    const result = { ...(base || readLocal() || defaultData) };
     (rows || []).forEach(row => {
-      const previous = result[row.course_id] || {};
+      const previous = result[row.course_id] || defaultData[row.course_id] || {};
       result[row.course_id] = {
         ...previous,
-        status: row.status,
-        progress: row.progress,
-        targetCount: row.target_count,
-        completedCount: row.completed_count,
-        extraCount: row.extra_count,
-        eduDate: row.edu_date || '',
-        checkedTrainees: row.checked_trainees || previous.checkedTrainees || [],
-        round1Trainees: row.round1_trainees || previous.round1Trainees || [],
-        round2Trainees: row.round2_trainees || previous.round2Trainees || []
+        status: row.status !== undefined ? row.status : (previous.status || '미진행'),
+        progress: row.progress !== undefined ? row.progress : (previous.progress || 0),
+        targetCount: (row.target_count !== undefined && row.target_count > 0) ? row.target_count : (previous.targetCount || defaultData[row.course_id]?.targetCount || 0),
+        completedCount: row.completed_count !== undefined ? row.completed_count : (previous.completedCount || 0),
+        extraCount: row.extra_count !== undefined ? row.extra_count : (previous.extraCount || 0),
+        eduDate: row.edu_date ? row.edu_date : (previous.eduDate || defaultData[row.course_id]?.eduDate || ''),
+        checkedTrainees: (row.checked_trainees && row.checked_trainees.length) ? row.checked_trainees : (previous.checkedTrainees || defaultData[row.course_id]?.checkedTrainees || []),
+        round1Trainees: (row.round1_trainees && row.round1_trainees.length) ? row.round1_trainees : (previous.round1Trainees || defaultData[row.course_id]?.round1Trainees || []),
+        round2Trainees: (row.round2_trainees && row.round2_trainees.length) ? row.round2_trainees : (previous.round2Trainees || defaultData[row.course_id]?.round2Trainees || [])
       };
     });
     return result;
-  }
-
-  function readLocal() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
-    catch (error) { console.error('이수현황 로컬 데이터 읽기 실패:', error); return {}; }
   }
 
   function cacheAndRefresh(next) {
@@ -55,7 +69,7 @@
     const { data, error } = await client.from('course_status_private').select('*').order('course_id');
     if (error) throw error;
     if (!data.length) return null;
-    const next = rowsToStatus(data, {});
+    const next = rowsToStatus(data, readLocal());
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     return next;
   }

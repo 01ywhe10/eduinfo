@@ -371,9 +371,13 @@
         <option value="all">전체 소속 부서</option>
       </select>
 
-      <!-- Prominent Primary Buttons for Adding Trainees -->
+      <!-- Prominent Primary Buttons for Adding Trainees & Backend Sync -->
       <button type="button" class="btn-add-trainee-lg" onclick="openAddTraineeModal()">
         <i class="fa-solid fa-user-plus"></i> 신규 대상자 등록 (모달)
+      </button>
+
+      <button type="button" class="btn-add-trainee-lg" style="background: linear-gradient(135deg, #0284c7 0%, #009ade 100%); box-shadow: 0 4px 14px rgba(0, 154, 222, 0.35);" onclick="handleSyncAllToBackend()" id="btn-sync-backend" title="현재 교육대상자 명단과 이수현황 전체를 Supabase 백엔드로 즉시 저장합니다.">
+        <i class="fa-solid fa-cloud-arrow-up"></i> 백엔드(DB) 전체 저장
       </button>
 
       <button type="button" class="btn-add-inline-toggle" onclick="toggleQuickAddRow()">
@@ -517,6 +521,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase_config.js"></script>
   <script src="js/completion_sync.js"></script>
+  <script src="js/trainee_sync.js"></script>
   <script src="js/course_status_data.js"></script>
   <script>
     let showQuickAdd = true; // Show quick add row at top by default for immediate visibility
@@ -527,7 +532,23 @@
       window.location.href = 'Admin.html';
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        if (window.traineeSync && typeof window.traineeSync.pull === 'function') {
+          const rows = await window.traineeSync.pull();
+          if (rows && rows.length) {
+            const merged = new Map(traineeData.map(item => [String(item.empId), item]));
+            rows.forEach(item => {
+              const localItem = merged.get(String(item.empId)) || {};
+              merged.set(String(item.empId), { ...localItem, ...item });
+            });
+            traineeData = [...merged.values()].map((item, index) => ({ ...item, seq: String(index + 1) }));
+            saveStoredTraineeData(traineeData);
+          }
+        }
+      } catch (error) {
+        console.warn('Supabase 교육대상자 조회 건너뜀:', error);
+      }
       populateDeptFilter();
       renderTraineeTable();
       setupEvents();
@@ -558,7 +579,7 @@
         const saved = localStorage.getItem('sampyo_admin_course_status_v3');
         if (saved) return JSON.parse(saved);
       } catch(e) {}
-      return {};
+      return (typeof defaultCourseStatusData !== 'undefined') ? defaultCourseStatusData : {};
     }
 
     function renderDepartmentParticipationChart(depts) {
@@ -762,6 +783,9 @@
       if (item) {
         item[field] = newValue;
         saveStoredTraineeData(traineeData);
+        if (window.traineeSync && typeof window.traineeSync.upsert === 'function') {
+          window.traineeSync.upsert(item).catch(() => {});
+        }
         renderTraineeTable();
       }
     }
@@ -916,6 +940,9 @@
 
       traineeData.push(newTrainee);
       saveStoredTraineeData(traineeData);
+      if (window.traineeSync && typeof window.traineeSync.upsert === 'function') {
+        window.traineeSync.upsert(newTrainee).catch(() => {});
+      }
 
       populateDeptFilter();
       renderTraineeTable();
@@ -931,6 +958,9 @@
         if (idx !== -1) {
           traineeData.splice(idx, 1);
           saveStoredTraineeData(traineeData);
+          if (window.traineeSync && typeof window.traineeSync.remove === 'function') {
+            window.traineeSync.remove(empId).catch(() => {});
+          }
           populateDeptFilter();
           renderTraineeTable();
         }
@@ -953,7 +983,7 @@
       document.getElementById('add-trainee-modal').classList.remove('active');
     }
 
-    function handleAddTraineeSubmit(e) {
+    async function handleAddTraineeSubmit(e) {
       e.preventDefault();
 
       const name = document.getElementById('add-name').value.trim();
@@ -991,13 +1021,23 @@
         phone: '010-0000-0000'
       };
 
+      const submitButton = e.currentTarget.querySelector('button[type="submit"]');
+      if (submitButton) submitButton.disabled = true;
+
       traineeData.push(newTrainee);
       saveStoredTraineeData(traineeData);
+
+      if (window.traineeSync && typeof window.traineeSync.upsert === 'function') {
+        window.traineeSync.upsert(newTrainee).catch(err => {
+          console.warn('Supabase 동기화 건너뜀 (로컬스토리지에 안전하게 저장됨):', err);
+        });
+      }
 
       closeAddTraineeModal();
       populateDeptFilter();
       renderTraineeTable();
       alert(`'${name}' 님이 교육대상자로 성공적으로 등록되었습니다.`);
+      if (submitButton) submitButton.disabled = false;
     }
 
     function handleResetData() {
@@ -1006,6 +1046,56 @@
         populateDeptFilter();
         renderTraineeTable();
         alert('초기 명단으로 리셋되었습니다.');
+      }
+    }
+
+    async function handleSyncAllToBackend() {
+      const btn = document.getElementById('btn-sync-backend');
+      const originalHtml = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> 백엔드 동기화 중...`;
+      }
+
+      try {
+        if (!window.completionSync || !window.completionSync.configured) {
+          throw new Error('Supabase 클라이언트 설정이 활성화되지 않았습니다. (js/supabase_config.js 확인)');
+        }
+
+        const hasSession = await window.completionSync.hasSession();
+        if (!hasSession) {
+          const goLogin = confirm('백엔드(Supabase) 저장을 위해서는 관리자 로그인이 필요합니다.\n관리자 포털 로그인 페이지(Admin.html)로 이동하시겠습니까?');
+          if (goLogin) {
+            window.location.href = 'Admin.html';
+          }
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = originalHtml;
+          }
+          return;
+        }
+
+        // 1. Save all trainees
+        if (!window.traineeSync || typeof window.traineeSync.saveAll !== 'function') {
+          throw new Error('교육대상자 동기화 모듈이 준비되지 않았습니다.');
+        }
+        await window.traineeSync.saveAll(traineeData);
+
+        // 2. Save all course status data
+        const currentCourseStatus = getAdminCourseStatus();
+        if (window.completionSync && typeof window.completionSync.push === 'function') {
+          await window.completionSync.push(currentCourseStatus);
+        }
+
+        alert(`✅ 백엔드(Supabase) 저장 완료!\n\n• 교육대상자 명단: 총 ${traineeData.length}명 저장\n• 교육과정 이수현황: 총 ${Object.keys(currentCourseStatus).length}개 과목 저장\n\n클라우드 데이터베이스에 최신 정보가 안전하게 영구 저장되었습니다.`);
+      } catch (error) {
+        console.error('백엔드 저장 실패:', error);
+        alert(`❌ 백엔드 저장 실패:\n${error.message || error}`);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = originalHtml;
+        }
       }
     }
 

@@ -616,18 +616,40 @@ function getStoredTraineeData() {
   try {
     const stored = localStorage.getItem('sampyo_trainee_data');
     if (stored) {
-      return JSON.parse(stored);
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        // Merge with initial data to preserve any default fields or trainees
+        const map = new Map();
+        initialTraineeData.forEach(item => map.set(String(item.empId), { ...item }));
+        parsed.forEach(item => {
+          if (item && item.empId) {
+            const prev = map.get(String(item.empId)) || {};
+            map.set(String(item.empId), { ...prev, ...item });
+          }
+        });
+        return [...map.values()].map((item, index) => ({
+          ...item,
+          seq: item.seq || String(index + 1)
+        }));
+      }
     }
   } catch (e) {
     console.error('Error loading trainee data from localStorage:', e);
   }
-  return [...initialTraineeData];
+  return initialTraineeData.map(item => ({ ...item }));
 }
 
 function saveStoredTraineeData(data) {
   try {
-    if (data) traineeData = data;
+    if (data && Array.isArray(data)) {
+      traineeData = data;
+    }
     localStorage.setItem('sampyo_trainee_data', JSON.stringify(traineeData));
+
+    // Async sync with Supabase if traineeSync module exists
+    if (window.traineeSync && typeof window.traineeSync.saveAll === 'function') {
+      window.traineeSync.saveAll(traineeData).catch(() => {});
+    }
   } catch (e) {
     console.error('Error saving trainee data to localStorage:', e);
   }
@@ -635,10 +657,11 @@ function saveStoredTraineeData(data) {
 
 function resetTraineeData() {
   localStorage.removeItem('sampyo_trainee_data');
-  traineeData = [...initialTraineeData];
+  traineeData = initialTraineeData.map(item => ({ ...item }));
   saveStoredTraineeData(traineeData);
   return traineeData;
 }
 
 let traineeData = getStoredTraineeData();
+
 

@@ -103,6 +103,10 @@
             <a href="AdminTrainee.html" class="header-level-btn btn-intermediate" style="font-size: 0.85rem; padding: 8px 16px;">
               <i class="fa-solid fa-users"></i> 교육대상자 현황
             </a>
+
+            <button type="button" class="header-level-btn" style="background: linear-gradient(135deg, #0284c7 0%, #009ade 100%); color: white; border: none; font-size: 0.85rem; padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;" onclick="handleSyncAllToBackendAdmin()" id="btn-admin-sync-backend" title="현재 교육대상자 명단과 이수현황 전체를 Supabase 백엔드로 즉시 저장합니다.">
+              <i class="fa-solid fa-cloud-arrow-up"></i> 백엔드(DB) 전체 저장
+            </button>
             
             <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()" style="padding: 6px 12px; font-size: 0.78rem;">
               <i class="fa-solid fa-palette"></i> 삼표 CI 테마

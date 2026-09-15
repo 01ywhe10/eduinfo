@@ -813,3 +813,56 @@ function toggleTheme() {
   document.body.classList.toggle('theme-pantone');
   renderAdminCharts();
 }
+
+async function handleSyncAllToBackendAdmin() {
+  const btn = document.getElementById('btn-admin-sync-backend');
+  const originalHtml = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> 백엔드 동기화 중...`;
+  }
+
+  try {
+    if (!window.completionSync || !window.completionSync.configured) {
+      throw new Error('Supabase 클라이언트 설정이 활성화되지 않았습니다. (js/supabase_config.js 확인)');
+    }
+
+    const hasSession = await window.completionSync.hasSession();
+    if (!hasSession) {
+      alert('백엔드(Supabase) 저장을 위해서는 먼저 관리자 로그인을 완료해야 합니다.');
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
+      }
+      return;
+    }
+
+    // 1. Save all course status data
+    const currentCourseStatus = (typeof getStoredCourseStatusData === 'function') 
+      ? getStoredCourseStatusData() 
+      : adminCourseStatus;
+    await window.completionSync.push(currentCourseStatus);
+
+    // 2. Save all trainees data
+    let currentTrainees = [];
+    if (typeof getStoredTraineeData === 'function') {
+      currentTrainees = getStoredTraineeData();
+    } else if (typeof traineeData !== 'undefined') {
+      currentTrainees = traineeData;
+    }
+
+    if (window.traineeSync && typeof window.traineeSync.saveAll === 'function' && currentTrainees.length > 0) {
+      await window.traineeSync.saveAll(currentTrainees);
+    }
+
+    alert(`✅ 백엔드(Supabase) 저장 완료!\n\n• 교육과정 이수현황: 총 ${Object.keys(currentCourseStatus).length}개 과목 저장\n• 교육대상자 명단: 총 ${currentTrainees.length}명 저장\n\n클라우드 데이터베이스에 최신 이수현황과 대상자 명부가 완벽히 동기화되었습니다.`);
+  } catch (error) {
+    console.error('백엔드 동기화 실패:', error);
+    alert(`❌ 백엔드 저장 실패:\n${error.message || error}`);
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = originalHtml;
+    }
+  }
+}

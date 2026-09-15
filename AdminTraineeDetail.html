@@ -495,7 +495,7 @@
         const saved = localStorage.getItem('sampyo_admin_course_status_v3');
         if (saved) return JSON.parse(saved);
       } catch(e) {}
-      return {};
+      return (typeof defaultCourseStatusData !== 'undefined') ? defaultCourseStatusData : {};
     }
 
     function loadTraineeDetail(empId) {
