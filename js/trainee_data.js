@@ -599,14 +599,79 @@ const initialTraineeData = [
   },
   {
     "seq": "47",
+    "dept": "생산2팀",
+    "position": "매니저",
+    "job": "생산관리",
+    "empId": "1008913",
+    "name": "김건우",
+    "processLvl": "초급",
+    "maintLvl": "초급",
+    "qualityLvl": "초급",
+    "email": "geonwoo.kim@sampyo.co.kr",
+    "phone": "010-0000-0000"
+  },
+  {
+    "seq": "48",
+    "dept": "보전관리팀",
+    "position": "매니저",
+    "job": "기계설비",
+    "empId": "1008914",
+    "name": "민성운",
+    "processLvl": "초급",
+    "maintLvl": "초급",
+    "qualityLvl": "초급",
+    "email": "sungwoon.min@sampyo.co.kr",
+    "phone": "010-0000-0000"
+  },
+  {
+    "seq": "49",
+    "dept": "기계팀",
+    "position": "매니저",
+    "job": "기계설비",
+    "empId": "1008915",
+    "name": "권오영",
+    "processLvl": "초급",
+    "maintLvl": "초급",
+    "qualityLvl": "초급",
+    "email": "ohyoung.kwon@sampyo.co.kr",
+    "phone": "010-0000-0000"
+  },
+  {
+    "seq": "50",
+    "dept": "인사팀",
+    "position": "매니저",
+    "job": "교육운영",
+    "empId": "1008917",
+    "name": "조현서",
+    "processLvl": "(선택)",
+    "maintLvl": "(선택)",
+    "qualityLvl": "(선택)",
+    "email": "hyunseo.cho@sampyo.co.kr",
+    "phone": "010-0000-0000"
+  },
+  {
+    "seq": "51",
+    "dept": "전기팀",
+    "position": "매니저",
+    "job": "설비/공사",
+    "empId": "1008923",
+    "name": "김용하",
+    "processLvl": "초급",
+    "maintLvl": "초급",
+    "qualityLvl": "초급",
+    "email": "yongha.kim@sampyo.co.kr",
+    "phone": "010-0000-0000"
+  },
+  {
+    "seq": "52",
     "dept": "인사팀",
     "position": "교육담당자",
     "job": "교육운영",
     "empId": "ADMIN_JU",
     "name": "주용현",
-    "processLvl": "전체",
-    "maintLvl": "전체",
-    "qualityLvl": "전체",
+    "processLvl": "(제외)",
+    "maintLvl": "(제외)",
+    "qualityLvl": "(제외)",
     "email": "younghyun.ju@sampyo.co.kr",
     "phone": "010-8527-8084"
   }
@@ -627,9 +692,15 @@ function getStoredTraineeData() {
             map.set(String(item.empId), { ...prev, ...item });
           }
         });
+        const adminItem = map.get('ADMIN_JU');
+        if (adminItem) {
+          adminItem.processLvl = '(제외)';
+          adminItem.maintLvl = '(제외)';
+          adminItem.qualityLvl = '(제외)';
+        }
         return [...map.values()].map((item, index) => ({
           ...item,
-          seq: item.seq || String(index + 1)
+          seq: String(index + 1)
         }));
       }
     }

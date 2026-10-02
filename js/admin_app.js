@@ -228,7 +228,7 @@ function updateAdminKPIs() {
     }
   });
 
-  const avgProgress = (totalProgressSum / totalCourses).toFixed(1);
+  const avgProgress = totalCourses > 0 ? ((completedCourses / totalCourses) * 100).toFixed(1) : '0.0';
   // Calculate participation rate ONLY for completed courses
   const participationRate = completedCoursesTargetSum > 0 
     ? ((completedCoursesCompletedSum / completedCoursesTargetSum) * 100).toFixed(1) 

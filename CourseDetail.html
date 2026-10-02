@@ -8,8 +8,53 @@
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Custom CSS -->
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css">
   <style>
+    .container {
+      max-width: 1440px;
+    }
+    .curriculum-table th,
+    .curriculum-table td {
+      padding: 12px 14px;
+      vertical-align: middle;
+    }
+    .header-level-btn.active-tab {
+      box-shadow: 0 0 0 2px #fff, 0 8px 20px rgba(0, 0, 0, 0.4) !important;
+      transform: translateY(-2px);
+      filter: brightness(1.15);
+    }
+    .chart-toggle-btn {
+      background: transparent;
+      color: var(--text-muted);
+      border: none;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .chart-toggle-btn:hover {
+      color: var(--text-main);
+    }
+    .chart-toggle-btn.active {
+      background: var(--ci-brand-hex);
+      color: #ffffff !important;
+      box-shadow: 0 2px 8px rgba(225, 29, 72, 0.4);
+    }
+    body.theme-pantone .chart-toggle-btn.active {
+      background: var(--ci-brand-hex);
+      color: #ffffff !important;
+    }
+    body.theme-pantone .chart-view-toggle {
+      background: #f1f5f9 !important;
+    }
     .list-header-box {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
@@ -31,16 +76,83 @@
           <p class="subtitle" id="page-subtitle">선택하신 교육과정의 과목명, 대분류, 세부분야, 주강사 및 후보강사 상세 정보입니다.</p>
         </div>
         
-        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 14px;">
-          <a href="Curriculum.html" class="badge badge-purple" style="text-decoration: none; padding: 10px 16px; font-size: 0.95rem; font-weight: 600;">
-            <i class="fa-solid fa-arrow-left"></i> 메인 포털로 돌아가기
-          </a>
-          <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()" style="padding: 8px 14px; font-size: 0.85rem;">
-            <i class="fa-solid fa-palette"></i> 삼표 CI 테마 전환
-          </button>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 12px;">
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="Curriculum.html" class="header-level-btn btn-all" style="font-size: 0.85rem; padding: 8px 16px; text-decoration: none;">
+              <i class="fa-solid fa-arrow-left"></i> 메인 포털로 돌아가기
+            </a>
+            <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()" style="padding: 8px 14px; font-size: 0.85rem;">
+              <i class="fa-solid fa-palette"></i> 삼표 CI 테마 전환
+            </button>
+          </div>
+          <!-- Quick Level Navigation Tabs -->
+          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+            <a href="CourseDetail.html?type=all" id="tab-btn-all" class="header-level-btn btn-all" style="font-size: 0.82rem; padding: 7px 14px;">
+              <i class="fa-solid fa-layer-group"></i> 전체 과정 (60개)
+            </a>
+            <a href="CourseDetail.html?type=beginner" id="tab-btn-beginner" class="header-level-btn btn-beginner" style="font-size: 0.82rem; padding: 7px 14px;">
+              <i class="fa-solid fa-seedling"></i> 초급 과정 (36개)
+            </a>
+            <a href="CourseDetail.html?type=intermediate" id="tab-btn-intermediate" class="header-level-btn btn-intermediate" style="font-size: 0.82rem; padding: 7px 14px;">
+              <i class="fa-solid fa-fire"></i> 중급 과정 (24개)
+            </a>
+          </div>
         </div>
       </div>
     </header>
+
+    
+    <!-- KPI Summary Section -->
+    <section class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-title" style="white-space: nowrap;">과정 진행율 (완료율)</div>
+        <div class="kpi-value" id="kpi-progress" style="color: var(--ci-brand-light);">0%</div>
+        <div class="kpi-subtext" id="kpi-progress-sub">완료 0 / 진행 0 / 미진행 0</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-title" style="white-space: nowrap;">교육 대상자 참여율</div>
+        <div class="kpi-value" id="kpi-participation" style="color: #10b981;">0%</div>
+        <div class="kpi-subtext" id="kpi-participation-sub">이수 0명 / 대상 0명</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-title" style="white-space: nowrap;">완료된 교육 과목</div>
+        <div class="kpi-value" id="kpi-completed-courses" style="color: #10b981;">0개 과목</div>
+        <div class="kpi-subtext" id="kpi-completed-sub">과목 수료 완료율 0%</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-title" style="white-space: nowrap;">누적 이수 완료 인원</div>
+        <div class="kpi-value" id="kpi-trainees" style="color: #f59e0b;">0명</div>
+        <div class="kpi-subtext" id="kpi-trainees-sub">현재 완료 과목 수료생 합계</div>
+      </div>
+    </section>
+
+    <!-- Visual Charts Section: 진행율 & 참여율 그래프 -->
+    <section class="charts-section">
+      <div class="chart-card">
+        <div class="chart-header" style="flex-wrap: wrap; gap: 8px;">
+          <div class="chart-title">
+            <i class="fa-solid fa-layer-group" id="sub-chart-icon" style="color: #10b981;"></i>
+            <span id="category-chart-title">대분류별 진행율 및 참여율 현황</span>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <div class="chart-view-toggle" style="display: inline-flex; background: rgba(0,0,0,0.25); border: 1px solid var(--border-color); border-radius: 8px; padding: 2px;">
+              <button type="button" id="btn-chart-mode-category" class="chart-toggle-btn active" onclick="switchChartMode('category')">
+                <i class="fa-solid fa-layer-group"></i> 대분류별
+              </button>
+              <button type="button" id="btn-chart-mode-monthly" class="chart-toggle-btn" onclick="switchChartMode('monthly')">
+                <i class="fa-solid fa-calendar-days"></i> 월별 추이
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="chart-container" style="height: 280px;">
+          <canvas id="chart-categories-comparison"></canvas>
+        </div>
+      </div>
+    </section>
 
     <div class="list-header-box">
       <div>
@@ -68,15 +180,15 @@
         <table class="curriculum-table">
           <thead>
             <tr>
-              <th style="width: 50px;">번호</th>
-              <th style="width: 70px;">레벨</th>
-              <th style="width: 140px;">대분류</th>
-              <th style="width: 120px;">세부분야</th>
-              <th>과목명</th>
-              <th style="width: 100px;">주강사</th>
-              <th style="width: 100px;">후보강사</th>
-              <th style="width: 160px;">교육일자 (1차/2차)</th>
-              <th style="width: 140px; text-align: center;">수료 현황 (이수/대상)</th>
+              <th style="width: 55px; text-align: center; white-space: nowrap;">번호</th>
+              <th style="width: 75px; text-align: center; white-space: nowrap;">레벨</th>
+              <th style="width: 130px; white-space: nowrap;">대분류</th>
+              <th style="width: 130px; white-space: nowrap;">세부분야</th>
+              <th style="min-width: 250px;">과목명</th>
+              <th style="width: 110px; white-space: nowrap;">주강사</th>
+              <th style="width: 110px; white-space: nowrap;">후보강사</th>
+              <th style="width: 175px; white-space: nowrap;">교육일자 (1차/2차)</th>
+              <th style="width: 160px; text-align: center; white-space: nowrap;">수료 현황 (이수/대상)</th>
             </tr>
           </thead>
           <tbody id="detail-table-body">
@@ -199,7 +311,7 @@
       countEl.textContent = '총 ' + list.length + '개 과목';
 
       if (list.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 40px; color: var(--text-muted);">검색 조건에 해당 과목이 없습니다.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding: 40px; color: var(--text-muted);">검색 조건에 해당 과목이 없습니다.</td></tr>';
         return;
       }
 
@@ -212,38 +324,47 @@
           ).join('');
         }
         
-        let statusBadge = '<span class="badge" style="background:#64748b; color:#fff;">미진행</span>';
+        let statusBadge = '<span class="badge" style="background:#64748b; color:#fff; padding: 3px 8px; font-size: 0.78rem; white-space: nowrap;">미진행</span>';
         let completionText = '0명 / 0명';
+        let st = null;
         if (typeof getStoredCourseStatusData === 'function') {
           const statusMap = getStoredCourseStatusData();
-          const st = statusMap[item.id];
+          st = statusMap[item.id];
           if (st) {
-            if (st.status === '완료') statusBadge = '<span class="badge badge-emerald">완료</span>';
-            else if (st.status === '진행중') statusBadge = '<span class="badge badge-amber">진행중</span>';
-            completionText = `<strong>${st.completedCount}명</strong> / ${st.targetCount}명`;
+            if (st.status === '완료') statusBadge = '<span class="badge badge-emerald" style="padding: 3px 8px; font-size: 0.78rem; white-space: nowrap;">완료</span>';
+            else if (st.status === '진행중') statusBadge = '<span class="badge badge-amber" style="padding: 3px 8px; font-size: 0.78rem; white-space: nowrap;">진행중</span>';
+            const matchedCount = (typeof courseTraineeMap !== 'undefined' && courseTraineeMap[item.id]) ? courseTraineeMap[item.id].length : 0;
+            const targetCount = (st.targetCount !== undefined && st.targetCount > 0) ? st.targetCount : matchedCount;
+            completionText = `<strong>${st.completedCount}명</strong> / ${targetCount}명`;
           }
         }
 
+        const extraCount = (st && st.extraCount) ? st.extraCount : 0;
+        const extraBadgeHtml = extraCount > 0 
+          ? `<span class="badge badge-amber" style="padding: 2px 7px; font-size: 0.72rem; white-space: nowrap;" title="정규 대상 외 추가 신청/참석자이력">+${extraCount}명 추가</span>` 
+          : '';
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td style="color: var(--text-muted);">${index + 1}</td>
-          <td><span class="badge badge-level-${item.level}">${item.level}</span></td>
-          <td><strong>${item.category}</strong></td>
-          <td>${item.subCategory}</td>
-          <td style="font-weight: 700; color: var(--text-main); font-size: 0.95rem;">${item.title}</td>
-          <td style="color: var(--ci-brand-light); font-weight: 700;">
+          <td style="color: var(--text-muted); text-align: center; white-space: nowrap;">${index + 1}</td>
+          <td style="text-align: center; white-space: nowrap;"><span class="badge badge-level-${item.level}" style="padding: 4px 10px; font-size: 0.8rem; white-space: nowrap;">${item.level}</span></td>
+          <td style="white-space: nowrap;"><strong>${item.category}</strong></td>
+          <td style="white-space: nowrap;">${item.subCategory}</td>
+          <td style="font-weight: 700; color: var(--text-main); font-size: 0.95rem; line-height: 1.4;">${item.title}</td>
+          <td style="color: var(--ci-brand-light); font-weight: 700; white-space: nowrap;">
             <i class="fa-solid fa-user-tie" style="margin-right: 4px;"></i> ${item.mainInstructor || '-'}
           </td>
-          <td style="color: var(--accent-blue);">
+          <td style="color: var(--accent-blue); white-space: nowrap;">
             ${item.subInstructor ? '<i class="fa-solid fa-user-group" style="margin-right: 4px;"></i>' + item.subInstructor : '-'}
           </td>
-          <td style="color: var(--ci-brand-light); font-weight: 600;">
+          <td style="color: var(--ci-brand-light); font-weight: 600; white-space: nowrap;">
             ${dateHtml}
           </td>
-          <td style="text-align: center;">
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+          <td style="text-align: center; white-space: nowrap;">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; white-space: nowrap;">
               ${statusBadge}
-              <span style="font-size: 0.78rem; color: var(--text-muted);">${completionText}</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted); white-space: nowrap;">${completionText}</span>
+              ${extraBadgeHtml}
             </div>
           </td>
         `;
@@ -265,12 +386,339 @@
       renderList(filtered);
     });
 
+    
+    // Active navigation tab highlight
+    if (type === 'beginner') {
+      document.getElementById('tab-btn-beginner')?.classList.add('active-tab');
+    } else if (type === 'intermediate') {
+      document.getElementById('tab-btn-intermediate')?.classList.add('active-tab');
+    } else {
+      document.getElementById('tab-btn-all')?.classList.add('active-tab');
+    }
+
+    // Helper: compute statistics for a course list
+    function computeStatsForList(list, statusMap) {
+      const total = list.length;
+      let comp = 0, inProg = 0, notSt = 0;
+      let targetSum = 0, compSum = 0, extraSum = 0;
+      let progressSum = 0;
+
+      list.forEach(item => {
+        const st = statusMap[item.id] || { status: '미진행', progress: 0, targetCount: 0, completedCount: 0, extraCount: 0 };
+        if (st.status === '완료') {
+          comp++;
+          targetSum += (st.targetCount || 0);
+          compSum += (st.completedCount || 0);
+          extraSum += (st.extraCount || 0);
+        } else if (st.status === '진행중') {
+          inProg++;
+        } else {
+          notSt++;
+        }
+        progressSum += (st.progress || 0);
+      });
+
+      const compRate = total > 0 ? parseFloat(((comp / total) * 100).toFixed(1)) : 0;
+      const partRate = targetSum > 0 ? parseFloat(((compSum / targetSum) * 100).toFixed(1)) : 0;
+
+      return {
+        total,
+        comp,
+        inProg,
+        notSt,
+        avgProgress: compRate,
+        compRate,
+        partRate,
+        targetSum,
+        compSum,
+        extraSum,
+        totalAttended: compSum + extraSum
+      };
+    }
+
+    let chartLevelsInstance = null;
+    let chartCategoriesInstance = null;
+    let currentSubChartMode = 'category';
+
+    function switchChartMode(mode) {
+      currentSubChartMode = mode;
+      document.getElementById('btn-chart-mode-category')?.classList.toggle('active', mode === 'category');
+      document.getElementById('btn-chart-mode-monthly')?.classList.toggle('active', mode === 'monthly');
+      renderChartsAndKPIs();
+    }
+    window.switchChartMode = switchChartMode;
+
+    function renderChartsAndKPIs() {
+      const statusMap = typeof getStoredCourseStatusData === 'function' ? getStoredCourseStatusData() : {};
+      
+      const allStats = computeStatsForList(curriculumData, statusMap);
+      const begStats = computeStatsForList(curriculumData.filter(d => d.level === '초급'), statusMap);
+      const intStats = computeStatsForList(curriculumData.filter(d => d.level === '중급'), statusMap);
+      const currentStats = computeStatsForList(currentList, statusMap);
+
+      // 1. Update KPI Summary Cards
+      const kpiProgEl = document.getElementById('kpi-progress');
+      const kpiProgSubEl = document.getElementById('kpi-progress-sub');
+      const kpiPartEl = document.getElementById('kpi-participation');
+      const kpiPartSubEl = document.getElementById('kpi-participation-sub');
+      const kpiCompEl = document.getElementById('kpi-completed-courses');
+      const kpiCompSubEl = document.getElementById('kpi-completed-sub');
+      const kpiTraineesEl = document.getElementById('kpi-trainees');
+      const kpiTraineesSubEl = document.getElementById('kpi-trainees-sub');
+
+      if (kpiProgEl) kpiProgEl.textContent = `${currentStats.compRate}%`;
+      if (kpiProgSubEl) kpiProgSubEl.textContent = `완료 ${currentStats.comp}개 / 전체 ${currentStats.total}개 과목`;
+      if (kpiPartEl) kpiPartEl.textContent = `${currentStats.partRate}%`;
+      if (kpiPartSubEl) kpiPartSubEl.textContent = `이수 ${currentStats.compSum}명 / 대상 ${currentStats.targetSum}명`;
+      if (kpiCompEl) kpiCompEl.textContent = `${currentStats.comp}개 과목`;
+      if (kpiCompSubEl) kpiCompSubEl.textContent = `진행중 ${currentStats.inProg}개 / 미진행 ${currentStats.notSt}개`;
+      if (kpiTraineesEl) kpiTraineesEl.textContent = `${currentStats.totalAttended}명`;
+      if (kpiTraineesSubEl) kpiTraineesSubEl.textContent = currentStats.extraSum > 0 ? `정규 ${currentStats.compSum}명 + 추가 참석 ${currentStats.extraSum}명` : `완료 과목 정규 수료 인원`;
+
+      // 2. Setup theme-sensitive colors
+      const isLight = document.body.classList.contains('theme-pantone');
+      const textColor = isLight ? '#0f172a' : '#ffffff';
+      const gridColor = isLight ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.12)';
+      const tooltipBg = 'rgba(15, 23, 42, 0.95)';
+
+      // 3. Chart 1: Levels Comparison Bar Chart
+      const ctxLevels = document.getElementById('chart-levels-comparison')?.getContext('2d');
+      if (ctxLevels) {
+        if (chartLevelsInstance) chartLevelsInstance.destroy();
+        chartLevelsInstance = new Chart(ctxLevels, {
+          type: 'bar',
+          data: {
+            labels: ['전체 과정 (60개)', '초급 과정 (36개)', '중급 과정 (24개)'],
+            datasets: [
+              {
+                label: '과정 진행율 (%)',
+                data: [allStats.compRate, begStats.compRate, intStats.compRate],
+                backgroundColor: 'rgba(0, 154, 222, 0.85)',
+                borderColor: '#009ADE',
+                borderWidth: 1.5,
+                borderRadius: 6
+              },
+              {
+                label: '교육 참여율 (%)',
+                data: [allStats.partRate, begStats.partRate, intStats.partRate],
+                backgroundColor: 'rgba(16, 185, 129, 0.85)',
+                borderColor: '#10B981',
+                borderWidth: 1.5,
+                borderRadius: 6
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                  color: textColor,
+                  font: { size: 12, weight: '600' },
+                  boxWidth: 14
+                }
+              },
+              tooltip: {
+                backgroundColor: tooltipBg,
+                titleColor: '#ffffff',
+                bodyColor: '#ffffff',
+                borderColor: '#009ADE',
+                borderWidth: 1,
+                padding: 12,
+                callbacks: {
+                  label: function(context) {
+                    const idx = context.dataIndex;
+                    const stats = [allStats, begStats, intStats][idx];
+                    const label = context.dataset.label || '';
+                    const val = context.parsed.y;
+                    if (label.includes('진행율')) {
+                      return ` ${label}: ${val}% (완료 ${stats.comp}개 / 총 ${stats.total}개)`;
+                    } else {
+                      const extraText = stats.extraSum > 0 ? ` (+${stats.extraSum}명 추가)` : ''; return ` ${label}: ${val}% (정규 ${stats.compSum}명 / 대상 ${stats.targetSum}명${extraText})`;
+                    }
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                ticks: { color: textColor, font: { weight: '600', size: 12 } },
+                grid: { display: false }
+              },
+              y: {
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                  color: textColor,
+                  font: { weight: '600' },
+                  callback: (v) => v + '%'
+                },
+                grid: { color: gridColor }
+              }
+            }
+          }
+        });
+      }
+
+      // 4. Chart 2: Category Breakdown OR Monthly Breakdown for Current View
+      const ctxCategories = document.getElementById('chart-categories-comparison')?.getContext('2d');
+      if (ctxCategories) {
+        if (chartCategoriesInstance) chartCategoriesInstance.destroy();
+
+        const typeName = type === 'beginner' ? '초급 과정' : (type === 'intermediate' ? '중급 과정' : '전체 과정');
+        const catTitleEl = document.getElementById('category-chart-title');
+        const subChartIconEl = document.getElementById('sub-chart-icon');
+
+        let chartLabels = [];
+        let datasetProgress = [];
+        let datasetParticipation = [];
+        let datasetDetails = [];
+
+        if (currentSubChartMode === 'monthly') {
+          if (catTitleEl) catTitleEl.textContent = `${typeName} 월별(3월~11월) 진행율 및 참여율 추이`;
+          if (subChartIconEl) subChartIconEl.className = 'fa-solid fa-calendar-days';
+
+          const monthKeys = ['2026-03', '2026-04', '2026-05', '2026-06', '2026-07', '2026-08', '2026-09', '2026-10', '2026-11'];
+          chartLabels = ['3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월'];
+
+          monthKeys.forEach((m, idx) => {
+            const mCourses = currentList.filter(c => {
+              const dates = courseScheduleMap[c.title] || [];
+              const st = statusMap[c.id];
+              const dateStr = dates[0] || (st && st.eduDate) || '';
+              return dateStr.startsWith(m);
+            });
+            const mStats = computeStatsForList(mCourses, statusMap);
+            datasetProgress.push(mStats.compRate);
+            datasetParticipation.push(mStats.partRate);
+            datasetDetails.push({
+              title: `${chartLabels[idx]} 교육 현황`,
+              comp: mStats.comp,
+              total: mStats.total,
+              compSum: mStats.compSum,
+              targetSum: mStats.targetSum
+            });
+          });
+        } else {
+          // Category mode
+          if (catTitleEl) catTitleEl.textContent = `${typeName} 대분류별 진행율 및 참여율`;
+          if (subChartIconEl) subChartIconEl.className = 'fa-solid fa-layer-group';
+
+          const categories = [...new Set(currentList.map(item => item.category))];
+          chartLabels = categories;
+
+          categories.forEach(cat => {
+            const catCourses = currentList.filter(item => item.category === cat);
+            const cStat = computeStatsForList(catCourses, statusMap);
+            datasetProgress.push(cStat.compRate);
+            datasetParticipation.push(cStat.partRate);
+            datasetDetails.push({
+              title: `분야: ${cat}`,
+              comp: cStat.comp,
+              total: cStat.total,
+              compSum: cStat.compSum,
+              targetSum: cStat.targetSum
+            });
+          });
+        }
+
+        chartCategoriesInstance = new Chart(ctxCategories, {
+          type: 'bar',
+          data: {
+            labels: chartLabels,
+            datasets: [
+              {
+                label: '과정 진행율 (%)',
+                data: datasetProgress,
+                backgroundColor: currentSubChartMode === 'monthly' ? 'rgba(244, 63, 94, 0.85)' : 'rgba(225, 29, 72, 0.85)',
+                borderColor: '#E11D48',
+                borderWidth: 1.5,
+                borderRadius: 6
+              },
+              {
+                label: '교육 참여율 (%)',
+                data: datasetParticipation,
+                backgroundColor: currentSubChartMode === 'monthly' ? 'rgba(245, 158, 11, 0.85)' : 'rgba(245, 158, 11, 0.85)',
+                borderColor: '#F59E0B',
+                borderWidth: 1.5,
+                borderRadius: 6
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                  color: textColor,
+                  font: { size: 12, weight: '600' },
+                  boxWidth: 14
+                }
+              },
+              tooltip: {
+                backgroundColor: tooltipBg,
+                titleColor: '#ffffff',
+                bodyColor: '#ffffff',
+                borderColor: '#E11D48',
+                borderWidth: 1,
+                padding: 12,
+                callbacks: {
+                  title: (items) => datasetDetails[items[0].dataIndex]?.title || items[0].label,
+                  label: function(context) {
+                    const idx = context.dataIndex;
+                    const item = datasetDetails[idx];
+                    const label = context.dataset.label || '';
+                    const val = context.parsed.y;
+                    if (label.includes('진행율')) {
+                      return ` ${label}: ${val}% (완료 ${item.comp}개 / 개설 ${item.total}개 과목)`;
+                    } else {
+                      return ` ${label}: ${val}% (수료 ${item.compSum}명 / 대상 ${item.targetSum}명)`;
+                    }
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                ticks: { color: textColor, font: { weight: '600', size: 11 } },
+                grid: { display: false }
+              },
+              y: {
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                  color: textColor,
+                  font: { weight: '600' },
+                  callback: (v) => v + '%'
+                },
+                grid: { color: gridColor }
+              }
+            }
+          }
+        });
+      }
+    }
+
     function toggleTheme() {
       document.body.classList.toggle('theme-pantone');
+      renderChartsAndKPIs();
     }
 
     // Initial render
     renderList(currentList);
+    renderChartsAndKPIs();
+
+    // Listen for live background Supabase sync updates
+    window.addEventListener('completion-status-synced', (e) => {
+      renderList(currentList);
+      renderChartsAndKPIs();
+    });
   </script>
 </body>
 </html>

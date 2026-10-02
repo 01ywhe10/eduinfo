@@ -85,6 +85,18 @@ body.theme-pantone .badge-rose {
   border-color: rgba(244, 63, 94, 0.3);
 }
 
+body.theme-pantone .badge-amber {
+  background: var(--pantone-lemon, #fef3c7);
+  color: #78350f;
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.badge-amber {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
 body.theme-pantone .search-box input,
 body.theme-pantone .filter-select {
   background: #ffffff;
