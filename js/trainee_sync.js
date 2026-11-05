@@ -71,8 +71,15 @@
       updated_by: user.id
     };
 
-    const { error } = await c.from('trainees').upsert(payload, { onConflict: 'emp_id' });
+    const { data, error } = await c
+      .from('trainees')
+      .upsert(payload, { onConflict: 'emp_id' })
+      .select('emp_id')
+      .single();
     if (error) throw error;
+    if (!data || String(data.emp_id) !== String(t.empId)) {
+      throw new Error('교육대상자 저장 결과를 확인하지 못했습니다.');
+    }
     return { success: true };
   }
 
@@ -114,8 +121,14 @@
       updated_by: user.id
     }));
 
-    const { error } = await c.from('trainees').upsert(payload, { onConflict: 'emp_id' });
+    const { data, error } = await c
+      .from('trainees')
+      .upsert(payload, { onConflict: 'emp_id' })
+      .select('emp_id');
     if (error) throw error;
+    if (!data || data.length !== payload.length) {
+      throw new Error(`교육대상자 저장 결과가 일치하지 않습니다. 요청 ${payload.length}명, 확인 ${data ? data.length : 0}명`);
+    }
     return { success: true, count: payload.length };
   }
 

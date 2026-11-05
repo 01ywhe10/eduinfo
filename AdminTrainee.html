@@ -777,16 +777,31 @@
       return html;
     }
 
-    function onLevelChange(empId, field, selectEl) {
+    async function onLevelChange(empId, field, selectEl) {
       const newValue = selectEl.value;
       const item = traineeData.find(d => String(d.empId) === String(empId));
-      if (item) {
-        item[field] = newValue;
-        saveStoredTraineeData(traineeData);
-        if (window.traineeSync && typeof window.traineeSync.upsert === 'function') {
-          window.traineeSync.upsert(item).catch(() => {});
+      if (!item) return;
+
+      const previousValue = item[field];
+      if (previousValue === newValue) return;
+
+      selectEl.disabled = true;
+      item[field] = newValue;
+
+      try {
+        if (!window.traineeSync || typeof window.traineeSync.upsert !== 'function') {
+          throw new Error('교육대상자 동기화 모듈이 준비되지 않았습니다.');
         }
+
+        await window.traineeSync.upsert(item);
+        saveStoredTraineeData(traineeData);
         renderTraineeTable();
+      } catch (error) {
+        item[field] = previousValue;
+        saveStoredTraineeData(traineeData);
+        console.error('교육 기준 저장 실패:', error);
+        renderTraineeTable();
+        alert(`교육 기준을 백엔드에 저장하지 못했습니다.\n변경 전 값으로 되돌렸습니다.\n\n${error.message || error}`);
       }
     }
 
