@@ -9,8 +9,8 @@ const initialTraineeData = [
     "processLvl": "(선택)",
     "maintLvl": "중급",
     "qualityLvl": "중급",
-    "email": "yangseok.oh@sampyo.co.kr",
-    "phone": "010-6301-7011"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "2",
@@ -22,8 +22,8 @@ const initialTraineeData = [
     "processLvl": "중급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "1008568@sampyo.co.kr",
-    "phone": "010-9515-5739"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "3",
@@ -35,8 +35,8 @@ const initialTraineeData = [
     "processLvl": "(선택)",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "soonhyeok.lee@sampyo.co.kr",
-    "phone": "010-2073-1465"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "4",
@@ -48,8 +48,8 @@ const initialTraineeData = [
     "processLvl": "(선택)",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "shinhwan.jung@sampyo.co.kr",
-    "phone": "010-4370-9135"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "5",
@@ -61,8 +61,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "youngmin.goh@sampyo.co.kr",
-    "phone": "010-6668-3246"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "6",
@@ -74,8 +74,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "wonsup.lee@sampyo.co.kr",
-    "phone": "010-8973-3301"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "7",
@@ -87,7 +87,7 @@ const initialTraineeData = [
     "processLvl": "제외",
     "maintLvl": "제외",
     "qualityLvl": "제외",
-    "email": "1008621@sampyo.co.kr",
+    "email": "",
     "phone": "#N/A"
   },
   {
@@ -100,8 +100,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "changyong.kim@sampyo.co.kr",
-    "phone": "010-2899-2941"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "9",
@@ -113,8 +113,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "(선택)",
     "qualityLvl": "초급",
-    "email": "sungwoong.shin@sampyo.co.kr",
-    "phone": "010-6364-7563"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "10",
@@ -126,8 +126,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "중급",
     "qualityLvl": "초급",
-    "email": "seonghun.hong@sampyo.co.kr",
-    "phone": "010-3279-3794"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "11",
@@ -139,8 +139,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "중급",
     "qualityLvl": "초급",
-    "email": "youngwook.kim@sampyo.co.kr",
-    "phone": "010-8383-4838"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "12",
@@ -152,8 +152,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "gisoo.lee@sampyo.co.kr",
-    "phone": "010-5099-0443"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "13",
@@ -165,8 +165,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "중급",
     "qualityLvl": "초급",
-    "email": "jangseok.bae@sampyo.co.kr",
-    "phone": "010-6373-9117"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "14",
@@ -178,8 +178,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "중급",
     "qualityLvl": "초급",
-    "email": "dongwon.lee@sampyo.co.kr",
-    "phone": "010-8879-5202"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "15",
@@ -191,8 +191,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "(선택)",
     "qualityLvl": "초급",
-    "email": "jinhee2.lee@sampyo.co.kr",
-    "phone": "010-9478-4078"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "16",
@@ -204,8 +204,8 @@ const initialTraineeData = [
     "processLvl": "중급",
     "maintLvl": "초급",
     "qualityLvl": "중급",
-    "email": "huibeom.park@sampyo.co.kr",
-    "phone": "010-2998-0633"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "17",
@@ -217,8 +217,8 @@ const initialTraineeData = [
     "processLvl": "(선택)",
     "maintLvl": "(선택)",
     "qualityLvl": "중급",
-    "email": "yuhyung.lee@sampyo.co.kr",
-    "phone": "010-4534-0701"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "18",
@@ -230,8 +230,8 @@ const initialTraineeData = [
     "processLvl": "중급",
     "maintLvl": "중급",
     "qualityLvl": "중급",
-    "email": "mingyu.choi@sampyo.co.kr",
-    "phone": "010-2614-3452"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "19",
@@ -243,8 +243,8 @@ const initialTraineeData = [
     "processLvl": "(선택)",
     "maintLvl": "(선택)",
     "qualityLvl": "중급",
-    "email": "donghyun.kim@sampyo.co.kr",
-    "phone": "010-2864-9881"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "20",
@@ -256,8 +256,8 @@ const initialTraineeData = [
     "processLvl": "중급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "sj.park@sampyo.co.kr",
-    "phone": "010-9968-4225"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "21",
@@ -269,8 +269,8 @@ const initialTraineeData = [
     "processLvl": "중급",
     "maintLvl": "중급",
     "qualityLvl": "초급",
-    "email": "hg.jung@sampyo.co.kr",
-    "phone": "010-6512-5687"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "22",
@@ -282,8 +282,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "kwanghyun.nam@sampyo.co.kr",
-    "phone": "010-7396-1126"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "23",
@@ -295,8 +295,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "hyejin.lee@sampyo.co.kr",
-    "phone": "010-2686-6405"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "24",
@@ -308,8 +308,8 @@ const initialTraineeData = [
     "processLvl": "중급",
     "maintLvl": "초급",
     "qualityLvl": "중급",
-    "email": "inhan.yoon@sampyo.co.kr",
-    "phone": "010-9439-4477"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "25",
@@ -321,8 +321,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "boae.kim@sampyo.co.kr",
-    "phone": "010-4977-1000"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "26",
@@ -334,8 +334,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "중급",
     "qualityLvl": "초급",
-    "email": "seungho.shin@sampyo.co.kr",
-    "phone": "010-7454-3363"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "27",
@@ -347,7 +347,7 @@ const initialTraineeData = [
     "processLvl": "제외",
     "maintLvl": "제외",
     "qualityLvl": "제외",
-    "email": "1007336@sampyo.co.kr",
+    "email": "",
     "phone": "#N/A"
   },
   {
@@ -360,8 +360,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "seongho.hong@sampyo.co.kr",
-    "phone": "010-7540-2259"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "29",
@@ -373,8 +373,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "중급",
     "qualityLvl": "초급",
-    "email": "dagun.yoo@sampyo.co.kr",
-    "phone": "010-3304-0784"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "30",
@@ -386,8 +386,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "(선택)",
     "qualityLvl": "초급",
-    "email": "sejung.kim@sampyo.co.kr",
-    "phone": "010-5100-8030"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "31",
@@ -399,8 +399,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "(선택)",
     "qualityLvl": "초급",
-    "email": "jongtae.kim@sampyo.co.kr",
-    "phone": "010-8609-2157"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "32",
@@ -412,8 +412,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "(선택)",
     "qualityLvl": "초급",
-    "email": "geon.park@sampyo.co.kr",
-    "phone": "010-7276-6404"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "33",
@@ -425,8 +425,8 @@ const initialTraineeData = [
     "processLvl": "제외",
     "maintLvl": "제외",
     "qualityLvl": "제외",
-    "email": "changgeun.song@sampyo.co.kr",
-    "phone": "010-4642-1003"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "34",
@@ -438,8 +438,8 @@ const initialTraineeData = [
     "processLvl": "(선택)",
     "maintLvl": "(선택)",
     "qualityLvl": "중급",
-    "email": "siwon.ko@sampyo.co.kr",
-    "phone": "010-5356-9688"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "35",
@@ -451,8 +451,8 @@ const initialTraineeData = [
     "processLvl": "중급",
     "maintLvl": "중급",
     "qualityLvl": "초급",
-    "email": "yoonsoo.jeong@sampyo.co.kr",
-    "phone": "010-7907-4025"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "36",
@@ -464,8 +464,8 @@ const initialTraineeData = [
     "processLvl": "중급",
     "maintLvl": "중급",
     "qualityLvl": "중급",
-    "email": "sangjin.kim@sampyo.co.kr",
-    "phone": "010-3352-1162"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "37",
@@ -477,8 +477,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "중급",
     "qualityLvl": "(선택)",
-    "email": "sangwon.ahn@sampyo.co.kr",
-    "phone": "010-9071-7935"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "38",
@@ -490,8 +490,8 @@ const initialTraineeData = [
     "processLvl": "중급",
     "maintLvl": "초급",
     "qualityLvl": "중급",
-    "email": "minseok.oh@sampyo.co.kr",
-    "phone": "010-2965-1891"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "39",
@@ -503,8 +503,8 @@ const initialTraineeData = [
     "processLvl": "중급",
     "maintLvl": "초급",
     "qualityLvl": "(선택)",
-    "email": "doosub.lim@sampyo.co.kr",
-    "phone": "010-4158-9218"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "40",
@@ -516,8 +516,8 @@ const initialTraineeData = [
     "processLvl": "중급",
     "maintLvl": "초급",
     "qualityLvl": "(선택)",
-    "email": "wuisik.jung@sampyo.co.kr",
-    "phone": "010-2770-6602"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "41",
@@ -529,8 +529,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "jihyun.kim@sampyo.co.kr",
-    "phone": "010-9580-0362"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "42",
@@ -542,8 +542,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "inuk.lee@sampyo.co.kr",
-    "phone": "010-9174-6849"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "43",
@@ -555,8 +555,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "junbae.kim@sampyo.co.kr",
-    "phone": "010-5084-1367"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "44",
@@ -568,8 +568,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "hyungjun.kim@sampyo.co.kr",
-    "phone": "010-8996-6626"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "45",
@@ -581,8 +581,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "john987abc@sampyo.co.kr",
-    "phone": "010-9982-5884"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "46",
@@ -594,8 +594,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "minsoo.kwon@sampyo.co.kr",
-    "phone": "010-5455-0134"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "47",
@@ -607,8 +607,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "geonwoo.kim@sampyo.co.kr",
-    "phone": "010-0000-0000"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "48",
@@ -620,8 +620,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "sungwoon.min@sampyo.co.kr",
-    "phone": "010-0000-0000"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "49",
@@ -633,8 +633,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "ohyoung.kwon@sampyo.co.kr",
-    "phone": "010-0000-0000"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "50",
@@ -646,8 +646,8 @@ const initialTraineeData = [
     "processLvl": "(선택)",
     "maintLvl": "(선택)",
     "qualityLvl": "(선택)",
-    "email": "hyunseo.cho@sampyo.co.kr",
-    "phone": "010-0000-0000"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "51",
@@ -659,8 +659,8 @@ const initialTraineeData = [
     "processLvl": "초급",
     "maintLvl": "초급",
     "qualityLvl": "초급",
-    "email": "yongha.kim@sampyo.co.kr",
-    "phone": "010-0000-0000"
+    "email": "",
+    "phone": ""
   },
   {
     "seq": "52",
@@ -672,8 +672,8 @@ const initialTraineeData = [
     "processLvl": "(제외)",
     "maintLvl": "(제외)",
     "qualityLvl": "(제외)",
-    "email": "younghyun.ju@sampyo.co.kr",
-    "phone": "010-8527-8084"
+    "email": "",
+    "phone": ""
   }
 ];
 

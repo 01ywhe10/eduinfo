@@ -61,8 +61,8 @@ function buildDynamicCourseTraineeMap() {
       position: t.position,
       job: t.job,
       empId: t.empId,
-      email: t.email || `${t.empId}@sampyo.co.kr`,
-      phone: t.phone || '010-0000-0000'
+      email: t.email || '',
+      phone: t.phone || ''
     }));
   });
 

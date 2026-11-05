@@ -458,7 +458,7 @@ function openCourseModal(id) {
       </div>
     </div>
 
-    <!-- Action Buttons: Print Attendance Sheet (출석양식.html) & Bulk Email Notice -->
+    <!-- Action Buttons: Print Attendance Sheet (attendance-sheet.html) & Bulk Email Notice -->
     <div style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed var(--border-color); display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap;">
       <button onclick="handlePrintAttendancePrompt('${item.id}')" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; padding: 12px 20px; border-radius: var(--radius-md); font-weight: 700; font-size: 0.92rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(16,185,129,0.35); transition: all 0.2s;">
         <i class="fa-solid fa-print"></i> 출석양식 자동 출력
@@ -500,7 +500,7 @@ function handlePrintAttendancePrompt(id) {
 
   const dates = courseScheduleMap[item.title] || [];
   if (dates.length <= 1) {
-    window.open(`출석양식.html?courseId=${id}&round=1&autoprint=1`, '_blank');
+    window.open(`attendance-sheet.html?courseId=${id}&round=1&autoprint=1`, '_blank');
     return;
   }
 
@@ -513,9 +513,9 @@ function handlePrintAttendancePrompt(id) {
   );
 
   if (userChoice === "2") {
-    window.open(`출석양식.html?courseId=${id}&round=2&autoprint=1`, '_blank');
+    window.open(`attendance-sheet.html?courseId=${id}&round=2&autoprint=1`, '_blank');
   } else if (userChoice === "1") {
-    window.open(`출석양식.html?courseId=${id}&round=1&autoprint=1`, '_blank');
+    window.open(`attendance-sheet.html?courseId=${id}&round=1&autoprint=1`, '_blank');
   }
 }
 
@@ -538,8 +538,8 @@ function openBulkEmailModal(id) {
     position: "교육담당자",
     job: "교육운영",
     empId: "ADMIN_JU",
-    email: "younghyun.ju@sampyo.co.kr",
-    phone: "010-8527-8084"
+    email: "",
+    phone: ""
   };
   if (!activeEmailRecipients.some(r => r.empId === adminJu.empId || r.email === adminJu.email)) {
     activeEmailRecipients.push(adminJu);
@@ -664,8 +664,8 @@ function renderRecipientSection() {
     container.innerHTML = '<span style="color:var(--text-muted); font-size:0.85rem;">수신 대상자가 없습니다. 오른쪽 위에서 대상자를 추가할 수 있습니다.</span>';
   } else {
     activeEmailRecipients.forEach(t => {
-      const email = t.email || `${t.empId.toLowerCase()}@sampyo.co.kr`;
-      const phone = t.phone || '010-0000-0000';
+      const email = t.email || '';
+      const phone = t.phone || '';
       const tag = document.createElement('span');
       tag.className = 'badge badge-purple';
       tag.style.cssText = 'font-size: 0.78rem; display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px;';
@@ -722,8 +722,8 @@ function updateEmailRoundRecipients(id, roundVal) {
     position: "교육담당자",
     job: "교육운영",
     empId: "ADMIN_JU",
-    email: "younghyun.ju@sampyo.co.kr",
-    phone: "010-8527-8084"
+    email: "",
+    phone: ""
   };
   if (!filtered.some(r => r.empId === adminJu.empId || r.email === adminJu.email)) {
     filtered.push(adminJu);
@@ -820,7 +820,7 @@ function simulateSendBulkSms() {
   const item = curriculumData.find(d => d.id === activeEmailCourseId);
   
   const validPhoneList = activeEmailRecipients.map(t => {
-    const phone = t.phone || '010-0000-0000';
+    const phone = t.phone || '';
     return `${t.name}(${phone})`;
   });
 

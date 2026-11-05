@@ -368,7 +368,7 @@
 
   async function loadScheduleFromCSV() {
     try {
-      const response = await fetch('교육일자.csv');
+      const response = await fetch('course-schedule.csv');
       if (!response.ok) return;
       const text = await response.text();
       const lines = text.split('\n').filter(l => l.trim());
@@ -408,7 +408,7 @@
         courseScheduleMap = scheduleMap;
       }
     } catch (e) {
-      console.warn('Failed to load 교육일자.csv, using default schedule map.', e);
+      console.warn('Failed to load course-schedule.csv, using default schedule map.', e);
     }
   }
 

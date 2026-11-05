@@ -41,8 +41,8 @@
         processLvl: r.process_lvl || '(선택)',
         maintLvl: r.maint_lvl || '(선택)',
         qualityLvl: r.quality_lvl || '(선택)',
-        email: r.email || `${r.emp_id}@sampyo.co.kr`,
-        phone: r.phone || '010-0000-0000'
+        email: r.email || '',
+        phone: r.phone || ''
       }));
     } catch (error) {
       console.warn('Supabase pull 오류:', error);
@@ -65,8 +65,8 @@
       process_lvl: t.processLvl || '(선택)',
       maint_lvl: t.maintLvl || '(선택)',
       quality_lvl: t.qualityLvl || '(선택)',
-      email: t.email || `${t.empId}@sampyo.co.kr`,
-      phone: t.phone || '010-0000-0000',
+      email: t.email || '',
+      phone: t.phone || '',
       updated_at: new Date().toISOString(),
       updated_by: user.id
     };
@@ -108,8 +108,8 @@
       process_lvl: t.processLvl || '(선택)',
       maint_lvl: t.maintLvl || '(선택)',
       quality_lvl: t.qualityLvl || '(선택)',
-      email: t.email || `${t.empId}@sampyo.co.kr`,
-      phone: t.phone || '010-0000-0000',
+      email: t.email || '',
+      phone: t.phone || '',
       updated_at: new Date().toISOString(),
       updated_by: user.id
     }));
